@@ -2,7 +2,7 @@
 let login = "cir2";
 let currentTitle = "Commentaires";
 
-document.getElementById("comments-add").addEventListener('submit', (event) =>
+/* document.getElementById("comments-add").addEventListener('submit', (event) =>
 {
     event.preventDefault();
     let value = document.getElementById('comment-field').value;
@@ -14,8 +14,10 @@ document.getElementById("comments-add").addEventListener('submit', (event) =>
 
 });
 
+*/
 
-document.getElementById("product-add").addEventListener('submit', (event) => {
+document.getElementById("product-add").addEventListener('submit', (event) => 
+    {
     event.preventDefault();
     console.log("Ajout d'un produit");
 })
