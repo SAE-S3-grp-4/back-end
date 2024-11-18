@@ -26,7 +26,7 @@ function dbRequestUser($db)
     $request = 'SELECT * FROM MEMBRE';
     $statement = $db->prepare($request);
     $statement->execute();
-    $result = $statement->fetch(PDO::FETCH_ASSOC);
+    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
   } catch (PDOException $exception) {
     error_log('Request error: ' . $exception->getMessage());
     return false;
