@@ -13,6 +13,14 @@ document.getElementById("comments-add").addEventListener('submit', (event) =>
     }, 'userLogin=' + login + '&photoId=' + currentID + '&comment=' + value);
 
 });
+
+
+document.getElementById("product-add").addEventListener('submit', (event) => {
+    event.preventDefault();
+    console.log("Ajout d'un produit");
+})
+
+
 function loadPhotos(photos){
     console.log(photos);
     let container = document.getElementById("thumbnails");

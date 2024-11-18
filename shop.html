@@ -1,12 +1,15 @@
 <form action="" method="POST">
     <div class="container">
         <div>
-            <input type="text" id="nom" name="nom" placeholder="Nom" required>
+            <input type="text" id="nom" name="nom" placeholder="Nom">
             <input type="text" id="description" name="description" placeholder="Description">
             <input type="file" name="image" id="image">
-            <input type="text" name="prix" id="prix" placeholder="prix" required>
-            <input type="text" name="stock" id="stock" placeholder="stock" required>
+            <input type="text" name="prix" id="prix" placeholder="prix">
+            <input type="text" name="stock" id="stock" placeholder="stock">
         </div>
-        <input type="submit" value="Envoyer">
+        <input id="product-add" type="submit" value="Envoyer">
     </div>
 </form>
+
+<script src="js/ajax.js" defer></script>
+<script src="js/loading.js" defer></script>
