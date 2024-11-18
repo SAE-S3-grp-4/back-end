@@ -34,6 +34,13 @@ if ($requestRessource == 'photos')
     $data = dbRequestPhotos($db);
 }
 
+if ($requestMethod == "POST") {
+  if ($requestRessource == "comments") {
+    $textToPost = filter_var($_POST["comment"], FILTER_SANITIZE_STRING);
+    $data = dbAddComment($db, $_POST["userLogin"], $_POST["photoId"], $textToPost);
+  }
+}
+
 
 if($requestMethod == "GET"){
   if($requestRessource == "comments"){
