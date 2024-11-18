@@ -132,8 +132,6 @@ function dbModifyComment($db, $id, $login, $text)
   return true;
 }
 
-
-
 function dbRequestUser($db)
 {
   try {
