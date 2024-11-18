@@ -53,6 +53,15 @@ if ($requestMethod == "POST") {
     $textToPost = filter_var($_POST["comment"], FILTER_SANITIZE_STRING);
     $data = dbAddComment($db, $_POST["userLogin"], $_POST["photoId"], $textToPost);
   }
+  if ($requestRessource == "produit") {
+    $nom = isset($_POST["nom"]) ? filter_var($_POST["nom"], FILTER_SANITIZE_STRING) : null;
+    $description = isset($_POST["description"]) ? filter_var($_POST["description"], FILTER_SANITIZE_STRING) : null;
+    $prix = isset($_POST["prix"]) ? filter_var($_POST["prix"], FILTER_SANITIZE_NUMBER_INT) : null;
+    $stock = isset($_POST["stock"]) ? filter_var($_POST["stock"], FILTER_SANITIZE_NUMBER_INT) : null;
+    $img = isset($_POST["image"]) ? filter_var($_POST["image"], FILTER_SANITIZE_STRING) : null;
+
+    $data = dbAddProduct($db, $nom, $description, $img, $prix, $stock);
+  }
 
 }
 

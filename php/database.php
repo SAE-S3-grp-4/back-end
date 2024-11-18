@@ -64,6 +64,7 @@ function dbAddProduct($db, $nom, $desc, $img, $prix, $stock)
     error_log('Request error:' . $exception->getMessage());
     return false;
   }
+  return true;
 }
 
 

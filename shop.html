@@ -1,16 +1,18 @@
 <script src="js/ajax.js" defer></script>
 <script src="js/loading.js" defer></script>
 
-<form method="POST" id="product-add">
+<form method="POST" id="product-add" action="request.php">
     <div id="product-add" style="display: block">
         <form class="form-group">
             <div class="input-group">
-                <input id="comment-field" class="form-control" type="text">
+                <input type="text" id="nom" name="nom" placeholder="Nom">
+                <input type="text" id="description" name="description" placeholder="Description">
+                <input type="file" name="image" id="image">
+                <input type="text" name="prix" id="prix" placeholder="prix">
+                <input type="text" name="stock" id="stock" placeholder="stock">
             </div>
             <br>
-            <button type="submit" class="btn btn-success float-end">
-                <i class="fa fa-paper-plane"></i> Envoyer
-            </button>
+            <button type="submit">Envoyer</button>
         </form>
     </div>
 </form>

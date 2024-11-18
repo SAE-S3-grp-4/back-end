@@ -19,8 +19,18 @@ let currentTitle = "Commentaires";
 document.getElementById("product-add").addEventListener('submit', (event) => 
     {
     event.preventDefault();
+    let nom = document.getElementById('nom').value;
+    let description = document.getElementById('description').value;
+    let prix = document.getElementById('prix').value;
+    let stock = document.getElementById('stock').value;
+    let image = document.getElementById('image').value;
     console.log("Ajout d'un produit");
+    ajaxRequest('POST', 'php/request.php/produit/', () => {
+        ajaxRequest('GET', 'php/request.php/produit/?nom=' + nom, + '&description=' + description + '$image=' + image + '&prix=' + prix + '&stock=' + stock);
+    })
 })
+
+
 
 
 function loadPhotos(photos){
