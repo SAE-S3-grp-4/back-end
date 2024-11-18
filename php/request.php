@@ -24,6 +24,13 @@ if ($id == '')
 $data = false;
 
 
+if ($requestMethod == "POST") {
+  if ($requestRessource == "comments") {
+    $textToPost = filter_var($_POST["comment"], FILTER_SANITIZE_STRING);
+    $data = dbAddComment($db, $_POST["userLogin"], $_POST["photoId"], $textToPost);
+  }
+}
+
 
 // Send data to the client.
 header('Content-Type: application/json; charset=utf-8');
