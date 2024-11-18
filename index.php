@@ -1,8 +1,5 @@
 <?php
 
-require 'php/database.php';
-$db = dbConnect();
-$data = dbRequestUser($db);
+echo "<a href='php/shopAdmin.php'>Shop</a><br>";
 
-var_dump($data);
 ?>

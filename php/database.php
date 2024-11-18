@@ -33,3 +33,28 @@ function dbRequestUser($db)
   }
   return $result;
 }
+
+
+function dbRequestProduct($db)
+{
+  try {
+    $request = 'SELECT * FROM PRODUIT';
+    $statement = $db->prepare($request);
+    $statement->execute();
+    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+  } catch (PDOException $exception) {
+    error_log('Request error: ' . $exception->getMessage());
+    return false;
+  }
+  return $result;
+}
+
+function dbAddProduct($db, $nom, $desc, $img, $prix, $stock)
+{
+  try {
+
+  } catch (PDOException $exception) {
+    error_log('Request error:' . $exception->getMessage());
+    return false;
+  }
+}
