@@ -59,7 +59,6 @@ if ($requestMethod == "POST") {
 
     $data = dbAddProduct($db, $nom, $description, $img, $prix, $stock);
   }
-
 }
 
 if ($requestMethod == "PUT") {
@@ -74,6 +73,10 @@ if ($requestMethod == "PUT") {
 if ($requestMethod == "DELETE") {
   if ($requestRessource == "comments") {
     $data = dbDeleteComment($db, $id, $_GET["userLogin"]);
+  }
+  if ($requestMethod === 'produit' && preg_match('/^\/produit\/id=(\d+)$/', $_SERVER['PATH_INFO'], $matches)) {
+    $id = intval($matches[1]);
+    $data = dbDeleteProduct($db, $id);
   }
 }
 

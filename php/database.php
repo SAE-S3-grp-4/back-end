@@ -68,4 +68,16 @@ function dbAddProduct($db, $nom, $desc, $img, $prix, $stock)
   return true;
 }
 
+function dbDeleteProduct($db, $id)
+{
+  try {
+    $request = 'DELETE FROM produits WHERE id = :id';
+    $statement = $db->prepare($request);
+    $statement->bindParam(':id', $id, PDO::PARAM_INT);
+    $statement->execute();
+  } catch (PDOException $exception) {
+    error_log('Request error :' . $exception->getMessage());
+  }
+}
+
 
