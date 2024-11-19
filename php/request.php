@@ -24,14 +24,7 @@ if ($id == '')
   $id = NULL;
 $data = false;
 
-// Request Photos.
-if ($requestRessource == 'photos') {
-  if ($id != NULL)
-    $data = dbRequestPhoto($db, intval($id));
-  else
-    $data = dbRequestPhotos($db);
-}
-
+// Request Produits.
 if ($requestRessource == 'produits') {
   $data = dbRequestProduct($db);
 }
