@@ -1,0 +1,52 @@
+{
+  "elements": [
+    {
+      "classe": "11A",
+      "url": "http://planning.univ-lemans.fr/jsp/custom/modules/plannings/anonymous_cal.jsp?resources=282&projectId=7&calType=ical&nbWeeks=4"
+    },
+    {
+      "classe": "11B",
+      "url": "http://planning.univ-lemans.fr/jsp/custom/modules/plannings/anonymous_cal.jsp?resources=567&projectId=7&calType=ical&nbWeeks=4"
+    },
+    {
+      "classe": "12C",
+      "url": "http://planning.univ-lemans.fr/jsp/custom/modules/plannings/anonymous_cal.jsp?resources=861&projectId=7&calType=ical&nbWeeks=4"
+    },
+    {
+      "classe": "12D",
+      "url": "http://planning.univ-lemans.fr/jsp/custom/modules/plannings/anonymous_cal.jsp?resources=869&projectId=7&calType=ical&nbWeeks=4"
+    },
+    {
+      "classe": "21A",
+      "url": "http://planning.univ-lemans.fr/jsp/custom/modules/plannings/anonymous_cal.jsp?resources=2667&projectId=7&calType=ical&nbWeeks=4"
+    },
+    {
+      "classe": "21B",
+      "url": "http://planning.univ-lemans.fr/jsp/custom/modules/plannings/anonymous_cal.jsp?resources=2668&projectId=7&calType=ical&nbWeeks=4"
+    },
+    {
+      "classe": "22C",
+      "url": "http://planning.univ-lemans.fr/jsp/custom/modules/plannings/anonymous_cal.jsp?resources=3113&projectId=7&calType=ical&nbWeeks=4"
+    },
+    {
+      "classe": "22D",
+      "url": "http://planning.univ-lemans.fr/jsp/custom/modules/plannings/anonymous_cal.jsp?resources=3115&projectId=7&calType=ical&nbWeeks=4"
+    },
+    {
+      "classe": "31A",
+      "url": "http://planning.univ-lemans.fr/jsp/custom/modules/plannings/anonymous_cal.jsp?resources=5269&projectId=7&calType=ical&nbWeeks=4"
+    },
+    {
+      "classe": "31B",
+      "url": "http://planning.univ-lemans.fr/jsp/custom/modules/plannings/anonymous_cal.jsp?resources=5419&projectId=7&calType=ical&nbWeeks=4"
+    },
+    {
+      "classe": "32C",
+      "url": "http://planning.univ-lemans.fr/jsp/custom/modules/plannings/anonymous_cal.jsp?resources=6239&projectId=7&calType=ical&nbWeeks=4"
+    },
+    {
+      "classe": "32D",
+      "url": "http://planning.univ-lemans.fr/jsp/custom/modules/plannings/anonymous_cal.jsp?resources=6241&projectId=7&calType=ical&nbWeeks=4"
+    }
+  ]
+}
