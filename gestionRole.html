@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestion des Rôles</title>
+  <link rel="stylesheet" href="/CSS/gestionRole.css">
+</head>
+<body>
+<div class="main-content">
+  <!-- Header -->
+  <header>
+    <h1 class="title">Panel <span class="highlight">Administrateur</span></h1>
+    <h2>Gestion des <span class="highlight-secondary">rôles</span></h2>
+  </header>
+
+  <!-- Formulaire de création de rôle -->
+  <section class="role-creation">
+    <form action="/submit-role" method="POST" class="role-form">
+      <h3>Ajouter un rôle</h3>
+      <div class="form-group">
+        <label for="role-name">Nom :</label>
+        <input type="text" id="role-name" name="name" placeholder="Nom du rôle" required>
+      </div>
+      <div class="form-group">
+        <label for="role-description">Description :</label>
+        <textarea id="role-description" name="description" placeholder="Description du rôle" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="role-permissions">Permissions :</label>
+        <textarea id="role-permissions" name="permissions" placeholder="Liste des permissions" required></textarea>
+      </div>
+      <button type="submit" class="btn-create">Créer</button>
+    </form>
+  </section>
+
+  <!-- Liste des rôles -->
+  <section class="role-list">
+    <div class="role-card">
+      <h3>Administrateur</h3>
+      <p>Président du BDE, membres actifs du BDE, Superviseur de l'IUT</p>
+      <p>Toutes les permissions</p>
+      <div class="role-actions">
+        <button class="btn-modify">Modifier</button>
+        <button class="btn-delete">Supprimer</button>
+      </div>
+    </div>
+    <div class="role-card">
+      <h3>Membre</h3>
+      <p>Adhérant du BDE</p>
+      <p>Accéder au site, Consulter l'agenda, Gérer son profil, Gérer ses inscriptions, Acheter des produits</p>
+      <div class="role-actions">
+        <button class="btn-modify">Modifier</button>
+        <button class="btn-delete">Supprimer</button>
+      </div>
+    </div>
+    <div class="role-card">
+      <h3>Visiteur</h3>
+      <p>Visiteur du site n'étant pas adhérant au BDE</p>
+      <p>Accéder au site, Créer un compte, Gérer son profil, Gérer ses inscriptions, Acheter des produits</p>
+      <div class="role-actions">
+        <button class="btn-modify">Modifier</button>
+        <button class="btn-delete">Supprimer</button>
+      </div>
+    </div>
+  </section>
+</div>
+</body>
+</html>

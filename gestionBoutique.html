@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion de la Boutique</title>
+    <link rel="stylesheet" href="/CSS/gestionBoutique.css">
+</head>
+<body>
+<div class="main-content">
+    <!-- Header -->
+    <header>
+        <h1 class="title">Panel <span class="highlight">Administrateur</span></h1>
+        <h2>Gestion de la <span class="highlight-secondary">Boutique</span></h2>
+        <a href="#" class="btn-promo">Gérer les codes promotionnels</a>
+    </header>
+
+    <!-- Formulaire de création de produit -->
+    <section class="product-creation">
+        <form action="/submit-product" method="POST" class="product-form">
+            <h3>Ajouter un produit</h3>
+            <div class="form-group">
+                <label for="product-name">Nom :</label>
+                <input type="text" id="product-name" name="name" placeholder="Nom du produit" required>
+            </div>
+            <div class="form-group">
+                <label for="product-description">Description :</label>
+                <textarea id="product-description" name="description" placeholder="Description du produit" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="product-image">Image :</label>
+                <input type="file" id="product-image" name="image" accept="image/*" required>
+            </div>
+            <div class="form-inline">
+                <div class="form-group">
+                    <label for="product-price">Prix (€) :</label>
+                    <input type="number" id="product-price" name="price" placeholder="Prix" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="product-stock">Stock :</label>
+                    <input type="number" id="product-stock" name="stock" placeholder="Quantité en stock" min="0" required>
+                </div>
+            </div>
+            <button type="submit" class="btn-create">Créer</button>
+        </form>
+    </section>
+
+    <!-- Liste des produits -->
+    <section class="product-list">
+        <div class="product-card">
+            <h3>Pull 2024</h3>
+            <p>Pull du BUT Info Laval de l'année 2023-2024</p>
+            <img src="/img/sweat.png" alt="Pull 2024">
+            <div class="product-details">
+                <span>30€</span>
+                <span>17 en stock</span>
+            </div>
+            <div class="product-actions">
+                <button class="btn-modify">Modifier</button>
+                <button class="btn-delete">Supprimer</button>
+            </div>
+        </div>
+        <div class="product-card">
+            <h3>Coca Cola</h3>
+            <p>Canette de Coca Cola de 33cl</p>
+            <img src="/img/coca-cola.jpg" alt="Coca Cola">
+            <div class="product-details">
+                <span>1€</span>
+                <span>53 en stock</span>
+            </div>
+            <div class="product-actions">
+                <button class="btn-modify">Modifier</button>
+                <button class="btn-delete">Supprimer</button>
+            </div>
+        </div>
+        <div class="product-card">
+            <h3>Red Bull</h3>
+            <p>Canette de Red Bull 25cl</p>
+            <img src="/img/red-bull.jpg" alt="Red Bull">
+            <div class="product-details">
+                <span>2€</span>
+                <span>45 en stock</span>
+            </div>
+            <div class="product-actions">
+                <button class="btn-modify">Modifier</button>
+                <button class="btn-delete">Supprimer</button>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>
