@@ -16,6 +16,30 @@ let currentTitle = "Commentaires";
 
 */
 
+function loadProduits(produits){
+    console.log(produits)
+    let container = document.getElementById("thumbnails");
+
+    produits.forEach((contents, idx) => {
+        let a = document.createElement("a");
+        a.href = "#"
+
+        let d = document.createElement("div");
+        d.className = 'col-xs-2 col-md-2';
+
+        let img = new Image();
+        img.src = contents["Img_Produit"];
+        img.alt = contents["Img_Produit"];
+        img.id = "thumbnail-" + idx;
+        img.setAttribute("photoid", idx);
+        img.className = "img-thumbnail";
+
+        a.append(img);
+        d.append(a);
+        container.append(d);
+    });
+}
+
 document.getElementById("product-add").addEventListener('submit', (event) => 
     {
     event.preventDefault();
@@ -26,11 +50,9 @@ document.getElementById("product-add").addEventListener('submit', (event) =>
     let image = document.getElementById('image').value;
     console.log("Ajout d'un produit");
     ajaxRequest('POST', 'php/request.php/produit/', () => {
-        ajaxRequest('GET', 'php/request.php/produit/?nom=' + nom, + '&description=' + description + '$image=' + image + '&prix=' + prix + '&stock=' + stock);
-    })
-})
-
-
+        ajaxRequest('GET', 'php/request.php/produit/?')
+    }, );
+});
 
 
 function loadPhotos(photos){
@@ -146,4 +168,4 @@ function requestPhoto(){
 
 document.getElementById('thumbnails').addEventListener('click', requestPhoto);
 
-ajaxRequest("GET","php/request.php/photos",loadPhotos);
+ajaxRequest("GET","php/request.php/produits",loadProduits);

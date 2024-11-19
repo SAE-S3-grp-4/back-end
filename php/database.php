@@ -52,13 +52,14 @@ function dbRequestProduct($db)
 function dbAddProduct($db, $nom, $desc, $img, $prix, $stock)
 {
   try {
-    $request = 'INSERT INTO PRODUIT(Nom_Produit, Description_Produit, Img_Produit, Prix_Produit, Stock_Produit) VALUES(:nom, :desc, :img, :prix, :stock)';
+    $request = 'INSERT INTO PRODUIT(Nom_Produit, Description_Produit, Img_Produit, Prix_Produit, Stock_Produit) VALUES(:Nom_Produit, :Description_Produit, :Img_Produit, :Prix_Produit, :Stock_Produit)';
     $statement = $db->prepare($request);
-    $statement->bindParam(':nom', $nom, PDO::PARAM_STR, 50);
-    $statement->bindParam(':desc', $desc, PDO::PARAM_STR, 200);
-    $statement->bindParam(':img', $img, PDO::PARAM_STR, 200);
-    $statement->bindParam(':prix', $prix, PDO::PARAM_INT, 10);
-    $statement->bindParam(':stock', $stock, PDO::PARAM_INT, 10);
+    $statement->bindParam(':Nom_Produit', $nom, PDO::PARAM_STR, 50);
+    $statement->bindParam(':Description_Produit', $desc, PDO::PARAM_STR, 200);
+    $statement->bindParam(':Img_Produit', $img, PDO::PARAM_STR, 200);
+    $statement->bindParam(':Prix_Produit', $prix, PDO::PARAM_INT, 10);
+    $statement->bindParam(':Stock_Produit', $stock, PDO::PARAM_INT, 10);
+    var_dump($statement);
     $statement->execute();
   } catch (PDOException $exception) {
     error_log('Request error:' . $exception->getMessage());
