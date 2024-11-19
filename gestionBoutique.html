@@ -18,8 +18,8 @@
     </header>
 
     <!-- Formulaire de création de produit -->
-    <section class="product-creation">
-        <form action="submit-product" method="POST" class="product-form">
+    <section class="product-creation" id="add-product">
+        <form method="POST" class="product-form">
             <h3>Ajouter un produit</h3>
             <div class="form-group">
                 <label for="product-name">Nom :</label>
@@ -46,6 +46,7 @@
             <button type="submit" class="btn-create">Créer</button>
         </form>
     </section>
+    <div id="errors" style="display: none;"></div>
 
     <!-- Liste des produits -->
     <section class="product-list" id="product-list">

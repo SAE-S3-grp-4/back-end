@@ -59,7 +59,7 @@ function dbAddProduct($db, $nom, $desc, $img, $prix, $stock)
     $statement->bindParam(':Img_Produit', $img, PDO::PARAM_STR, 200);
     $statement->bindParam(':Prix_Produit', $prix, PDO::PARAM_INT, 10);
     $statement->bindParam(':Stock_Produit', $stock, PDO::PARAM_INT, 10);
-    var_dump($statement);
+    //var_dump($statement);
     $statement->execute();
   } catch (PDOException $exception) {
     error_log('Request error:' . $exception->getMessage());

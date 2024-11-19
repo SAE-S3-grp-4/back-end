@@ -12,8 +12,32 @@
 
 */
 
+document.getElementById("add-product").addEventListener('submit', (event) => 
+    {
+    event.preventDefault();
+    let nom = document.getElementById('product-name').value;
+    let description = document.getElementById('product-description').value;
+    let prix = document.getElementById('product-price').value;
+    let stock = document.getElementById('product-stock').value;
+    let image = document.getElementById('product-image').value;
+
+    console.log("Ajout d'un produit");
+
+    let data = `nom=${encodeURIComponent(nom)}&description=${encodeURIComponent(description)}&image=${encodeURIComponent(image)}&prix=${encodeURIComponent(prix)}&stock=${encodeURIComponent(stock)}`;
+
+    ajaxRequest('POST', 'php/request.php/produit/', () => {
+        ajaxRequest('GET', 'php/request.php/produits?', loadProduits);
+    }, data);
+
+    nom = document.getElementById('product-name').value = '';
+    description = document.getElementById('product-description').value = '';
+    prix = document.getElementById('product-price').value = '';
+    stock = document.getElementById('product-stock').value = '';
+    image = document.getElementById('product-image').value = '';
+});
+
 function loadProduits(produits){
-    console.log(produits)
+    //console.log(produits)
     let container = document.getElementById("product-list")
 
     produits.forEach((contents, idx) => {
@@ -68,22 +92,10 @@ function loadProduits(produits){
     });
 }
 
-/* document.getElementById("product-add").addEventListener('submit', (event) => 
-    {
-    event.preventDefault();
-    let nom = document.getElementById('nom').value;
-    let description = document.getElementById('description').value;
-    let prix = document.getElementById('prix').value;
-    let stock = document.getElementById('stock').value;
-    let image = document.getElementById('image').value;
-    console.log("Ajout d'un produit");
-    ajaxRequest('POST', 'php/request.php/produit/', () => {
-        ajaxRequest('GET', 'php/request.php/produit/?')
-    }, );
-});
 
 
-function loadPhotos(photos){
+
+/* function loadPhotos(photos){
     console.log(photos);
     let container = document.getElementById("thumbnails");
 
