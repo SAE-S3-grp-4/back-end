@@ -1,7 +1,3 @@
-
-let login = "cir2";
-let currentTitle = "Commentaires";
-
 /* document.getElementById("comments-add").addEventListener('submit', (event) =>
 {
     event.preventDefault();
@@ -18,24 +14,56 @@ let currentTitle = "Commentaires";
 
 function loadProduits(produits){
     console.log(produits)
-    let container = document.getElementById("product-list");
+    let container = document.getElementById("product-list")
 
     produits.forEach((contents, idx) => {
-        let a = document.createElement("a");
-        a.href = "#"
-
         let d = document.createElement("div");
-        d.className = 'col-xs-2 col-md-2';
+        d.className = 'product-card';
+
+        let h3 = document.createElement("h3");
+        h3.innerText = contents.Nom_Produit;
+
+        let p = document.createElement("p");
+        p.innerText = contents.Description_Produit;
 
         let img = new Image();
-        img.src = contents["Img_Produit"];
+        img.src = "img/" + contents["Img_Produit"];
         img.alt = contents["Img_Produit"];
-        img.id = "thumbnail-" + idx;
         img.setAttribute("photoid", idx);
-        img.className = "img-thumbnail";
 
-        a.append(img);
-        d.append(a);
+        d.append(h3);
+        d.append(p);
+        d.append(img);
+
+        let details = document.createElement("div");
+        details.className = 'product-details';
+
+        let sp = document.createElement("span");
+        sp.innerText = contents.Prix_Produit + '€ ';
+
+        let sp2 = document.createElement("span");
+        sp2.innerText = contents.Stock_Produit + ' en stock';
+
+        details.append(sp);
+        details.append(sp2);
+
+        let actions = document.createElement("div");
+        actions.className = 'product-actions';
+
+        let btndel = document.createElement("button");
+        btndel.innerText = 'Supprimer'
+        btndel.className = 'btn-delete';
+
+        let btnmod = document.createElement("button");
+        btnmod.innerText = 'Modifier'
+        btnmod.className = 'btn-modify';
+
+        actions.append(btndel);
+        actions.append(btnmod);
+
+        d.append(details);
+        d.append(actions);
+
         container.append(d);
     });
 }
