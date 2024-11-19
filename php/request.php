@@ -29,6 +29,10 @@ if ($requestRessource == 'produits') {
   $data = dbRequestProduct($db);
 }
 
+if ($requestRessource == 'events') {
+  $data = dbRequestEvent($db);
+}
+
 if ($requestMethod == "POST") {
   if ($requestRessource == "comments") {
     $textToPost = filter_var($_POST["comment"], FILTER_SANITIZE_STRING);

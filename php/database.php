@@ -34,6 +34,19 @@ function dbRequestUser($db)
   return $result;
 }
 
+function dbRequestEvent($db)
+{
+  try {
+    $request = 'SELECT * FROM EVENEMENT';
+    $statement = $db->prepare($request);
+    $statement->execute();
+    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+  } catch (PDOException $exception) {
+    error_log('Request error: ' . $exception->getMessage());
+    return false;
+  }
+  return $result;
+}
 
 function dbRequestProduct($db)
 {

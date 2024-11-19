@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gestion des événements</title>
-  <link rel="stylesheet" href="/CSS/gestionEvent.css">
+  <link rel="stylesheet" href="CSS/gestionEvent.css">
+  <script src="js/ajax.js" defer></script>
+  <script src="js/loading_events.js" defer></script>
 </head>
 <body>
 <div class="main-content">
@@ -16,7 +18,7 @@
 
   <!-- Formulaire de création d'événement -->
   <section class="event-creation">
-    <form action="/submit-event" method="POST" class="event-form">
+    <form action="submit-event" method="POST" class="event-form">
       <h3>Créer un événement</h3>
       <div class="form-group">
         <label for="event-title">Titre :</label>
@@ -41,139 +43,7 @@
   </section>
 
   <!-- Liste des événements déjà créés -->
-  <section class="event-list">
-    <div class="event-card">
-      <h3>Soirée d'intégration</h3>
-      <p>Soirée d'intégration à l'AfterWork</p>
-      <div class="event-details">
-        <span>21/09/24 - 19h00</span>
-        <span>0€</span>
-      </div>
-      <div class="event-actions">
-        <button class="btn-modify">Modifier</button>
-        <button class="btn-delete">Supprimer</button>
-      </div>
-    </div>
-    <div class="event-card">
-      <h3>Barbecue</h3>
-      <p>Barbecue sur le parking du bâtiment info</p>
-      <div class="event-details">
-        <span>27/05/25 - 12h30</span>
-        <span>5€</span>
-      </div>
-      <div class="event-actions">
-        <button class="btn-modify">Modifier</button>
-        <button class="btn-delete">Supprimer</button>
-      </div>
-    </div>
-    <div class="event-card">
-      <h3>Karting</h3>
-      <p>Session de karting pour les étudiants</p>
-      <div class="event-details">
-        <span>10/06/25 - 14h00</span>
-        <span>20€</span>
-      </div>
-      <div class="event-actions">
-        <button class="btn-modify">Modifier</button>
-        <button class="btn-delete">Supprimer</button>
-      </div>
-    </div>
-    <div class="event-card">
-      <h3>Soirée d'intégration</h3>
-      <p>Soirée d'intégration à l'AfterWork</p>
-      <div class="event-details">
-        <span>21/09/24 - 19h00</span>
-        <span>0€</span>
-      </div>
-      <div class="event-actions">
-        <button class="btn-modify">Modifier</button>
-        <button class="btn-delete">Supprimer</button>
-      </div>
-    </div>
-    <div class="event-card">
-      <h3>Barbecue</h3>
-      <p>Barbecue sur le parking du bâtiment info</p>
-      <div class="event-details">
-        <span>27/05/25 - 12h30</span>
-        <span>5€</span>
-      </div>
-      <div class="event-actions">
-        <button class="btn-modify">Modifier</button>
-        <button class="btn-delete">Supprimer</button>
-      </div>
-    </div>
-    <div class="event-card">
-      <h3>Karting</h3>
-      <p>Session de karting pour les étudiants</p>
-      <div class="event-details">
-        <span>10/06/25 - 14h00</span>
-        <span>20€</span>
-      </div>
-      <div class="event-actions">
-        <button class="btn-modify">Modifier</button>
-        <button class="btn-delete">Supprimer</button>
-      </div>
-    </div>
-    <div class="event-card">
-      <h3>Soirée d'intégration</h3>
-      <p>Soirée d'intégration à l'AfterWork</p>
-      <div class="event-details">
-        <span>21/09/24 - 19h00</span>
-        <span>0€</span>
-      </div>
-      <div class="event-actions">
-        <button class="btn-modify">Modifier</button>
-        <button class="btn-delete">Supprimer</button>
-      </div>
-    </div>
-    <div class="event-card">
-      <h3>Barbecue</h3>
-      <p>Barbecue sur le parking du bâtiment info</p>
-      <div class="event-details">
-        <span>27/05/25 - 12h30</span>
-        <span>5€</span>
-      </div>
-      <div class="event-actions">
-        <button class="btn-modify">Modifier</button>
-        <button class="btn-delete">Supprimer</button>
-      </div>
-    </div>
-    <div class="event-card">
-      <h3>Barbecue</h3>
-      <p>Barbecue sur le parking du bâtiment info</p>
-      <div class="event-details">
-        <span>27/05/25 - 12h30</span>
-        <span>5€</span>
-      </div>
-      <div class="event-actions">
-        <button class="btn-modify">Modifier</button>
-        <button class="btn-delete">Supprimer</button>
-      </div>
-    </div>
-    <div class="event-card">
-      <h3>Barbecue</h3>
-      <p>Barbecue sur le parking du bâtiment info</p>
-      <div class="event-details">
-        <span>27/05/25 - 12h30</span>
-        <span>5€</span>
-      </div>
-      <div class="event-actions">
-        <button class="btn-modify">Modifier</button>
-        <button class="btn-delete">Supprimer</button>
-      </div>
-    </div>
-    <div class="event-card">
-      <h3>Barbecue</h3>
-      <p>Barbecue sur le parking du bâtiment info</p>
-      <div class="event-details">
-        <span>27/05/25 - 12h30</span>
-        <span>5€</span>
-      </div>
-      <div class="event-actions">
-        <button class="btn-modify">Modifier</button>
-        <button class="btn-delete">Supprimer</button>
-      </div>
-    </div>
+  <section class="event-list" id="event-list">
   </section>
 </div>
 </body>
