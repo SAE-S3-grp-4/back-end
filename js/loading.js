@@ -18,7 +18,7 @@ let currentTitle = "Commentaires";
 
 function loadProduits(produits){
     console.log(produits)
-    let container = document.getElementById("thumbnails");
+    let container = document.getElementById("product-list");
 
     produits.forEach((contents, idx) => {
         let a = document.createElement("a");
@@ -40,7 +40,7 @@ function loadProduits(produits){
     });
 }
 
-document.getElementById("product-add").addEventListener('submit', (event) => 
+/* document.getElementById("product-add").addEventListener('submit', (event) => 
     {
     event.preventDefault();
     let nom = document.getElementById('nom').value;
@@ -167,5 +167,5 @@ function requestPhoto(){
 
 
 document.getElementById('thumbnails').addEventListener('click', requestPhoto);
-
+*/
 ajaxRequest("GET","php/request.php/produits",loadProduits);
