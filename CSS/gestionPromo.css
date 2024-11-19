@@ -1,0 +1,161 @@
+/* Reset styles */
+body, h1, h2, h3, p, label, input, textarea, button {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #1e1e2f, #3a3a5e);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+}
+
+.main-content {
+    text-align: center;
+    width: 100%;
+    padding-bottom: 2rem;
+}
+
+/* Header */
+.title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.highlight {
+    color: #ff99ff;
+}
+
+.highlight-secondary {
+    color: #c8a2ff;
+    font-weight: bold;
+}
+
+/* Formulaire */
+.promo-form {
+    background: #2b2b59;
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin: 2rem auto;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    width: 400px;
+    text-align: left;
+    color: #c8c8e8;
+}
+
+.promo-form h3 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #ff99ff;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #00b4d8;
+    border-radius: 5px;
+    background: #1e1e3e;
+    color: #fff;
+}
+
+.form-group textarea {
+    resize: none;
+    height: 80px;
+}
+
+button {
+    border: none;
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-create {
+    background: #00b4d8;
+    color: #fff;
+    display: block;
+    margin: 1rem auto;
+    text-align: center;
+    width: 100%;
+}
+
+.btn-create:hover {
+    background: #0077b6;
+}
+
+/* Liste des codes promo */
+.promo-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.promo-card {
+    background: #2b2b59;
+    border-radius: 15px;
+    padding: 1rem;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.promo-card h3 {
+    font-size: 1.5rem;
+    color: #ff99ff;
+    margin-bottom: 0.5rem;
+}
+
+.promo-card p {
+    font-size: 1rem;
+    color: #c8c8e8;
+    margin-bottom: 1rem;
+}
+
+.promo-actions button {
+    padding: 0.5rem 1rem;
+    margin: 0.3rem;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-modify {
+    background: #3a3a5e;
+    color: #fff;
+}
+
+.btn-modify:hover {
+    background: #00b4d8;
+}
+
+.btn-delete {
+    background: #d62828;
+    color: #fff;
+}
+
+.btn-delete:hover {
+    background: #b51717;
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Codes Promotionnels</title>
+    <link rel="stylesheet" href="/CSS/gestionPromo.css">
+</head>
+<body>
+<div class="main-content">
+    <!-- Header -->
+    <header>
+        <h1 class="title">Panel <span class="highlight">Administrateur</span></h1>
+        <h2>Gestion des <span class="highlight-secondary">codes Promotionnels</span></h2>
+    </header>
+
+    <!-- Formulaire de création de code promo -->
+    <section class="promo-creation">
+        <form action="/submit-code" method="POST" class="promo-form">
+            <h3>Ajouter un code promo</h3>
+            <div class="form-group">
+                <label for="promo-name">Nom :</label>
+                <input type="text" id="promo-name" name="name" placeholder="Nom du code promo" required>
+            </div>
+            <div class="form-group">
+                <label for="promo-percentage">Pourcentage (%) :</label>
+                <input type="number" id="promo-percentage" name="percentage" placeholder="Ex : 10" min="0" max="100" required>
+            </div>
+            <div class="form-group">
+                <label for="promo-products">Produits associés :</label>
+                <textarea id="promo-products" name="products" placeholder="Liste des produits associés" required></textarea>
+            </div>
+            <button type="submit" class="btn-create">Créer</button>
+        </form>
+    </section>
+
+    <!-- Liste des codes promo -->
+    <section class="promo-list">
+        <div class="promo-card">
+            <h3>Pull5</h3>
+            <p>5%</p>
+            <p>Pull 2024</p>
+            <div class="promo-actions">
+                <button class="btn-modify">Modifier</button>
+                <button class="btn-delete">Supprimer</button>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>
