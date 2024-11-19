@@ -18,6 +18,8 @@ function dbConnect()
   return $db;
 }
 
+
+
 function dbRequestUser($db)
 {
   try {
@@ -96,8 +98,6 @@ function dbAddEvent($db, $nom, $desc, $date, $prix)
   }
   return true;
 }
-<<<<<<< HEAD
-=======
 
 function dbDeleteProduct($db, $id)
 {
@@ -110,4 +110,3 @@ function dbDeleteProduct($db, $id)
     error_log('Request error :' . $exception->getMessage());
   }
 }
->>>>>>> 6eca09071370d662089b4afc04cba35a49fe95a9
