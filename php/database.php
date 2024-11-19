@@ -81,4 +81,20 @@ function dbAddProduct($db, $nom, $desc, $img, $prix, $stock)
   return true;
 }
 
-
+function dbAddEvent($db, $nom, $desc, $date, $prix)
+{
+  try {
+    $request = 'INSERT INTO EVENEMENT(Nom_Event, Prix_Event, Description_Event, Nb_Place_Event, Date_Fin_Inscription, Date_Event) VALUES(:Nom_Event,:Prix_Event,:Description_Event,NULL,NULL,:Date_Event)';
+    $statement = $db->prepare($request);
+    $statement->bindParam(':Nom_Event', $nom, PDO::PARAM_STR, 50);
+    $statement->bindParam(':Description_Event', $desc, PDO::PARAM_STR, 200);
+    $statement->bindParam(':Date_Event', $date, PDO::PARAM_STR, 200);
+    $statement->bindParam(':Prix_Produit', $prix, PDO::PARAM_INT, 10);
+    //var_dump($statement);
+    $statement->execute();
+  } catch (PDOException $exception) {
+    error_log('Request error:' . $exception->getMessage());
+    return false;
+  }
+  return true;
+}

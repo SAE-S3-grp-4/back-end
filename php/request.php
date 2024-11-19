@@ -64,6 +64,13 @@ if ($requestMethod == "POST") {
     $data = dbAddProduct($db, $nom, $description, $img, $prix, $stock);
   }
 
+  if ($requestRessource == 'event') {
+    $nom = isset($_POST["nom"]) ? filter_var($_POST["nom"], FILTER_SANITIZE_STRING) : null;
+    $description = isset($_POST["description"]) ? filter_var($_POST["description"], FILTER_SANITIZE_STRING) : null;
+    $prix = isset($_POST["prix"]) ? filter_var($_POST["prix"], FILTER_SANITIZE_NUMBER_INT) : null;
+    $date = isset($_POST["date"]) ? filter_var($_POST["date"], FILTER_SANITIZE_NUMBER_INT) : null;
+    $data = dbRequestEvent($db);
+  }
 }
 
 if ($requestMethod == "PUT") {

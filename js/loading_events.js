@@ -1,3 +1,27 @@
+document.getElementById("add-event").addEventListener('submit', (event) => 
+    {
+    event.preventDefault();
+    let nom = document.getElementById('event-title').value;
+    let description = document.getElementById('event-description').value;
+    let prix = document.getElementById('event-price').value;
+    let date = document.getElementById('event-date').value;
+
+    console.log("Ajout d'un event");
+
+    let data = `nom=${encodeURIComponent(nom)}&description=${encodeURIComponent(description)}&prix=${encodeURIComponent(prix)}&date=${encodeURIComponent(date)}`;
+
+    ajaxRequest('POST', 'php/request.php/event/', () => {
+        ajaxRequest('GET', 'php/request.php/events?', loadEvents);
+    }, data);
+
+    nom = document.getElementById('event-title').value = '';
+    description = document.getElementById('event-description').value = '';
+    prix = document.getElementById('event-price').value = '';
+    date = document.getElementById('event-date').value = '';
+});
+
+
+
 function loadEvents(events){
     console.log(events);
     let container = document.getElementById("event-list");
