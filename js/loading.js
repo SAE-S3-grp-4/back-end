@@ -117,7 +117,6 @@ function loadProduits(produits){
 
 
 
-
 /* function loadPhotos(photos){
     console.log(photos);
     let container = document.getElementById("thumbnails");
