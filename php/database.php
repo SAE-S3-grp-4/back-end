@@ -81,6 +81,7 @@ function dbAddProduct($db, $nom, $desc, $img, $prix, $stock)
   return true;
 }
 
+<<<<<<< HEAD
 function dbAddEvent($db, $nom, $desc, $date, $prix)
 {
   try {
@@ -98,3 +99,18 @@ function dbAddEvent($db, $nom, $desc, $date, $prix)
   }
   return true;
 }
+=======
+function dbDeleteProduct($db, $id)
+{
+  try {
+    $request = 'DELETE FROM produits WHERE id = :id';
+    $statement = $db->prepare($request);
+    $statement->bindParam(':id', $id, PDO::PARAM_INT);
+    $statement->execute();
+  } catch (PDOException $exception) {
+    error_log('Request error :' . $exception->getMessage());
+  }
+}
+
+
+>>>>>>> facbb13dc46bcaba8492c5c5b44a5107cfe9b375

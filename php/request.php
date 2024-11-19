@@ -63,6 +63,7 @@ if ($requestMethod == "POST") {
 
     $data = dbAddProduct($db, $nom, $description, $img, $prix, $stock);
   }
+<<<<<<< HEAD
 
   if ($requestRessource == 'event') {
     $nom = isset($_POST["nom"]) ? filter_var($_POST["nom"], FILTER_SANITIZE_STRING) : null;
@@ -71,6 +72,8 @@ if ($requestMethod == "POST") {
     $date = isset($_POST["date"]) ? filter_var($_POST["date"], FILTER_SANITIZE_NUMBER_INT) : null;
     $data = dbRequestEvent($db);
   }
+=======
+>>>>>>> facbb13dc46bcaba8492c5c5b44a5107cfe9b375
 }
 
 if ($requestMethod == "PUT") {
@@ -85,6 +88,10 @@ if ($requestMethod == "PUT") {
 if ($requestMethod == "DELETE") {
   if ($requestRessource == "comments") {
     $data = dbDeleteComment($db, $id, $_GET["userLogin"]);
+  }
+  if ($requestMethod === 'produit' && preg_match('/^\/produit\/id=(\d+)$/', $_SERVER['PATH_INFO'], $matches)) {
+    $id = intval($matches[1]);
+    $data = dbDeleteProduct($db, $id);
   }
 }
 

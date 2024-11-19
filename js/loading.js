@@ -12,6 +12,10 @@
 
 */
 
+
+//------------------------------------------------------------------------------
+//--- Add Product --------------------------------------------------------------
+//------------------------------------------------------------------------------
 document.getElementById("add-product").addEventListener('submit', (event) => 
     {
     event.preventDefault();
@@ -36,6 +40,24 @@ document.getElementById("add-product").addEventListener('submit', (event) =>
     image = document.getElementById('product-image').value = '';
 });
 
+//------------------------------------------------------------------------------
+//--- Delete Product -----------------------------------------------------------
+//------------------------------------------------------------------------------
+function deleteProduct(){
+    let deleteButtons = document.querySelectorAll('.btn-delete');
+    deleteButtons.forEach(button => button.addEventListener('click', event => {
+        let productId = event.target.getAttribute('data-id');
+        if(confirm("Voulez vous vraiment supprimer ce produit ?")){
+            ajaxRequest('DELETE', `php/request.php/produit/?id=${productId}`, () => {
+                ajaxRequest('GET', 'php/request.php/produits', loadProduits);
+            })
+        }
+    }))
+}
+
+//------------------------------------------------------------------------------
+//--- Load Product -------------------------------------------------------------
+//------------------------------------------------------------------------------
 function loadProduits(produits){
     //console.log(produits)
     let container = document.getElementById("product-list")
@@ -77,6 +99,7 @@ function loadProduits(produits){
         let btndel = document.createElement("button");
         btndel.innerText = 'Supprimer'
         btndel.className = 'btn-delete';
+        btndel.setAttribute("data-id", contents.Id_Produit);
 
         let btnmod = document.createElement("button");
         btnmod.innerText = 'Modifier'
@@ -207,4 +230,7 @@ function requestPhoto(){
 
 document.getElementById('thumbnails').addEventListener('click', requestPhoto);
 */
-ajaxRequest("GET","php/request.php/produits",loadProduits);
+ajaxRequest("GET","php/request.php/produits", produits => {
+    loadProduits(produits);
+    deleteProduct();
+});
