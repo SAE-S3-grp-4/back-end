@@ -48,6 +48,37 @@
     </section>
     <div id="errors" style="display: none;"></div>
 
+    <!-- Formulaire de modification de produit -->
+    <section class="product-modification" id="modify-product" style="display: none;">
+        <form id="form-modify-product" class="product-form">
+            <h3>Modifier un produit</h3>
+            <input type="hidden" id="modify-product-id">
+            <div class="form-group">
+                <label for="modify-product-name">Nom :</label>
+                <input type="text" id="modify-product-name" name="name" placeholder="Nom du produit" required>
+            </div>
+            <div class="form-group">
+                <label for="modify-product-description">Description :</label>
+                <textarea id="modify-product-description" name="description" placeholder="Description du produit" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="modify-product-image">Image :</label>
+                <input type="file" id="modify-product-image" name="image" accept="image/*">
+            </div>
+            <div class="form-inline">
+                <div class="form-group">
+                    <label for="modify-product-price">Prix (€) :</label>
+                    <input type="number" id="modify-product-price" name="price" placeholder="Prix" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="modify-product-stock">Stock :</label>
+                    <input type="number" id="modify-product-stock" name="stock" placeholder="Quantité en stock" min="0" required>
+                </div>
+            </div>
+            <button type="submit" class="btn-create">Enregistrer les modifications</button>
+        </form>
+    </section>
+
     <!-- Liste des produits -->
     <section class="product-list" id="product-list">
     </section>
