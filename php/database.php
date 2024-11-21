@@ -194,3 +194,38 @@ function dbRequestProductById($db, $id)
     return $result;
 }
 
+function dbModifyEvent($db, $id, $nom, $desc, $date, $prix, $nbPlace, $dateFinInscription)
+{
+    try {
+        $request = 'UPDATE EVENEMENT SET Nom_Event = :Nom_Event, Description_Event = :Description_Event, Date_Event = :Date_Event, Prix_Event = :Prix_Event, Nb_Place_Event = :Nb_Place_Event, Date_Fin_Inscription = :Date_Fin_Inscription WHERE Id_Event = :Id_Event';
+        $statement = $db->prepare($request);
+        $statement->bindParam(':Id_Event', $id, PDO::PARAM_INT);
+        $statement->bindParam(':Nom_Event', $nom, PDO::PARAM_STR);
+        $statement->bindParam(':Description_Event', $desc, PDO::PARAM_STR);
+        $statement->bindParam(':Date_Event', $date, PDO::PARAM_STR);
+        $statement->bindParam(':Prix_Event', $prix, PDO::PARAM_INT);
+        $statement->bindParam(':Nb_Place_Event', $nbPlace, PDO::PARAM_INT);
+        $statement->bindParam(':Date_Fin_Inscription', $dateFinInscription, PDO::PARAM_STR);
+        $statement->execute();
+    } catch (PDOException $exception) {
+        error_log('Request error: ' . $exception->getMessage());
+        return false;
+    }
+    return true;
+}
+
+function dbRequestEventById($db, $id)
+{
+    try {
+        $request = 'SELECT * FROM EVENEMENT WHERE Id_Event = :Id_Event';
+        $statement = $db->prepare($request);
+        $statement->bindParam(':Id_Event', $id, PDO::PARAM_INT);
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $exception) {
+        error_log('Request error: ' . $exception->getMessage());
+        return false;
+    }
+    return $result;
+}
+
