@@ -15,7 +15,7 @@ document.getElementById("add-product").addEventListener('submit', (event) =>
     let data = `nom=${encodeURIComponent(nom)}&description=${encodeURIComponent(description)}&image=${encodeURIComponent(image)}&prix=${encodeURIComponent(prix)}&stock=${encodeURIComponent(stock)}`;
 
     ajaxRequest('POST', 'php/request.php/produit/', () => {
-        ajaxRequest('GET', 'php/request.php/produits?', loadProduits);
+        ajaxRequest('GET', 'php/request.php/produits', loadProduits);
     }, data);
 
     nom = document.getElementById('product-name').value = '';
