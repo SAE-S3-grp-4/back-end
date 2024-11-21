@@ -88,7 +88,7 @@ if ($requestMethod == "DELETE") {
   }
   if ($requestRessource === 'produit') {
     $id = $_GET["id"];
-
+    // casque
     $data = dbDeleteProduct($db, $id);
   }
 }
