@@ -61,10 +61,6 @@
                     <!-- Les options seront ajoutées dynamiquement via PHP -->
                 </select>
             </div>
-            <div class="date-selector">
-                <label for="date">Date :</label>
-                <input id="date" type="text" placeholder="Choisissez une date">
-            </div>
         </div>
     </div>
 
@@ -78,31 +74,35 @@
             }
         });
 
-        // Met à jour les événements lors du changement du groupe ou de la date
         const groupSelector = document.getElementById("group");
-        const dateSelector = document.getElementById("date");
         const eventsContainer = document.getElementById("events");
 
-        groupSelector.addEventListener("change", updateEvents);
+        // Charger dynamiquement les options de groupe depuis get_groups.php
+        fetch("php/get_groups.php")
+            .then(response => response.text())
+            .then(options => {
+                groupSelector.innerHTML = options;
+            });
 
-        function updateEvents() {
-            const group = groupSelector.value;
-            const date = dateSelector.value;
+        // Mettre à jour les événements lorsque le groupe est sélectionné
+        groupSelector.addEventListener("change", () => {
+            const group = groupSelector.value; // Contient directement "11A", "11B", etc.
 
-            if (group && date) {
-                fetch(`php/get_events.php?group=${group}&date=${date}`)
+            if (group) {
+                fetch(`php/get_events.php?group=${group}`)
                     .then(response => response.json())
                     .then(data => {
                         if (data.length === 0) {
-                            eventsContainer.innerHTML = `<p>Aucun événement trouvé pour ce groupe et cette date.</p>`;
+                            eventsContainer.innerHTML = `<p>Aucun événement trouvé pour ce groupe.</p>`;
                         } else {
                             eventsContainer.innerHTML = data
-                                .map(event => `<p>${event.time} - ${event.summary}</p>`)
+                                .map(event => `<p>${event.date} ${event.time} - ${event.summary}</p>`)
                                 .join("");
                         }
                     });
             }
-        }
+        });
+
     </script>
 </body>
 </html>

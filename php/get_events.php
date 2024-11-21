@@ -1,29 +1,47 @@
 <?php
 
-if (!isset($_GET['group']) || !isset($_GET['date'])) {
-    echo json_encode(['error' => 'Paramètres manquants']);
+if (!isset($_GET['group'])) {
+    echo json_encode([]);
     exit;
 }
 
-$groupUrl = $_GET['group'];
-$date = $_GET['date'];
+$group = $_GET['group'];
 
-// Vérifiez si l'URL du groupe est correcte
-if (!filter_var($groupUrl, FILTER_VALIDATE_URL)) {
-    echo json_encode(['error' => 'URL du groupe invalide']);
+// Lire le fichier JSON
+$jsonPath = "../json/icals.json"; // Chemin vers le fichier JSON contenant les groupes
+$jsonData = file_get_contents($jsonPath);
+$groupsData = json_decode($jsonData, true);
+
+// Vérifier la validité du JSON
+if (!isset($groupsData['elements'])) {
+    echo json_encode([]);
     exit;
 }
 
-// Essayez de télécharger le fichier ICS
-$icsData = @file_get_contents($groupUrl);
+// Trouver l'URL associée au groupe
+$groupUrl = null;
+foreach ($groupsData['elements'] as $element) {
+    if ($element['classe'] === $group) {
+        $groupUrl = $element['url'];
+        break;
+    }
+}
+
+if (!$groupUrl) {
+    echo json_encode([]);
+    exit;
+}
+
+// Télécharger le fichier ICS
+$icsData = file_get_contents($groupUrl);
 
 if (!$icsData) {
-    echo json_encode(['error' => 'Impossible de télécharger le fichier ICS']);
+    echo json_encode([]);
     exit;
 }
 
-// Parser les événements dans l'ICS
-function parseIcs($icsData, $targetDate) {
+// Fonction pour analyser les événements
+function parseIcs($icsData) {
     $events = [];
     $blocks = explode("BEGIN:VEVENT", $icsData);
 
@@ -34,19 +52,24 @@ function parseIcs($icsData, $targetDate) {
 
             if ($startMatches && $summaryMatches) {
                 $startDate = DateTime::createFromFormat('Ymd', $startMatches[1])->format('Y-m-d');
+                $time = substr($startMatches[2], 0, 2) . ':' . substr($startMatches[2], 2, 2);
 
-                if ($startDate === $targetDate) {
-                    $events[] = [
-                        'time' => substr($startMatches[2], 0, 2) . ':' . substr($startMatches[2], 2, 2),
-                        'summary' => $summaryMatches[1],
-                    ];
-                }
+                $events[] = [
+                    'date' => $startDate,
+                    'time' => $time,
+                    'summary' => $summaryMatches[1],
+                ];
             }
         }
     }
 
+    usort($events, function ($a, $b) {
+        return strcmp($a['date'] . $a['time'], $b['date'] . $b['time']);
+    });
+
     return $events;
 }
 
-echo json_encode(parseIcs($icsData, $date));
+// Analyser les événements
+echo json_encode(parseIcs($icsData));
 ?>
