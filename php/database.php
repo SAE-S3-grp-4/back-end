@@ -116,13 +116,19 @@ function dbDeleteProduct($db, $id)
 function dbDeleteEvent($db, $id)
 {
     try {
-        // First, delete the inscriptions related to the event
+        // First, update the status of the related commands to 'Annulée'
+        $updateCommandStatus = 'UPDATE COMMANDE SET Statut_Commande = "Annulée" WHERE Id_Commande IN (SELECT Id_Commande FROM INSCRIPTION WHERE Id_Event = :id)';
+        $statement = $db->prepare($updateCommandStatus);
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
+        $statement->execute();
+
+        // Then, delete the inscriptions related to the event
         $deleteInscriptions = 'DELETE FROM INSCRIPTION WHERE Id_Event = :id';
         $statement = $db->prepare($deleteInscriptions);
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->execute();
 
-        // Then, delete the event itself
+        // Finally, delete the event itself
         $deleteEvent = 'DELETE FROM EVENEMENT WHERE Id_Event = :id';
         $statement = $db->prepare($deleteEvent);
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
