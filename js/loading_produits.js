@@ -51,6 +51,9 @@ document.getElementById("product-list").addEventListener('click', (event) => {
                 document.getElementById('modify-product-price').value = product.Prix_Produit;
                 document.getElementById('modify-product-stock').value = product.Stock_Produit;
                 document.getElementById('modify-product').style.display = 'block';
+
+                // Scroll to the modification form
+                document.getElementById('modify-product').scrollIntoView({ behavior: 'smooth' });
             });
         } else {
             console.error('Invalid product ID');
