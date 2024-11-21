@@ -215,3 +215,14 @@ button {
 .btn-promo:hover {
     background: #0077b6;
 }
+
+.product-modification {
+    display: none;
+    background-color: #1e1e3e;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    margin: 1rem auto;
+    max-width: 500px;
+    color: #fff;
+}
