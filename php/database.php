@@ -104,19 +104,19 @@ function dbDeleteProduct($db, $id)
 {
     try {
         // Update the status of related orders to "Produit supprimé"
-        $updateOrderStatus = 'UPDATE commande SET Statut_Commande = "Produit supprimé" WHERE Id_Commande IN (SELECT Id_Commande FROM bon_de_commande WHERE Id_Produit = :id)';
+        $updateOrderStatus = 'UPDATE COMMANDE SET Statut_Commande = "Produit supprimé" WHERE Id_Commande IN (SELECT Id_Commande FROM BON_DE_COMMANDE WHERE Id_Produit = :id)';
         $statement = $db->prepare($updateOrderStatus);
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->execute();
 
         // Delete related order slips
-        $deleteOrderSlips = 'DELETE FROM bon_de_commande WHERE Id_Produit = :id';
+        $deleteOrderSlips = 'DELETE FROM BON_DE_COMMANDE WHERE Id_Produit = :id';
         $statement = $db->prepare($deleteOrderSlips);
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->execute();
 
         // Delete the product itself
-        $deleteProduct = 'DELETE FROM produit WHERE Id_Produit = :id';
+        $deleteProduct = 'DELETE FROM PRODUIT WHERE Id_Produit = :id';
         $statement = $db->prepare($deleteProduct);
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->execute();
