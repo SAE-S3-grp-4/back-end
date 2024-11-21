@@ -86,8 +86,9 @@ if ($requestMethod == "DELETE") {
   if ($requestRessource == "comments") {
     $data = dbDeleteComment($db, $id, $_GET["userLogin"]);
   }
-  if ($requestMethod === 'produit' && preg_match('/^\/produit\/id=(\d+)$/', $_SERVER['PATH_INFO'], $matches)) {
-    $id = intval($matches[1]);
+  if ($requestRessource === 'produit') {
+    $id = $_GET["id"];
+
     $data = dbDeleteProduct($db, $id);
   }
 }
