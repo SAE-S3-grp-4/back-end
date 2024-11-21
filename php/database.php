@@ -84,17 +84,18 @@ function dbAddProduct($db, $nom, $desc, $img, $prix, $stock)
 function dbAddEvent($db, $nom, $desc, $date, $prix, $nbPlace, $dateFinInscription)
 {
     try {
-        $request = 'INSERT INTO EVENEMENT(Nom_Event, Prix_Event, Description_Event, Date_Event, Nb_Place_Event, Date_Fin_Inscription) VALUES(:Nom_Event, :Prix_Event, :Description_Event, :Date_Event, :Nb_Place_Event, :Date_Fin_Inscription)';
+        $request = 'INSERT INTO EVENEMENT (Nom_Event, Description_Event, Date_Event, Prix_Event, Nb_Place_Event, Date_Fin_Inscription) 
+                    VALUES (:Nom_Event, :Description_Event, :Date_Event, :Prix_Event, :Nb_Place_Event, :Date_Fin_Inscription)';
         $statement = $db->prepare($request);
-        $statement->bindParam(':Nom_Event', $nom, PDO::PARAM_STR, 50);
-        $statement->bindParam(':Description_Event', $desc, PDO::PARAM_STR, 200);
-        $statement->bindParam(':Date_Event', $date, PDO::PARAM_STR, 200);
-        $statement->bindParam(':Prix_Event', $prix, PDO::PARAM_INT, 10);
-        $statement->bindParam(':Nb_Place_Event', $nbPlace, PDO::PARAM_INT, 10);
-        $statement->bindParam(':Date_Fin_Inscription', $dateFinInscription, PDO::PARAM_STR, 200);
+        $statement->bindParam(':Nom_Event', $nom, PDO::PARAM_STR);
+        $statement->bindParam(':Description_Event', $desc, PDO::PARAM_STR);
+        $statement->bindParam(':Date_Event', $date, PDO::PARAM_STR);
+        $statement->bindParam(':Prix_Event', $prix, PDO::PARAM_INT);
+        $statement->bindParam(':Nb_Place_Event', $nbPlace, PDO::PARAM_INT);
+        $statement->bindParam(':Date_Fin_Inscription', $dateFinInscription, PDO::PARAM_STR);
         $statement->execute();
     } catch (PDOException $exception) {
-        error_log('Request error:' . $exception->getMessage());
+        error_log('Request error: ' . $exception->getMessage());
         return false;
     }
     return true;

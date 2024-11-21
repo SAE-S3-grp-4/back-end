@@ -4,10 +4,12 @@ document.getElementById("add-event").addEventListener('submit', (event) => {
     let description = document.getElementById('event-description').value;
     let prix = document.getElementById('event-price').value;
     let date = document.getElementById('event-date').value;
+    let nbPlace = document.getElementById('event-nbPlace').value;
+    let dateFinInscription = document.getElementById('event-dateFinInscription').value;
 
     console.log("Ajout d'un event");
 
-    let data = `nom=${encodeURIComponent(nom)}&description=${encodeURIComponent(description)}&prix=${encodeURIComponent(prix)}&date=${encodeURIComponent(date)}`;
+    let data = `nom=${encodeURIComponent(nom)}&description=${encodeURIComponent(description)}&prix=${encodeURIComponent(prix)}&date=${encodeURIComponent(date)}&nbPlace=${encodeURIComponent(nbPlace)}&dateFinInscription=${encodeURIComponent(dateFinInscription)}`;
 
     ajaxRequest('POST', 'php/request.php/event', () => {
         ajaxRequest('GET', 'php/request.php/events', loadEvents);
@@ -17,6 +19,8 @@ document.getElementById("add-event").addEventListener('submit', (event) => {
     document.getElementById('event-description').value = '';
     document.getElementById('event-price').value = '';
     document.getElementById('event-date').value = '';
+    document.getElementById('event-nbPlace').value = '';
+    document.getElementById('event-dateFinInscription').value = '';
 });
 
 document.getElementById("event-list").addEventListener('click', (event) => {

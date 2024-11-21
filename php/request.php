@@ -69,11 +69,13 @@ if ($requestMethod == "POST") {
 }
 if ($requestMethod == "POST") {
     if ($requestRessource == 'event') {
-        $nom = isset($_POST["nom"]) ? filter_var($_POST["nom"], FILTER_SANITIZE_STRING) : null;
-        $description = isset($_POST["description"]) ? filter_var($_POST["description"], FILTER_SANITIZE_STRING) : null;
+        $nom = isset($_POST["nom"]) ? filter_var($_POST["nom"], FILTER_SANITIZE_FULL_SPECIAL_CHARS) : null;
+        $description = isset($_POST["description"]) ? filter_var($_POST["description"], FILTER_SANITIZE_FULL_SPECIAL_CHARS) : null;
         $prix = isset($_POST["prix"]) ? filter_var($_POST["prix"], FILTER_SANITIZE_NUMBER_INT) : null;
-        $date = isset($_POST["date"]) ? filter_var($_POST["date"], FILTER_SANITIZE_STRING) : null;
-        $data = dbAddEvent($db, $nom, $description, $date, $prix);
+        $date = isset($_POST["date"]) ? filter_var($_POST["date"], FILTER_SANITIZE_FULL_SPECIAL_CHARS) : null;
+        $nbPlace = isset($_POST["nbPlace"]) ? filter_var($_POST["nbPlace"], FILTER_SANITIZE_NUMBER_INT) : null;
+        $dateFinInscription = isset($_POST["dateFinInscription"]) ? filter_var($_POST["dateFinInscription"], FILTER_SANITIZE_FULL_SPECIAL_CHARS) : null;
+        $data = dbAddEvent($db, $nom, $description, $date, $prix, $nbPlace, $dateFinInscription);
     }
 }
 if ($requestMethod == "DELETE") {
