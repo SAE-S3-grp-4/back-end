@@ -102,7 +102,7 @@ function dbAddEvent($db, $nom, $desc, $date, $prix)
 function dbDeleteProduct($db, $id)
 {
   try {
-    $request = 'DELETE FROM produit WHERE id = :id';
+    $request = 'DELETE FROM produit WHERE Id_Produit = :id';
     $statement = $db->prepare($request);
     $statement->bindParam(':id', $id, PDO::PARAM_INT);
     $statement->execute();
