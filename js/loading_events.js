@@ -1,5 +1,4 @@
-document.getElementById("add-event").addEventListener('submit', (event) => 
-    {
+document.getElementById("add-event").addEventListener('submit', (event) => {
     event.preventDefault();
     let nom = document.getElementById('event-title').value;
     let description = document.getElementById('event-description').value;
@@ -10,23 +9,35 @@ document.getElementById("add-event").addEventListener('submit', (event) =>
 
     let data = `nom=${encodeURIComponent(nom)}&description=${encodeURIComponent(description)}&prix=${encodeURIComponent(prix)}&date=${encodeURIComponent(date)}`;
 
-    ajaxRequest('POST', 'php/request.php/event/', () => {
-        ajaxRequest('GET', 'php/request.php/events?', loadEvents);
+    ajaxRequest('POST', 'php/request.php/event', () => {
+        ajaxRequest('GET', 'php/request.php/events', loadEvents);
     }, data);
 
-    nom = document.getElementById('event-title').value = '';
-    description = document.getElementById('event-description').value = '';
-    prix = document.getElementById('event-price').value = '';
-    date = document.getElementById('event-date').value = '';
+    document.getElementById('event-title').value = '';
+    document.getElementById('event-description').value = '';
+    document.getElementById('event-price').value = '';
+    document.getElementById('event-date').value = '';
 });
 
+document.getElementById("event-list").addEventListener('click', (event) => {
+    if (event.target.classList.contains('btn-delete')) {
+        const eventId = parseInt(event.target.dataset.id, 10);
+        if (!isNaN(eventId)) {
+            ajaxRequest('DELETE', `php/request.php/event/${eventId}`, () => {
+                ajaxRequest('GET', 'php/request.php/events', loadEvents);
+            });
+        } else {
+            console.error('Invalid event ID');
+        }
+    }
+});
 
-
-function loadEvents(events){
-    console.log(events);
+function loadEvents(events) {
+    console.log("Loading events:", events);
     let container = document.getElementById("event-list");
+    container.innerHTML = ''; // Clear existing events
 
-    events.forEach((contents, idx) => {
+    events.forEach((contents) => {
         let d = document.createElement("div");
         d.className = 'event-card';
 
@@ -55,11 +66,12 @@ function loadEvents(events){
         actions.className = 'event-actions';
 
         let btndel = document.createElement("button");
-        btndel.innerText = 'Supprimer'
+        btndel.innerText = 'Supprimer';
         btndel.className = 'btn-delete';
+        btndel.dataset.id = contents.Id_Event; // Set the data-id attribute
 
         let btnmod = document.createElement("button");
-        btnmod.innerText = 'Modifier'
+        btnmod.innerText = 'Modifier';
         btnmod.className = 'btn-modify';
 
         actions.append(btndel);
@@ -72,4 +84,4 @@ function loadEvents(events){
     });
 }
 
-ajaxRequest("GET","php/request.php/events",loadEvents);
+ajaxRequest("GET", "php/request.php/events", loadEvents);

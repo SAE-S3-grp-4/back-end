@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 require_once('database.php');
 
@@ -50,27 +53,39 @@ if ($requestMethod == "GET") {
 }
 
 if ($requestMethod == "POST") {
-  if ($requestRessource == "comments") {
-    $textToPost = filter_var($_POST["comment"], FILTER_SANITIZE_STRING);
-    $data = dbAddComment($db, $_POST["userLogin"], $_POST["photoId"], $textToPost);
-  }
-  if ($requestRessource == "produit") {
-    $nom = isset($_POST["nom"]) ? filter_var($_POST["nom"], FILTER_SANITIZE_STRING) : null;
-    $description = isset($_POST["description"]) ? filter_var($_POST["description"], FILTER_SANITIZE_STRING) : null;
-    $prix = isset($_POST["prix"]) ? filter_var($_POST["prix"], FILTER_SANITIZE_NUMBER_INT) : null;
-    $stock = isset($_POST["stock"]) ? filter_var($_POST["stock"], FILTER_SANITIZE_NUMBER_INT) : null;
-    $img = isset($_POST["image"]) ? filter_var($_POST["image"], FILTER_SANITIZE_STRING) : null;
+    if ($requestRessource == "comments") {
+        $textToPost = filter_var($_POST["comment"], FILTER_SANITIZE_STRING);
+        $data = dbAddComment($db, $_POST["userLogin"], $_POST["photoId"], $textToPost);
+    }
+    if ($requestRessource == "produit") {
+        $nom = isset($_POST["nom"]) ? filter_var($_POST["nom"], FILTER_SANITIZE_STRING) : null;
+        $description = isset($_POST["description"]) ? filter_var($_POST["description"], FILTER_SANITIZE_STRING) : null;
+        $prix = isset($_POST["prix"]) ? filter_var($_POST["prix"], FILTER_SANITIZE_NUMBER_INT) : null;
+        $stock = isset($_POST["stock"]) ? filter_var($_POST["stock"], FILTER_SANITIZE_NUMBER_INT) : null;
+        $img = isset($_POST["image"]) ? filter_var($_POST["image"], FILTER_SANITIZE_STRING) : null;
 
-    $data = dbAddProduct($db, $nom, $description, $img, $prix, $stock);
-  }
-
-  if ($requestRessource == 'event') {
-    $nom = isset($_POST["nom"]) ? filter_var($_POST["nom"], FILTER_SANITIZE_STRING) : null;
-    $description = isset($_POST["description"]) ? filter_var($_POST["description"], FILTER_SANITIZE_STRING) : null;
-    $prix = isset($_POST["prix"]) ? filter_var($_POST["prix"], FILTER_SANITIZE_NUMBER_INT) : null;
-    $date = isset($_POST["date"]) ? filter_var($_POST["date"], FILTER_SANITIZE_NUMBER_INT) : null;
-    $data = dbRequestEvent($db);
-  }
+        $data = dbAddProduct($db, $nom, $description, $img, $prix, $stock);
+    }
+}
+if ($requestMethod == "POST") {
+    if ($requestRessource == 'event') {
+        $nom = isset($_POST["nom"]) ? filter_var($_POST["nom"], FILTER_SANITIZE_STRING) : null;
+        $description = isset($_POST["description"]) ? filter_var($_POST["description"], FILTER_SANITIZE_STRING) : null;
+        $prix = isset($_POST["prix"]) ? filter_var($_POST["prix"], FILTER_SANITIZE_NUMBER_INT) : null;
+        $date = isset($_POST["date"]) ? filter_var($_POST["date"], FILTER_SANITIZE_STRING) : null;
+        $data = dbAddEvent($db, $nom, $description, $date, $prix);
+    }
+}
+if ($requestMethod == "DELETE") {
+    if ($requestRessource == 'event') {
+        if (isset($id)) {
+            $data = dbDeleteEvent($db, $id);
+        } else {
+            header('HTTP/1.1 400 Bad Request');
+            echo json_encode(['error' => 'Invalid event ID']);
+            exit;
+        }
+    }
 }
 
 if ($requestMethod == "PUT") {
