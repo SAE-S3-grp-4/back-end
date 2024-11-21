@@ -116,8 +116,15 @@ function dbDeleteProduct($db, $id)
 function dbDeleteEvent($db, $id)
 {
     try {
-        $request = 'DELETE FROM EVENEMENT WHERE Id_Event = :id';
-        $statement = $db->prepare($request);
+        // First, delete the inscriptions related to the event
+        $deleteInscriptions = 'DELETE FROM INSCRIPTION WHERE Id_Event = :id';
+        $statement = $db->prepare($deleteInscriptions);
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
+        $statement->execute();
+
+        // Then, delete the event itself
+        $deleteEvent = 'DELETE FROM EVENEMENT WHERE Id_Event = :id';
+        $statement = $db->prepare($deleteEvent);
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->execute();
     } catch (PDOException $exception) {
@@ -126,3 +133,4 @@ function dbDeleteEvent($db, $id)
     }
     return true;
 }
+
