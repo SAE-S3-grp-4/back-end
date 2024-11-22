@@ -4,14 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion</title>
-    <link rel="stylesheet" href="../CSS/connexion.css">
+    <link rel="stylesheet" href="CSS/connexion.css">
+    <script src="js/ajax.js"></script>
+    <script src="js/connexion.js"></script>
 </head>
 <body>
 <div class="background">
     <div class="login-container">
         <h1>Connexion</h1>
         <a href="#" class="back-link">Retour</a>
-        <form action="connexion.php" method="POST">
+        <div id="error-message" class="error-message" style="display: none;"></div>
+        <form id="login-form">
             <div class="form-group">
                 <label for="username">Nom d'utilisateur</label>
                 <input type="text" id="username" name="username" placeholder="Adresse mail ou identifiant" required>

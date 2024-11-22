@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription</title>
-    <link rel="stylesheet" href="../CSS/inscription.css">
+    <link rel="stylesheet" href="CSS/inscription.css">
 </head>
 <body>
 <div class="background">
     <div class="signup-container">
         <h1>Inscription</h1>
         <a href="accueil.html" class="back-link">Retour</a>
-        <form action="inscription.php" method="POST">
+        <form id="signup-form" action="inscription.php" method="POST">
             <div class="form-group">
                 <label for="name">Nom</label>
                 <input type="text" id="name" name="name" placeholder="Votre nom" required>
@@ -38,8 +38,11 @@
                     <option value="tp D">Groupe D</option>
                 </select>
             </div>
+            <div id="error-message" class="error-message" style="display: none;"></div>
             <button type="submit" class="btn-signup">S'inscrire</button>
         </form>
+        <script src="js/ajax.js"></script>
+        <script src="js/inscription.js"></script>
     </div>
 </div>
 </body>
