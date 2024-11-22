@@ -5,38 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendrier des Groupes</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            margin: 0;
-        }
-        .container {
-            display: flex;
-            width: 100%;
-            height: 100vh;
-        }
-        .left {
-            flex: 3;
-            padding: 20px;
-            overflow-y: auto;
-            border-right: 1px solid #ddd;
-        }
-        .right {
-            flex: 1;
-            padding: 20px;
-            background: #f9f9f9;
-        }
-        .group-selector {
-            margin-bottom: 20px;
-        }
-        h3 {
-            margin-top: 0;
-        }
-        #events {
-            margin-top: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="CSS/calendrier.css">
+    <script src="js/calendar.js" defer></script>
     <script>
         fetch("php/get_groups.php")
             .then(response => response.text())
@@ -48,9 +18,15 @@
 <body>
     <div class="container">
         <div class="left">
-            <h2>Événements</h2>
-            <div id="events">
-                <p>Sélectionnez un groupe et une date pour afficher les événements.</p>
+            <div class="agenda">
+                <div class="header">
+                    <button id="prev-week">⬅️</button>
+                    <h2 id="current-week">Semaine du 22/11/2024</h2>
+                    <button id="next-week">➡️</button>
+                </div>
+                <div id="week-events" class="events-container">
+                    <!-- Les événements de la semaine seront insérés ici -->
+                </div>
             </div>
         </div>
         <div class="right">
@@ -75,7 +51,9 @@
         });
 
         const groupSelector = document.getElementById("group");
-        const eventsContainer = document.getElementById("events");
+        const eventsContainer = document.getElementById("week-events");
+
+        var events = [];
 
         // Charger dynamiquement les options de groupe depuis get_groups.php
         fetch("php/get_groups.php")
@@ -95,9 +73,8 @@
                         if (data.length === 0) {
                             eventsContainer.innerHTML = `<p>Aucun événement trouvé pour ce groupe.</p>`;
                         } else {
-                            eventsContainer.innerHTML = data
-                                .map(event => `<p>${event.date} ${event.time} - ${event.summary}</p>`)
-                                .join("");
+                            events = data;
+                            displayWeekEvents();
                         }
                     });
             }
