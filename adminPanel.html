@@ -1,26 +1,21 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Panel Administrateur</title>
-  <link rel="stylesheet" href="/CSS/adminPanel.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel administrateur</title>
+    <link rel="stylesheet" href="css/adminPanel.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="js/ajax.js"></script>
+    <script src="js/loading_students.js"></script>
 </head>
 <body>
-<h1 class="title">Panel <span class="highlight">Administrateur</span></h1>
-<div class="main-content">
-  <div class="left-buttons">
-    <a href="#" class="left-btn">Profils</a>
-  </div>
-  <div class="main-buttons">
-    <a href="#" class="main-btn">Comptabilité 🧮</a>
-    <a href="#" class="main-btn">Boutique 🛒</a>
-    <a href="gestionEvent.html" class="main-btn">Événements 🎊</a>
-  </div>
-  <div class="right-buttons">
-    <a href="#" class="right-btn">Fichiers</a>
-    <a href="gestionEvent.html" class="right-btn">Gestion des rôles</a>
-  </div>
-</div>
+    <div>
+        <input type="text" id="search-input" placeholder="Rechercher un membre...">
+        <button id="search-button">Rechercher</button>
+    </div>
+    <div id="dropdown-container">
+        <!-- Dropdowns will be dynamically added here -->
+    </div>
 </body>
 </html>
