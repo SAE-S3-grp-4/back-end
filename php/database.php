@@ -4,18 +4,18 @@ require_once('constantes.php');
 
 function dbConnect()
 {
-  try {
-    $db = new PDO(
-      'mysql:host=' . DB_SERVER . ';dbname=' . DB_NAME . ';charset=utf8',
-      DB_USER,
-      DB_PASSWORD
-    );
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  } catch (PDOException $exception) {
-    error_log('Connection error: ' . $exception->getMessage());
-    return false;
-  }
-  return $db;
+    try {
+        $db = new PDO(
+            'mysql:host=' . DB_SERVER . ';dbname=' . DB_NAME . ';charset=utf8',
+            DB_USER,
+            DB_PASSWORD
+        );
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    } catch (PDOException $exception) {
+        error_log('Connection error: ' . $exception->getMessage());
+        return false;
+    }
+    return $db;
 }
 
 
@@ -104,19 +104,19 @@ function dbDeleteProduct($db, $id)
 {
     try {
         // Update the status of related orders to "Produit supprimé"
-        $updateOrderStatus = 'UPDATE commande SET Statut_Commande = "Produit supprimé" WHERE Id_Commande IN (SELECT Id_Commande FROM bon_de_commande WHERE Id_Produit = :id)';
+        $updateOrderStatus = 'UPDATE COMMANDE SET Statut_Commande = "Produit supprimé" WHERE Id_Commande IN (SELECT Id_Commande FROM BON_DE_COMMANDE WHERE Id_Produit = :id)';
         $statement = $db->prepare($updateOrderStatus);
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->execute();
 
         // Delete related order slips
-        $deleteOrderSlips = 'DELETE FROM bon_de_commande WHERE Id_Produit = :id';
+        $deleteOrderSlips = 'DELETE FROM BON_DE_COMMANDE WHERE Id_Produit = :id';
         $statement = $db->prepare($deleteOrderSlips);
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->execute();
 
         // Delete the product itself
-        $deleteProduct = 'DELETE FROM produit WHERE Id_Produit = :id';
+        $deleteProduct = 'DELETE FROM PRODUIT WHERE Id_Produit = :id';
         $statement = $db->prepare($deleteProduct);
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->execute();
@@ -227,5 +227,58 @@ function dbRequestEventById($db, $id)
         return false;
     }
     return $result;
+}
+
+function dbLoginUser($db, $username, $password)
+{
+    try {
+        $request = 'SELECT * FROM MEMBRE WHERE Nom_Membre = :username OR Mail_Membre = :username';
+        $statement = $db->prepare($request);
+        $statement->bindParam(':username', $username, PDO::PARAM_STR);
+        $statement->execute();
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($user && password_verify($password, $user['Mdp_Membre'])) {
+            return $user;
+        } else {
+            return false;
+        }
+    } catch (PDOException $exception) {
+        error_log('Login error: ' . $exception->getMessage());
+        return false;
+    }
+}
+
+function dbRegisterUser($db, $name, $email, $password, $group)
+{
+    try {
+        $request = 'INSERT INTO MEMBRE (Nom_Membre, Mail_Membre, Mdp_Membre, Grp_Membre, Id_Role) VALUES (:name, :email, :password, :group, 1)';
+        $statement = $db->prepare($request);
+        $statement->bindParam(':name', $name, PDO::PARAM_STR);
+        $statement->bindParam(':email', $email, PDO::PARAM_STR);
+        $statement->bindParam(':password', $password, PDO::PARAM_STR);
+        $statement->bindParam(':group', $group, PDO::PARAM_STR);
+        $statement->execute();
+        return true;
+    } catch (PDOException $exception) {
+        error_log('Registration error: ' . $exception->getMessage());
+        return false;
+    }
+}
+
+function dbUserExists($db, $name, $email)
+{
+    try {
+        $request = 'SELECT COUNT(*) FROM MEMBRE WHERE Nom_Membre = :name OR Mail_Membre = :email';
+        $statement = $db->prepare($request);
+        $statement->bindParam(':name', $name, PDO::PARAM_STR);
+        $statement->bindParam(':email', $email, PDO::PARAM_STR);
+        $statement->execute();
+        $count = $statement->fetchColumn();
+        return $count > 0;
+    } catch (PDOException $exception) {
+        error_log('User exists check error: ' . $exception->getMessage());
+        return false;
+    }
 }
 

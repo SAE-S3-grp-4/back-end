@@ -6,6 +6,15 @@
     <title>Gestion de la Boutique</title>
     <link rel="stylesheet" href="CSS/gestionBoutique.css">
     <script src="js/ajax.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            ajaxRequest('GET', 'php/check_admin.php', function(response) {
+                if (!response.is_admin) {
+                    window.location.href = 'connexion.html';
+                }
+            });
+        });
+    </script>
     <script src="js/loading_produits.js" defer></script>
 </head>
 <body>

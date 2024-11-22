@@ -107,3 +107,10 @@ select option {
 .btn-signup:hover {
     background: #5095e6;
 }
+
+.error-message {
+    color: red;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+

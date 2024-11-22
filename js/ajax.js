@@ -2,9 +2,6 @@
 
 function ajaxRequest(type, url, callback, data = null) {
     let xhr = new XMLHttpRequest();
-    if (type === 'GET' && data != null) {
-        url += '?' + data;
-    }
     xhr.open(type, url);
 
     // Only set the Content-Type header if data is not FormData
@@ -32,20 +29,16 @@ function ajaxRequest(type, url, callback, data = null) {
     xhr.send(data);
 }
 
-//------------------------------------------------------------------------------
-//--- httpErrors ---------------------------------------------------------------
-//------------------------------------------------------------------------------
 function httpErrors(errorCode) {
     let messages = {
-        400: 'Requête incorrecte',
-        401: 'Authentifiez vous',
-        403: 'Accès refusé',
-        404: 'Page non trouvée',
-        500: 'Erreur interne du serveur',
-        503: 'Service indisponible'
+        400: 'Bad Request',
+        401: 'Unauthorized',
+        403: 'Forbidden',
+        404: 'Not Found',
+        500: 'Internal Server Error',
+        503: 'Service Unavailable'
     };
 
-    // Display error.
     if (errorCode in messages) {
         document.getElementById('errors').innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> <strong>' + messages[errorCode] + '</strong>';
         document.getElementById('errors').style.display = 'block';
