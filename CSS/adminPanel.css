@@ -170,3 +170,35 @@ input[type="radio"]:checked::before {
 input[type="radio"]:focus {
     box-shadow: 0 0 0 3px rgba(0, 180, 216, 0.5);
 }
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.center-button {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centrer le contenu */
+    width: 300px; /* Augmenter la largeur */
+    padding: 1.5rem 3rem; /* Augmenter la taille des boutons */
+    font-size: 1.5rem; /* Augmenter la taille de la police */
+    color: #fff;
+    background-color: #2b2b59;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none; /* Supprimer la décoration de texte */
+    transition: background-color 0.3s ease;
+}
+
+.center-button i {
+    margin-right: 1rem; /* Ajuster l'espace entre l'icône et le texte */
+}
+
+.center-button:hover {
+    background-color: #1e1e3e;
+}
