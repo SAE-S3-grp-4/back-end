@@ -1,15 +1,31 @@
+function displayValidationMessage(message) {
+    let validationMessageDiv = document.getElementById('validation-message');
+    validationMessageDiv.innerText = message;
+    validationMessageDiv.style.display = 'block';
+    setTimeout(() => {
+        validationMessageDiv.style.display = 'none';
+    }, 3000); // Hide after 3 seconds
+}
+
+function displayErrorMessage(message) {
+    let errorMessageDiv = document.getElementById('error-message');
+    errorMessageDiv.innerText = message;
+    errorMessageDiv.style.display = 'block';
+    setTimeout(() => {
+        errorMessageDiv.style.display = 'none';
+    }, 3000); // Hide after 3 seconds
+}
+
 document.getElementById('promo-form').addEventListener('submit', function(event) {
     event.preventDefault();
 
     let formData = new FormData(this);
-    ajaxRequest('POST', 'php/request.php/promo', function(response) {
+    ajaxRequest('POST', 'php/controllerGestionPromo.php/promo', function(response) {
         if (response.success) {
-            alert('Le code promo a été ajouté avec succès.');
-            ajaxRequest('GET', 'php/request.php/promos', loadPromos); // Refresh the promo list
+            displayValidationMessage('Code promo ajouté.');
+            ajaxRequest('GET', 'php/controllerGestionPromo.php/promos', loadPromos); // Refresh the promo list
         } else {
-            let errorMessageDiv = document.getElementById('errors');
-            errorMessageDiv.innerText = response.error;
-            errorMessageDiv.style.display = 'block';
+            displayErrorMessage(response.error);
         }
     }, formData);
 });
@@ -18,8 +34,9 @@ document.getElementById("promo-list").addEventListener('click', (event) => {
     if (event.target.classList.contains('btn-delete')) {
         const promoId = parseInt(event.target.dataset.id, 10);
         if (!isNaN(promoId)) {
-            ajaxRequest('DELETE', `php/request.php/promo/${promoId}`, () => {
-                ajaxRequest('GET', 'php/request.php/promos', loadPromos);
+            displayValidationMessage('Code promo supprimé.');
+            ajaxRequest('DELETE', `php/controllerGestionPromo.php/promo/${promoId}`, () => {
+                ajaxRequest('GET', 'php/controllerGestionPromo.php/promos', loadPromos);
             });
         } else {
             console.error('Invalid promo ID');
@@ -29,7 +46,7 @@ document.getElementById("promo-list").addEventListener('click', (event) => {
     if (event.target.classList.contains('btn-modify')) {
         const promoId = parseInt(event.target.dataset.id, 10);
         if (!isNaN(promoId)) {
-            ajaxRequest('GET', `php/request.php/promo/${promoId}`, (promo) => {
+            ajaxRequest('GET', `php/controllerGestionPromo.php/promo/${promoId}`, (promo) => {
                 document.getElementById('modify-promo-id').value = promo.Id_Promo;
                 document.getElementById('modify-promo-name').value = promo.Nom_Promo;
                 document.getElementById('modify-promo-percentage').value = promo.Pourcentage_Promo;
@@ -63,13 +80,15 @@ document.getElementById("form-modify-promo").addEventListener('submit', (event) 
     formData.append('nom', nom);
     formData.append('pourcentage', pourcentage.toFixed(2)); // Pourcentage formaté avec 2 décimales
 
-    console.log("Modification du promo", id, nom, pourcentage);
+    console.log("Modification du code promo", id, nom, pourcentage);
     console.log("Données du formulaire:", formData);
 
+    displayValidationMessage('Code promo modifié.');
+
     // Envoyer la requête
-    ajaxRequest('POST', 'php/request.php/promo-modify', (response) => {
+    ajaxRequest('POST', 'php/controllerGestionPromo.php/promo-modify', (response) => {
         console.log('Réponse du serveur:', response);
-        ajaxRequest('GET', 'php/request.php/promos', loadPromos); // Rafraîchit la liste des promos
+        ajaxRequest('GET', 'php/controllerGestionPromo.php/promos', loadPromos); // Rafraîchit la liste des promos
         document.getElementById('modify-promo').style.display = 'none';
     }, formData);
 });
@@ -123,4 +142,4 @@ function loadPromos(promos) {
     });
 }
 
-ajaxRequest("GET", "php/request.php/promos", loadPromos);
+ajaxRequest("GET", "php/controllerGestionPromo.php/promos", loadPromos);
