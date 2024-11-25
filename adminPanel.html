@@ -1,21 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel administrateur</title>
+    <title>Panel Administrateur</title>
     <link rel="stylesheet" href="css/adminPanel.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="js/ajax.js"></script>
-    <script src="js/loading_students.js"></script>
+    <script src="js/ajax.js" defer></script>
+    <script src="js/loading_students.js" defer></script>
 </head>
 <body>
-    <div>
-        <input type="text" id="search-input" placeholder="Rechercher un membre...">
-        <button id="search-button">Rechercher</button>
+<div class="main-content">
+    <!-- Header -->
+    <header>
+        <h1 class="title">Panel <span class="highlight">Administrateur</span></h1>
+    </header>
+
+    <div class="content">
+        <!-- Recherche et affichage des membres -->
+        <aside class="search-section">
+            <input type="text" id="search-input" placeholder="Rechercher un membre">
+            <button id="search-button">Rechercher</button>
+            <section class="member-list" id="dropdown-container">
+                <!-- Dropdowns will be dynamically added here -->
+            </section>
+        </aside>
     </div>
-    <div id="dropdown-container">
-        <!-- Dropdowns will be dynamically added here -->
-    </div>
+</div>
 </body>
 </html>

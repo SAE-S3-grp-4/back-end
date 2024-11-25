@@ -1,57 +1,141 @@
-#search-input {
-    width: 80%;
-    padding: 10px;
-    margin-bottom: 20px;
+/* Reset styles */
+body, h1, h2, input, button, div {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
-#search-button {
-    padding: 10px;
-    margin-bottom: 20px;
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #1e1e2f, #3a3a5e);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow-y: auto;
 }
 
-.info-container {
-    margin-bottom: 20px;
+.main-content {
+    text-align: center;
+    width: 100%;
+    padding: 2rem;
 }
 
-.info-content.hidden {
-    display: none;
+.header {
+    margin-bottom: 2rem;
 }
 
-.td-container {
-    margin-left: 20px;
-    margin-bottom: 20px;
+.title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
 }
 
-.td-content.hidden {
-    display: none;
+.highlight {
+    color: #ff99ff;
 }
 
-.group-container {
-    margin-left: 40px;
-    margin-bottom: 20px;
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem;
+}
+
+.search-section {
+    background: #2b2b59;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    width: 300px;
+    text-align: left;
+    color: #c8c8e8;
+}
+
+.search-section input {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #00b4d8;
+    border-radius: 5px;
+    background: #1e1e3e;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+.search-section button {
+    width: 100%;
+    padding: 0.7rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background: #00b4d8;
+    color: #fff;
+    transition: background 0.3s ease;
+}
+
+.member-list {
+    margin-top: 1rem;
+}
+
+.info-container,
+.td-container,
+.group-container,
+.teacher-container,
+.student-container {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border-radius: 5px;
 }
 
 .label-container {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     cursor: pointer;
 }
 
-.label-container h4 {
-    margin-right: 10px;
+.student-container,
+.teacher-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
 }
 
-.student-list.hidden {
+.student-container span,
+.teacher-container span {
+    flex: 1;
+}
+
+.student-container input,
+.teacher-container input {
+    margin-left: 1rem;
+}
+
+/* Classe cachée pour masquer les éléments par défaut */
+.hidden {
     display: none;
 }
 
-.student-container {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
+
+.label-container h2,
+.label-container h3,
+.label-container h4 {
+    margin: 0;
+    padding: 0.5rem; /* Ajout de padding pour toute la ligne */
+    width: 100%; /* Assurez-vous que l'élément prend toute la largeur */
+    box-sizing: border-box; /* Inclure le padding dans la largeur totale */
+    border-radius: 5px; /* Ajout de border-radius */
+    transition: background-color 0.3s ease, border-radius 0.3s ease; /* Ajout de transition */
 }
 
-.student-container span {
-    margin-right: 10px;
+.label-container h2:hover,
+.label-container h3:hover,
+.label-container h4:hover {
+    background-color: #3a3a5e;
+    border-radius: 5px; /* Ajout de border-radius pour l'effet de survol */
 }

@@ -231,6 +231,7 @@ function dbRequestEventById($db, $id)
 
 
 
+
 function dbRequestStudents($db)
 {
   try {
