@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion des Codes Promotionnels</title>
     <link rel="stylesheet" href="CSS/gestionPromo.css">
+    <script src="js/ajax.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            ajaxRequest('GET', 'php/check_admin.php', function(response) {
+                if (!response.is_admin) {
+                    window.location.href = 'connexion.html';
+                }
+            });
+        });
+    </script>
+    <script src="js/loading_promos.js" defer></script>
 </head>
 <body>
 <div class="main-content">
@@ -26,25 +37,31 @@
                 <label for="promo-percentage">Pourcentage (%) :</label>
                 <input type="number" id="promo-percentage" name="percentage" placeholder="Ex : 10" min="0" max="100" required>
             </div>
-            <div class="form-group">
-                <label for="promo-products">Produits associés :</label>
-                <textarea id="promo-products" name="products" placeholder="Liste des produits associés" required></textarea>
-            </div>
             <button type="submit" class="btn-create">Créer</button>
         </form>
     </section>
 
-    <!-- Liste des codes promo -->
-    <section class="promo-list">
-        <div class="promo-card">
-            <h3>Pull5</h3>
-            <p>5%</p>
-            <p>Pull 2024</p>
-            <div class="promo-actions">
-                <button class="btn-modify">Modifier</button>
-                <button class="btn-delete">Supprimer</button>
+    <div id="errors" style="display: none;"></div>
+
+    <!-- Formulaire de modification de code promo -->
+    <section id="modify-promo" class="promo-modify" style="display: none;">
+        <form id="form-modify-promo" class="promo-form">
+            <h3>Modifier un code promo</h3>
+            <input type="hidden" id="modify-promo-id">
+            <div class="form-group">
+                <label for="modify-promo-name">Nom :</label>
+                <input type="text" id="modify-promo-name" name="name" required>
             </div>
-        </div>
+            <div class="form-group">
+                <label for="modify-promo-percentage">Pourcentage (%) :</label>
+                <input type="number" id="modify-promo-percentage" name="percentage" min="0" max="100" required>
+            </div>
+            <button type="submit" class="btn-modify">Modifier</button>
+        </form>
+    </section>
+
+    <!-- Liste des codes promo -->
+    <section id="promo-list" class="promo-list">
     </section>
 </div>
 </body>

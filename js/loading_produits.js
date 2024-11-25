@@ -168,12 +168,4 @@ function loadProduits(produits) {
     });
 }
 
-
-//------------------------------------------------------------------------------
-//--- Delete Product -----------------------------------------------------------
-//------------------------------------------------------------------------------
-
-
-ajaxRequest("GET","php/request.php/produits", produits => {
-    loadProduits(produits);
-});
+ajaxRequest("GET","php/request.php/produits", loadProduits);

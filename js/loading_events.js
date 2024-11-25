@@ -149,4 +149,3 @@ function loadEvents(events) {
 
 ajaxRequest("GET", "php/request.php/events", loadEvents);
 
-ajaxRequest("GET", "php/request.php/events", loadEvents);

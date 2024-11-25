@@ -29,11 +29,15 @@ $data = false;
 
 // Request Produits.
 if ($requestRessource == 'produits') {
-  $data = dbRequestProduct($db);
+    $data = dbRequestProduct($db);
 }
 
 if ($requestRessource == 'events') {
-  $data = dbRequestEvent($db);
+    $data = dbRequestEvent($db);
+}
+
+if ($requestRessource == 'promos') {
+    $data = dbRequestPromo($db);
 }
 
 if ($requestMethod == "POST") {
@@ -215,6 +219,62 @@ if ($requestMethod == "POST") {
         }
     }
 }
+
+if ($requestMethod == "POST") {
+    if ($requestRessource == 'promo') {
+        $nom = isset($_POST["nom"]) ? filter_var($_POST["nom"], FILTER_SANITIZE_FULL_SPECIAL_CHARS) : null;
+        $pourcentage = isset($_POST["pourcentage"]) ? filter_var($_POST["pourcentage"], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : null;
+
+        if ($nom && $pourcentage) {
+            $data = dbAddPromo($db, $nom, $pourcentage);
+        } else {
+            header('HTTP/1.1 400 Bad Request');
+            echo json_encode(['error' => 'Invalid promo data']);
+            exit;
+        }
+    }
+}
+
+if ($requestMethod == "POST") {
+    if ($requestRessource == 'promo-modify') {
+        $id = isset($_POST["id"]) ? filter_var($_POST["id"], FILTER_SANITIZE_NUMBER_INT) : null;
+        $nom = isset($_POST["nom"]) ? filter_var($_POST["nom"], FILTER_SANITIZE_FULL_SPECIAL_CHARS) : null;
+        $pourcentage = isset($_POST["pourcentage"]) ? filter_var($_POST["pourcentage"], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : null;
+
+        if ($id && $nom && $pourcentage) {
+            $data = dbModifyPromo($db, $id, $nom, $pourcentage);
+        } else {
+            header('HTTP/1.1 400 Bad Request');
+            echo json_encode(['error' => 'Invalid promo data']);
+            exit;
+        }
+    }
+}
+
+if ($requestMethod == "DELETE") {
+    if ($requestRessource == 'promo') {
+        if (isset($id) && is_numeric($id)) {
+            $data = dbDeletePromo($db, $id);
+        } else {
+            header('HTTP/1.1 400 Bad Request');
+            echo json_encode(['error' => 'Invalid promo ID']);
+            exit;
+        }
+    }
+}
+
+if ($requestMethod == "GET") {
+    if ($requestRessource === 'promo') {
+        if (isset($id) && is_numeric($id)) {
+            $data = dbRequestPromoById($db, $id);
+        } else {
+            header('HTTP/1.1 400 Bad Request');
+            echo json_encode(['error' => 'Invalid promo ID']);
+            exit;
+        }
+    }
+}
+
 
 // Send data to the client.
 header('Content-Type: application/json; charset=utf-8');

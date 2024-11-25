@@ -62,6 +62,20 @@ function dbRequestProduct($db)
   return $result;
 }
 
+function dbRequestPromo($db)
+{
+    try {
+        $request = 'SELECT * FROM PROMO';
+        $statement = $db->prepare($request);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $exception) {
+        error_log('Request error: ' . $exception->getMessage());
+        return false;
+    }
+    return $result;
+}
+
 function dbAddProduct($db, $nom, $desc, $img, $prix, $stock)
 {
     try {
@@ -281,4 +295,68 @@ function dbUserExists($db, $name, $email)
         return false;
     }
 }
+
+function dbAddPromo($db, $nom, $pourcentage) {
+    try {
+        $request = 'INSERT INTO PROMO (Nom_Promo, Pourcentage_Promo) VALUES (:Nom_Promo, :Pourcentage_Promo)';
+        $statement = $db->prepare($request);
+        $statement->bindParam(':Nom_Promo', $nom, PDO::PARAM_STR);
+        $statement->bindParam(':Pourcentage_Promo', $pourcentage, PDO::PARAM_STR);
+        $statement->execute();
+    } catch (PDOException $exception) {
+        error_log('Request error: ' . $exception->getMessage());
+        return false;
+    }
+    return true;
+}
+
+function dbModifyPromo($db, $id, $nom, $pourcentage) {
+    try {
+        $request = 'UPDATE PROMO SET Nom_Promo = :Nom_Promo, Pourcentage_Promo = :Pourcentage_Promo WHERE Id_Promo = :Id_Promo';
+        $statement = $db->prepare($request);
+        $statement->bindParam(':Id_Promo', $id, PDO::PARAM_INT);
+        $statement->bindParam(':Nom_Promo', $nom, PDO::PARAM_STR);
+        $statement->bindParam(':Pourcentage_Promo', $pourcentage, PDO::PARAM_STR);
+        $statement->execute();
+    } catch (PDOException $exception) {
+        error_log('Request error: ' . $exception->getMessage());
+        return false;
+    }
+    return true;
+}
+
+function dbDeletePromo($db, $id) {
+    try {
+        // Mettre à jour les commandes pour définir Id_Promo à NULL
+        $updateCommandes = 'UPDATE COMMANDE SET Id_Promo = NULL WHERE Id_Promo = :Id_Promo';
+        $statement = $db->prepare($updateCommandes);
+        $statement->bindParam(':Id_Promo', $id, PDO::PARAM_INT);
+        $statement->execute();
+
+        // Supprimer la promo
+        $deletePromo = 'DELETE FROM PROMO WHERE Id_Promo = :Id_Promo';
+        $statement = $db->prepare($deletePromo);
+        $statement->bindParam(':Id_Promo', $id, PDO::PARAM_INT);
+        $statement->execute();
+    } catch (PDOException $exception) {
+        error_log('Request error: ' . $exception->getMessage());
+        return false;
+    }
+    return true;
+}
+
+function dbRequestPromoById($db, $id) {
+    try {
+        $request = 'SELECT * FROM PROMO WHERE Id_Promo = :Id_Promo';
+        $statement = $db->prepare($request);
+        $statement->bindParam(':Id_Promo', $id, PDO::PARAM_INT);
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $exception) {
+        error_log('Request error: ' . $exception->getMessage());
+        return false;
+    }
+    return $result;
+}
+
 
