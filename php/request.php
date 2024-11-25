@@ -227,6 +227,11 @@ if ($requestMethod == "POST") {
 
         if ($nom && $pourcentage) {
             $data = dbAddPromo($db, $nom, $pourcentage);
+            if ($data) {
+                echo json_encode(['success' => true]);
+            } else {
+                echo json_encode(['success' => false, 'error' => 'Échec de l\'ajout du code promo']);
+            }
         } else {
             header('HTTP/1.1 400 Bad Request');
             echo json_encode(['error' => 'Invalid promo data']);

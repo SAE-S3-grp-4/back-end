@@ -1,4 +1,18 @@
+document.getElementById('promo-form').addEventListener('submit', function(event) {
+    event.preventDefault();
 
+    let formData = new FormData(this);
+    ajaxRequest('POST', 'php/request.php/promo', function(response) {
+        if (response.success) {
+            alert('Le code promo a été ajouté avec succès.');
+            ajaxRequest('GET', 'php/request.php/promos', loadPromos); // Refresh the promo list
+        } else {
+            let errorMessageDiv = document.getElementById('errors');
+            errorMessageDiv.innerText = response.error;
+            errorMessageDiv.style.display = 'block';
+        }
+    }, formData);
+});
 
 document.getElementById("promo-list").addEventListener('click', (event) => {
     if (event.target.classList.contains('btn-delete')) {
