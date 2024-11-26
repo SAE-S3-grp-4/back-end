@@ -80,6 +80,10 @@ header {
     transition: background 0.3s ease;
 }
 
+.search-section button:hover {
+    background: #0077a7;
+}
+
 .member-list {
     margin-top: 1rem;
 }
@@ -215,50 +219,60 @@ header {
 .popup-content {
     background: #fff;
     color: #000;
-    padding: 2rem;
+    padding: 3rem;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
-    width: 80%;
-    max-width: 600px;
+    width: 90%;
+    max-width: 800px;
 }
 
-.popup-header {
-    width: 100%;
+.popup-body {
     display: flex;
+    gap: 2rem;
+    width: 100%;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
-.profile-picture {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin-bottom: 1rem;
 }
 
 .popup-left {
+    margin-top: 3rem;
     text-align: center;
-    margin-bottom: 1rem;
+}
+.popup-center {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: left;
 }
 
-.popup-center {
-    text-align: left;
-    margin-bottom: 1rem;
+.popup-header {
+    display: flex;
+    justify-content: space-between;
     width: 100%;
 }
 
 .popup-footer {
-    width: 100%;
     display: flex;
     justify-content: flex-end;
+    width: 100%;
 }
 
+.profile-picture {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+
 .student-grade {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
     font-size: 1.2rem;
     font-weight: bold;
 }
@@ -274,12 +288,23 @@ header {
 .inscriptions-button {
     background: #00b4d8;
     color: #fff;
+    transition: background 0.3s ease;
+}
+
+.inscriptions-button:hover {
+    background: #0077a7;
 }
 
 .delete-button {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
     background: #ff4d4d;
     color: #fff;
-    margin-left: auto;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .delete-button:hover {
@@ -287,12 +312,16 @@ header {
 }
 
 .close-button {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
     background: #ccc;
     color: #000;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     padding: 0.5rem 1rem;
+    transition: background 0.3s ease;
 }
 
 .close-button:hover {

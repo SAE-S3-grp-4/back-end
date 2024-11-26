@@ -27,7 +27,7 @@ function showStudentPopup(studentId) {
                 </div>
                 <div class="popup-body">
                     <div class="popup-left">
-                        <img src="path/to/profile/pictures/${student.Pdp_Membre}" alt="Profile Picture" class="profile-picture">
+                        <img src="img/imgMembre/${student.Pdp_Membre}" alt="Profile Picture" class="profile-picture">
                         <h3>${student.Nom_Membre}</h3>
                         <p>${student.Nom_Role}</p>
                     </div>
