@@ -124,7 +124,7 @@ function loadProduits(produits) {
         productDescription.innerText = product.Description_Produit || "Pas de description";
 
         let productImage = new Image();
-        productImage.src = "img/" + encodeURIComponent(product.Img_Produit || "default.png");
+        productImage.src = "imgProduits/" + encodeURIComponent(product.Img_Produit || "default.png");
         productImage.alt = product.Img_Produit || "Image manquante";
 
         let productDetails = document.createElement("div");

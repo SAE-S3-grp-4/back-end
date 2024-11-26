@@ -42,7 +42,7 @@ if ($requestMethod == "POST") {
 
         if ($nom && $description && $prix && $stock && $img) {
             // Ensure the target directory exists
-            $targetDir = "img/";
+            $targetDir = "../imgProduits/";
             if (!is_dir($targetDir)) {
                 mkdir($targetDir, 0777, true);
             }
@@ -50,6 +50,7 @@ if ($requestMethod == "POST") {
             // Move the uploaded file to the desired directory
             $imgPath = $targetDir . basename($img);
             if (move_uploaded_file($_FILES["image"]["tmp_name"], $imgPath)) {
+                move_uploaded_file($_FILES["image"]["tmp_name"], $imgPath);
                 $data = dbAddProduct($db, $nom, $description, $img, $prix, $stock);
             } else {
                 header('HTTP/1.1 400 Bad Request');

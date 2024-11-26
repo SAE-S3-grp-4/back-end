@@ -7,14 +7,49 @@
     <link rel="stylesheet" href="CSS/inscription.css">
 </head>
 <body>
-<div class="background">
     <div class="signup-container">
         <h1>Inscription</h1>
         <a href="accueil.html" class="back-link">Retour</a>
         <form id="signup-form" action="inscription.php" method="POST">
+            
+        <div class="orgaLabels">
             <div class="form-group">
-                <label for="name">Nom</label>
-                <input type="text" id="name" name="name" placeholder="Votre nom" required>
+                <label for="prenom">Prénom</label>
+                <input type="text" id="prenom" name="prenom" placeholder="Prénom" required>
+            </div>
+            <div class="form-group">
+                <label for="nom">Nom</label>
+                <input type="text" id="nom" name="nom" placeholder="Nom" required>
+            </div>
+
+            <div class="form-group">
+                <label for="group">Groupe TP</label>
+                <select id="group" name="group" required>
+                    <option value="" disabled selected>Grp</option>
+                    <option value="TP11A">Groupe 11A</option>
+                    <option value="TP11B">Groupe 11B</option>
+                    <option value="TP12C">Groupe 12C</option>
+                    <option value="TP12D">Groupe 12D</option>
+
+                    <option value="TP21A">Groupe 21A</option>
+                    <option value="TP21B">Groupe 21B</option>
+                    <option value="TP22C">Groupe 22C</option>
+                    <option value="TP22D">Groupe 22D</option>
+
+                    <option value="TP31A">Groupe 31A</option>
+                    <option value="TP31B">Groupe 31B</option>
+                    <option value="TP32C">Groupe 32C</option>
+                    <option value="TP32D">Groupe 32D</option>
+
+                    <option value="Enseignant">Enseignant</option>
+                </select>
+            </div>
+        </div>
+
+
+            <div class="form-group">
+                <label for="username">Nom d'utilisateur</label>
+                <input type="text" id="username" name="username" placeholder="Votre nom d'utilsateur" required>
             </div>
             <div class="form-group">
                 <label for="email">Adresse mail</label>
@@ -25,25 +60,15 @@
                 <input type="password" id="password" name="password" placeholder="Créez un mot de passe" required>
             </div>
             <div class="form-group">
-                <label for="confirm-password">Vérification du mot de passe</label>
+                <label for="confirm-password">Confirmation du mot de passe</label>
                 <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirmez le mot de passe" required>
             </div>
-            <div class="form-group">
-                <label for="group">Choisir un groupe</label>
-                <select id="group" name="group" required>
-                    <option value="" disabled selected>Choisissez votre groupe</option>
-                    <option value="tp A">Groupe A</option>
-                    <option value="tp B">Groupe B</option>
-                    <option value="tp C">Groupe C</option>
-                    <option value="tp D">Groupe D</option>
-                </select>
-            </div>
+            
             <div id="error-message" class="error-message" style="display: none;"></div>
             <button type="submit" class="btn-signup">S'inscrire</button>
         </form>
         <script src="js/ajax.js"></script>
         <script src="js/inscription.js"></script>
     </div>
-</div>
 </body>
 </html>
