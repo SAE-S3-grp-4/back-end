@@ -1,5 +1,7 @@
 <?php
 
+date_default_timezone_set('Europe/Paris'); // Ajuste selon ton emplacement
+
 if (!isset($_GET['group'])) {
     echo json_encode([]);
     exit;
@@ -52,9 +54,12 @@ function parseIcs($icsData) {
             preg_match('/SUMMARY:(.+)/', $block, $summaryMatches);
 
             if ($startMatches && $endMatches && $summaryMatches) {
-                // Récupérer la date et l'heure de début
-                $startDate = DateTime::createFromFormat('Ymd', $startMatches[1])->format('Y-m-d');
-                $startTime = substr($startMatches[2], 0, 2) . ':' . substr($startMatches[2], 2, 2);
+
+                $dateTimeUtc = DateTime::createFromFormat('Ymd\THis', $startMatches[1] . 'T' . $startMatches[2], new DateTimeZone('UTC'));
+                $dateTimeLocal = $dateTimeUtc->setTimezone(new DateTimeZone('Europe/Paris')); // Ajuste pour ton fuseau horaire
+
+                $startDate = $dateTimeLocal->format('Y-m-d');
+                $startTime = $dateTimeLocal->format('H:i');
 
                 // Récupérer la date et l'heure de fin
                 $endTime = substr($endMatches[2], 0, 2) . ':' . substr($endMatches[2], 2, 2);
