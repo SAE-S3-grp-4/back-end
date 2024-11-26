@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ADIIL - Evenements</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-    </style>
+    <title>ADIIL - Agenda</title>
     <link rel="stylesheet" href="css/evenements.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    </style>
 </head>
 <body>
 <header class="header">
@@ -16,46 +16,42 @@
             <li><a href="accueil.html">Accueil</a></li>
             <li><a href="#evenements">Événements</a></li>
             <li><a href="#boutique">Boutique</a></li>
-            <li>
-                <a class="logo">
-                    <img src="img/logo.svg" alt="ADIIL">
-                </a>
-            </li>
+            <li class="logo"><a href="#"><img src="img/logo.svg" alt="ADIIL"></a></li>
             <li><a href="#agenda">Agenda</a></li>
             <li><a href="#presentation">Présentation</a></li>
-            <li><a href="connexion.html">Connexion</a></li>
+            <li><a href="connexion.html">Compte</a></li>
         </ul>
     </nav>
 </header>
 <main>
-    <section class="hero">
-        <div class="hero-card">
-            <h2>Bienvenue sur le site de l'ADIIL</h2>
-            <p>Des événements sportifs, ludiques et autres rendez-vous gourmands vous attendent cette année au département informatique avec l'ADIIL !</p>
+    <section class="agenda">
+        <div class="month">
+            <h3>Septembre</h3>
+            <div class="event">
+                <span>Lun 04</span>
+                <p>Présentation site</p>
+                <button>S'inscrire</button>
+            </div>
+            <div class="event">
+                <span>Lun 04</span>
+                <p>Début des grades</p>
+                <button>S'inscrire</button>
+            </div>
+            <div class="event">
+                <span>Lun 04</span>
+                <p>Soirée Boston</p>
+                <button class="unsubscribe">Désinscrire</button>
+            </div>
+            <!-- Ajoutez plus d'événements ici -->
         </div>
-    </section>
-    <section class="events">
-        <h3>Prochains événements :</h3>
-        <div class="events-list">
-            <div class="event-card">
-                <h4>Soirée d'intégration - 12 SEP</h4>
-                <p>Une soirée d'intégration pour les nouveaux arrivants !</p>
+        <div class="month">
+            <h3>Octobre</h3>
+            <div class="event">
+                <span>Lun 04</span>
+                <p>Présentation site</p>
+                <button>S'inscrire</button>
             </div>
-            <div class="event-card">
-                <h4>Vente de gâteaux - 17 SEP</h4>
-                <p>Vente de super tartes cuisinées par Mathis.</p>
-            </div>
-            <div class="event-card">
-                <h4>Campus en fête - 19 SEP</h4>
-                <p>Le BDE organise un barbecue pour seulement 5€.</p>
-            </div>
-        </div>
-    </section>
-    <section class="shop">
-        <h3>Nouveautés boutique :</h3>
-        <div class="shop-item">
-            <img src="/img/sweat.png" alt="Sweat 2023-2024">
-            <p>Sweat 2023-2024</p>
+            <!-- Ajoutez plus d'événements -->
         </div>
     </section>
 </main>

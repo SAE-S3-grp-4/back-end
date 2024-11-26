@@ -1,137 +1,88 @@
-.poppins-thin {
-    font-family: "Poppins", sans-serif;
-    font-weight: 100;
-    font-style: normal;
-  }
-  
-  .poppins-extralight {
-    font-family: "Poppins", sans-serif;
-    font-weight: 200;
-    font-style: normal;
-  }
-  
-  .poppins-light {
-    font-family: "Poppins", sans-serif;
-    font-weight: 300;
-    font-style: normal;
-  }
-  
-  .poppins-regular {
-    font-family: "Poppins", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-  }
-  
-  .poppins-medium {
-    font-family: "Poppins", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-  }
-  
-  .poppins-semibold {
-    font-family: "Poppins", sans-serif;
-    font-weight: 600;
-    font-style: normal;
-  }
-  
-  .poppins-bold {
-    font-family: "Poppins", sans-serif;
-    font-weight: 700;
-    font-style: normal;
-  }
-  
-  .poppins-extrabold {
-    font-family: "Poppins", sans-serif;
-    font-weight: 800;
-    font-style: normal;
-  }
-  
-  .poppins-black {
-    font-family: "Poppins", sans-serif;
-    font-weight: 900;
-    font-style: normal;
-  }
-  
-  .poppins-thin-italic {
-    font-family: "Poppins", sans-serif;
-    font-weight: 100;
-    font-style: italic;
-  }
-  
-  .poppins-extralight-italic {
-    font-family: "Poppins", sans-serif;
-    font-weight: 200;
-    font-style: italic;
-  }
-  
-  .poppins-light-italic {
-    font-family: "Poppins", sans-serif;
-    font-weight: 300;
-    font-style: italic;
-  }
-  
-  .poppins-regular-italic {
-    font-family: "Poppins", sans-serif;
-    font-weight: 400;
-    font-style: italic;
-  }
-  
-  .poppins-medium-italic {
-    font-family: "Poppins", sans-serif;
-    font-weight: 500;
-    font-style: italic;
-  }
-  
-  .poppins-semibold-italic {
-    font-family: "Poppins", sans-serif;
-    font-weight: 600;
-    font-style: italic;
-  }
-  
-  .poppins-bold-italic {
-    font-family: "Poppins", sans-serif;
-    font-weight: 700;
-    font-style: italic;
-  }
-  
-  .poppins-extrabold-italic {
-    font-family: "Poppins", sans-serif;
-    font-weight: 800;
-    font-style: italic;
-  }
-  
-  .poppins-black-italic {
-    font-family: "Poppins", sans-serif;
-    font-weight: 900;
-    font-style: italic;
-  }
-  
 body {
     background: linear-gradient(259.73deg, #0F103F 17.24%, #1B1D72 54.11%, #272AA5 91.73%);
-    font-family: "Poppins", sans-serif;
-    font-weight: 400;
-    font-style: normal;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    color: #fff;
 }
 
-header {
-    background: #1E2E71;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
+.header {
+    background-color: #1E2E71;
+    padding: 1rem;
 }
 
 .navbar ul {
-    list-style: none;
     display: flex;
-}
-
-.navbar ul li {
-    margin: 0 1rem;
+    justify-content: space-around;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .navbar ul li a {
-    text-decoration: none;
     color: #fff;
-    transition: color 0.3s ease;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.agenda {
+    padding: 2rem;
+}
+
+.month {
+    margin-bottom: 2rem;
+}
+
+.month h3 {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.event {
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background: #4F75FF;
+    box-shadow: 2px 2px 4px 0px rgba(148, 148, 148, 0.25);
+}
+
+.event span {
+    font-weight: 500;
+    font-size: 1rem;
+    color: #A5B0FF;
+}
+
+.event p {
+    margin: 0;
+    font-weight: 400;
+}
+
+button {
+    background-color: #5468FF;
+    border: 2px solid white;
+    border-radius: 5px;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4153CC;
+}
+
+button.unsubscribe {
+    background-color: #FF6A6A;
+}
+
+button.unsubscribe:hover {
+    background-color: #D45555;
+}
+
+.navbar .logo img {
+    height: 30px; /* Ajuste la hauteur du logo */
+    width: auto;  /* Conserve les proportions */
+    margin: 0;    /* Réduit l'espacement autour du logo */
 }
