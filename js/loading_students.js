@@ -23,7 +23,7 @@ function showStudentPopup(studentId) {
             <div class="popup-content">
                 <div class="popup-header">
                     <button class="close-button">Retour</button>
-                    <span class="student-grade">${student.Nom_Grade}</span>
+                    <span class="student-grade">Grade ${student.Nom_Grade}</span>
                 </div>
                 <div class="popup-body">
                     <div class="popup-left">

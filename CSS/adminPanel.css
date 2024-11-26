@@ -9,6 +9,7 @@ body {
     font-family: Arial, sans-serif;
     background: linear-gradient(135deg, #1e1e2f, #3a3a5e);
     color: #fff;
+    min-height: 100vh;
 }
 
 header {
@@ -27,11 +28,11 @@ header {
 }
 
 .main-container {
-    display: flex; /* Active Flexbox */
-    align-items: flex-start; /* Aligne les divs en haut */
-    width: 100%; /* S'assure que le conteneur prend toute la largeur */
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
     padding: 1rem;
-    position: relative; /* Permet de positionner la div des boutons indépendamment */
+    position: relative; 
 }
 
 .member-container {
