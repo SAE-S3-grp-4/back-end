@@ -16,8 +16,8 @@ document.getElementById("add-product").addEventListener('submit', (event) => {
     console.log("Ajout d'un produit");
 
 
-    ajaxRequest('POST', 'php/request.php/produit/', () => {
-        ajaxRequest('GET', 'php/request.php/produits', loadProduits);
+    ajaxRequest('POST', 'php/controllerGestionBoutique.php/produit/', () => {
+        ajaxRequest('GET', 'php/controllerGestionBoutique.php/produits', loadProduits);
     }, formData);
 
     document.getElementById('product-name').value = '';
@@ -31,8 +31,8 @@ document.getElementById("product-list").addEventListener('click', (event) => {
     if (event.target.classList.contains('btn-delete')) {
         const productId = parseInt(event.target.dataset.id, 10);
         if (!isNaN(productId)) {
-            ajaxRequest('DELETE', `php/request.php/produit/${productId}`, () => {
-                ajaxRequest('GET', 'php/request.php/produits', loadProduits);
+            ajaxRequest('DELETE', `php/controllerGestionBoutique.php/produit/${productId}`, () => {
+                ajaxRequest('GET', 'php/controllerGestionBoutique.php/produits', loadProduits);
             });
         } else {
             console.error('Invalid product ID');
@@ -44,7 +44,7 @@ document.getElementById("product-list").addEventListener('click', (event) => {
     if (event.target.classList.contains('btn-modify')) {
         const productId = parseInt(event.target.getAttribute('data-id'), 10);
         if (!isNaN(productId)) {
-            ajaxRequest('GET', `php/request.php/produit/${productId}`, (product) => {
+            ajaxRequest('GET', `php/controllerGestionBoutique.php/produit/${productId}`, (product) => {
                 document.getElementById('modify-product-id').value = product.Id_Produit;
                 document.getElementById('modify-product-name').value = product.Nom_Produit;
                 document.getElementById('modify-product-description').value = product.Description_Produit;
@@ -92,16 +92,14 @@ document.getElementById("form-modify-product").addEventListener('submit', (event
     console.log("Données du formulaire:", formData);
 
     // Envoyer la requête
-    ajaxRequest('POST', 'php/request.php/produit-modify', (response) => {
+    ajaxRequest('POST', 'php/controllerGestionBoutique.php/produit-modify', (response) => {
         console.log('Réponse du serveur:', response);
-        ajaxRequest('GET', 'php/request.php/produits', loadProduits); // Rafraîchit la liste des produits
+        ajaxRequest('GET', 'php/controllerGestionBoutique.php/produits', loadProduits); // Rafraîchit la liste des produits
         document.getElementById('modify-product').style.display = 'none';
     }, formData);
 });
 
 
-
-ajaxRequest("GET", "php/request.php/produits", loadProduits);
 
 
 //------------------------------------------------------------------------------
@@ -168,12 +166,4 @@ function loadProduits(produits) {
     });
 }
 
-
-//------------------------------------------------------------------------------
-//--- Delete Product -----------------------------------------------------------
-//------------------------------------------------------------------------------
-
-
-ajaxRequest("GET","php/request.php/produits", produits => {
-    loadProduits(produits);
-});
+ajaxRequest("GET","php/controllerGestionBoutique.php/produits", loadProduits);

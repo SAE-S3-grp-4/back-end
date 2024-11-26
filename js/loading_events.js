@@ -11,8 +11,8 @@ document.getElementById("add-event").addEventListener('submit', (event) => {
 
     let data = `nom=${encodeURIComponent(nom)}&description=${encodeURIComponent(description)}&prix=${encodeURIComponent(prix)}&date=${encodeURIComponent(date)}&nbPlace=${encodeURIComponent(nbPlace)}&dateFinInscription=${encodeURIComponent(dateFinInscription)}`;
 
-    ajaxRequest('POST', 'php/request.php/event', () => {
-        ajaxRequest('GET', 'php/request.php/events', loadEvents);
+    ajaxRequest('POST', 'php/controllerGestionEvent.php/event', () => {
+        ajaxRequest('GET', 'php/controllerGestionEvent.php/events', loadEvents);
     }, data);
 
     document.getElementById('event-title').value = '';
@@ -27,8 +27,8 @@ document.getElementById("event-list").addEventListener('click', (event) => {
     if (event.target.classList.contains('btn-delete')) {
         const eventId = parseInt(event.target.dataset.id, 10);
         if (!isNaN(eventId)) {
-            ajaxRequest('DELETE', `php/request.php/event/${eventId}`, () => {
-                ajaxRequest('GET', 'php/request.php/events', loadEvents);
+            ajaxRequest('DELETE', `php/controllerGestionEvent.php/event/${eventId}`, () => {
+                ajaxRequest('GET', 'php/controllerGestionEvent.php/events', loadEvents);
             });
         } else {
             console.error('Invalid event ID');
@@ -40,7 +40,7 @@ document.getElementById("event-list").addEventListener('click', (event) => {
     if (event.target.classList.contains('btn-modify')) {
         const eventId = parseInt(event.target.dataset.id, 10); // Use dataset.id
         if (!isNaN(eventId)) {
-            ajaxRequest('GET', `php/request.php/event/${eventId}`, (eventData) => {
+            ajaxRequest('GET', `php/controllerGestionEvent.php/event/${eventId}`, (eventData) => {
                 document.getElementById('modify-event-id').value = eventData.Id_Event;
                 document.getElementById('modify-event-title').value = eventData.Nom_Event;
                 document.getElementById('modify-event-description').value = eventData.Description_Event;
@@ -79,9 +79,9 @@ document.getElementById("form-modify-event").addEventListener('submit', (event) 
     data.append('nbPlace', nbPlace);
     data.append('dateFinInscription', dateFinInscription);
 
-    ajaxRequest('POST', 'php/request.php/event-modify', (response) => {
+    ajaxRequest('POST', 'php/controllerGestionEvent.php/event-modify', (response) => {
         console.log('Réponse du serveur:', response);
-        ajaxRequest('GET', 'php/request.php/events', loadEvents); // Rafraîchit la liste des événements
+        ajaxRequest('GET', 'php/controllerGestionEvent.php/events', loadEvents); // Rafraîchit la liste des événements
         document.getElementById('modify-event').style.display = 'none';
     }, data);
 });
@@ -147,6 +147,5 @@ function loadEvents(events) {
     });
 }
 
-ajaxRequest("GET", "php/request.php/events", loadEvents);
+ajaxRequest("GET", "php/controllerGestionEvent.php/events", loadEvents);
 
-ajaxRequest("GET", "php/request.php/events", loadEvents);

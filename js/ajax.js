@@ -4,7 +4,6 @@ function ajaxRequest(type, url, callback, data = null) {
     let xhr = new XMLHttpRequest();
     xhr.open(type, url);
 
-    // Only set the Content-Type header if data is not FormData
     if (!(data instanceof FormData)) {
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     }
@@ -12,10 +11,12 @@ function ajaxRequest(type, url, callback, data = null) {
     xhr.onload = () => {
         if (xhr.status >= 200 && xhr.status < 300) {
             try {
+                console.log('Response Text:', xhr.responseText); // Debugging line
                 let response = xhr.responseText ? JSON.parse(xhr.responseText) : {};
                 callback(response);
             } catch (e) {
-                console.error('Invalid JSON response:', xhr.responseText);
+                console.error('Error parsing JSON response:', e);
+                console.error('Response Text:', xhr.responseText);
             }
         } else {
             httpErrors(xhr.status);
