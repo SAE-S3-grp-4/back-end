@@ -62,7 +62,7 @@ body {
 
 button {
     background-color: #5468FF;
-    border: 6px solid white;
+    border: 2px solid white;
     border-radius: 5px;
     color: #fff;
     padding: 0.5rem 1rem;
@@ -79,4 +79,10 @@ button.unsubscribe {
 
 button.unsubscribe:hover {
     background-color: #D45555;
+}
+
+.navbar .logo img {
+    height: 30px; /* Ajuste la hauteur du logo */
+    width: auto;  /* Conserve les proportions */
+    margin: 0;    /* Réduit l'espacement autour du logo */
 }
