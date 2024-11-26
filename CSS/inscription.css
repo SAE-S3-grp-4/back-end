@@ -6,8 +6,12 @@ body, h1, h2, p, a, input, button, select, form {
 }
 
 body {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(to bottom, #091540, #021a40);
+    font-family: 'Poppins', sans-serif;
+    background-image: linear-gradient(rgba(19, 21, 77, 0.4), rgba(44, 49, 178, 0.4)), url("../img/pageConnexion/background2.PNG");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -53,6 +57,12 @@ body {
 
 .back-link:hover {
     color: #ffffff;
+}
+
+.orgaLabels {
+    display: flex;
+    justify-content: space-between; /* Espacement équivalent entre les éléments */
+    gap: 1rem; /* Espacement entre les champs */
 }
 
 .form-group {
