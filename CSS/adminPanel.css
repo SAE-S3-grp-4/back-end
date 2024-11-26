@@ -1,76 +1,330 @@
-/* Reset styles */
-body, h1, a {
+body, h1, h2, input, button, div {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
 body {
+    overflow-y: auto;
     font-family: Arial, sans-serif;
     background: linear-gradient(135deg, #1e1e2f, #3a3a5e);
     color: #fff;
-    height: 100vh;
+    min-height: 100vh;
+}
+
+header {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1rem;
 }
 
 .title {
-    font-size: 2rem;
-    margin: 2rem;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .highlight {
     color: #ff99ff;
 }
 
-.main-content {
+.main-container {
     display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+    align-items: flex-start;
+    width: 100%;
+    padding: 1rem;
+    position: relative; 
 }
 
-a:hover {
-    background: #00b4d8;
-    transform: scale(1.1);
-}
-
-.main-buttons, .left-buttons, .right-buttons {
+.member-container {
     width: 30%;
+    margin-top: 5rem;
+    margin-left: 2rem;
+}
+
+.content {
     display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     gap: 1rem;
 }
 
-.main-btn, .left-btn, .right-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem 2rem;
-    width: 90%;
-    background: #3a3a5e;
-    border: 2px solid #00b4d8;
-    color: #fff;
-    border-radius: 10px;
+.search-section {
+    background: #2b2b59;
+    border-radius: 15px;
+    padding: 1rem;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    width: 300px;
+    text-align: left;
+    color: #c8c8e8;
+}
+
+.search-section input {
+    width: 100%;
+    padding: 0.5rem;
     font-size: 1rem;
+    border: 1px solid #00b4d8;
+    border-radius: 5px;
+    background: #1e1e3e;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+.search-section button {
+    width: 100%;
+    padding: 0.7rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: none;
     cursor: pointer;
-    text-align: center;
-    transition: background 0.3s, transform 0.2s;
+    background: #00b4d8;
+    color: #fff;
+    transition: background 0.3s ease;
+}
+
+.search-section button:hover {
+    background: #0077a7;
+}
+
+.member-list {
+    margin-top: 1rem;
+}
+
+.info-container,
+.td-container,
+.group-container,
+.teacher-container,
+.student-container {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border-radius: 5px;
+}
+
+.label-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.student-container,
+.teacher-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+}
+
+.student-container span,
+.teacher-container span {
+    flex: 1;
+}
+
+.student-container input,
+.teacher-container input {
+    margin-left: 1rem;
+}
+
+.hidden {
+    display: none;
+}
+
+.label-container h2,
+.label-container h3,
+.label-container h4 {
+    margin: 0;
+    padding: 0.5rem;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, border-radius 0.3s ease;
+}
+
+.label-container h2:hover,
+.label-container h3:hover,
+.label-container h4:hover {
+    background-color: #3a3a5e;
+    border-radius: 5px;
+}
+
+.select-button {
+    background-color: #00b4d8 !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 3px !important;
+    padding: 0.3rem 0.6rem !important;
+    font-size: 0.8rem !important;
+    cursor: pointer;
+    width: auto !important;
+    height: auto !important;
+    display: inline-block !important;
+    box-sizing: content-box !important;
+    margin: 0 !important;
+    transition: background-color 0.3s ease !important;
+}
+
+.select-button:hover {
+    background-color: #0077a7 !important;
+}
+
+
+
+.button-container {
+    position: absolute; /* Position absolue pour un placement précis */
+    left: 50%; /* Place le centre de la div au milieu de la page */
+    transform: translateX(-50%); /* Recentre la div en ajustant la moitié de sa largeur */
+    display: flex;
+    flex-direction: column; /* Aligne les boutons verticalement */
+    align-items: center; /* Centre les boutons dans leur propre div */
+    gap: 5rem; /* Espacement entre les boutons */
+    margin-top: 5rem; /* Ajustez pour l'espacement vertical */
+}
+
+.center-button {
+    width: 300px;
+    padding: 1.5rem 3rem;
+    font-size: 1.5rem;
+    color: #fff;
+    background-color: #2b2b59;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
     text-decoration: none;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+
 }
 
-.left-btn {
-    width: 60%;
-    height: 12rem;
+.center-button i {
+    margin-right: 1rem;
 }
 
-.right-btn {
-    width: 60%;
-    height: 12rem;
-    margin-bottom: 20%;
+.center-button:hover {
+    background-color: #1e1e3e;
 }
 
-.main-btn {
-    height: 4rem;
-    margin-bottom: 15%;
+.popup-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background: #fff;
+    color: #000;
+    padding: 3rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 90%;
+    max-width: 800px;
+}
+
+.popup-body {
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.popup-left {
+    margin-top: 3rem;
+    text-align: center;
+}
+.popup-center {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: left;
+}
+
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.popup-footer {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.profile-picture {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+
+.student-grade {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.inscriptions-button, .delete-button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.inscriptions-button {
+    background: #00b4d8;
+    color: #fff;
+    transition: background 0.3s ease;
+}
+
+.inscriptions-button:hover {
+    background: #0077a7;
+}
+
+.delete-button {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    background: #ff4d4d;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    background: #ff1a1a;
+}
+
+.close-button {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: #ccc;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    transition: background 0.3s ease;
+}
+
+.close-button:hover {
+    background: #aaa;
 }

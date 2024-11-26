@@ -5,32 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion</title>
     <link rel="stylesheet" href="CSS/connexion.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <script src="js/ajax.js"></script>
     <script src="js/connexion.js"></script>
 </head>
 <body>
-<div class="background">
-    <div class="login-container">
-        <h1>Connexion</h1>
-        <a href="#" class="back-link">Retour</a>
-        <div id="error-message" class="error-message" style="display: none;"></div>
-        <form id="login-form">
-            <div class="form-group">
-                <label for="username">Nom d'utilisateur</label>
-                <input type="text" id="username" name="username" placeholder="Adresse mail ou identifiant" required>
-                <a href="#" class="forgot-link">Adresse mail oubliée ?</a>
-            </div>
-            <div class="form-group">
-                <label for="password">Mot de passe</label>
-                <input type="password" id="password" name="password" placeholder="Votre mot de passe" required>
-                <a href="#" class="forgot-link">Mot de passe oublié ?</a>
-            </div>
-            <button type="submit" class="btn-login">Se connecter</button>
-        </form>
-        <div class="register-link">
-            <a href="#">Pas encore de compte ? Inscrivez-vous !</a>
+
+    <div class="deco1">
+        <img src="img/pageConnexion/stars.png" height="200px" width="auto" />
+    </div>
+
+    <div class="container">
+        <div class="form-box">
+            <a href="#" class="retour">Retour</a>
+            <h1>Connexion</h1>
+            <form>
+                <div class="input-group">
+                    <label for="username">Nom d'utilisateur </label>
+                    <input type="text" id="username" placeholder="Nom d’utilisateur">
+                    <a href="#" class="link"> Nom d'utilisateur oublié ?</a>
+                </div>
+                <div class="input-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" placeholder="Mot de passe">
+                    <a href="#" class="link">Mot de passe oublié ?</a>
+                </div>
+                <button type="submit" class="btn">Se connecter</button>
+                <p class="register">Pas encore de compte ? <a href="inscription.html">Inscris-toi !</a></p>
+            </form>
         </div>
     </div>
-</div>
+    <div class="deco2">
+        <img src="img/pageConnexion/planet.png" height="400px" width="auto" />
+    </div>
 </body>
 </html>
