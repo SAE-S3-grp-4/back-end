@@ -22,8 +22,8 @@ function dbRequestStudentDetails($db, $id)
     try {
         $request = '
             SELECT 
-                MEMBRE.Id_Membre, MEMBRE.Nom_Membre, MEMBRE.Mail_Membre, MEMBRE.Grp_Membre, MEMBRE.Pdp_Membre, 
-                COALESCE(GRADE.Nom_Grade, "Aucun grade") AS Nom_Grade, 
+                MEMBRE.Id_Membre, MEMBRE.Nom_Membre, MEMBRE.Prenom_Membre, MEMBRE.Pseudo_Membre, MEMBRE.Mail_Membre, MEMBRE.Grp_Membre, MEMBRE.Pdp_Membre, 
+                COALESCE(GRADE.Nom_Grade, "Aucun") AS Nom_Grade, 
                 ROLE.Nom_Role 
             FROM MEMBRE
             LEFT JOIN GRADE ON MEMBRE.Id_Grade = GRADE.Id_Grade
@@ -54,3 +54,19 @@ function dbRequestStudents($db)
     }
     return $result;
 }
+
+
+function deleteStudentById($db, $id)
+{
+    try {
+        $request = "DELETE FROM MEMBRE WHERE Id_Membre = :id";
+        $statement = $db->prepare($request);
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
+        $statement->execute();
+    } catch (PDOException $exception) {
+        error_log('Request error: ' . $exception->getMessage());
+        return false;
+    }
+    return true;
+}
+
