@@ -62,7 +62,7 @@ body {
 
 button {
     background-color: #5468FF;
-    border: #fff;
+    border: 6px solid white;
     border-radius: 5px;
     color: #fff;
     padding: 0.5rem 1rem;
