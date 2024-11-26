@@ -1,3 +1,26 @@
+document.getElementById("product-list").addEventListener('click', (event) => {
+    if (event.target.classList.contains('btn-add-to-cart')) {
+        const productId = parseInt(event.target.getAttribute('data-id'), 10);
+        if (!isNaN(productId)) {
+            ajaxRequest('GET', 'php/controllerBoutique.php/isLoggedIn', (response) => {
+                if (response.loggedIn) {
+                    ajaxRequest('POST', 'php/controllerBoutique.php/addToCart', (response) => {
+                        if (response.success) {
+                            alert('Produit ajouté au panier');
+                        } else {
+                            alert('Erreur lors de l\'ajout au panier');
+                        }
+                    }, { productId: productId });
+                } else {
+                    window.location.href = 'connexion.html';
+                }
+            });
+        } else {
+            console.error('Invalid product ID');
+        }
+    }
+});
+
 function loadProducts() {
     ajaxRequest('GET', 'php/controllerBoutique.php/produits', (produits) => {
         if (!Array.isArray(produits)) {
@@ -50,4 +73,6 @@ function loadProducts() {
     });
 }
 
-ajaxRequest("GET","php/controllerBoutique.php/produits", loadProducts());
+document.addEventListener('DOMContentLoaded', function() {
+    loadProducts();
+});
