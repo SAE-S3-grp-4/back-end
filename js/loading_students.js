@@ -14,6 +14,64 @@ const classGroups = {
     'Autre': ['Enseignant']
 };
 
+function showStudentPopup(studentId) {
+    ajaxRequest('GET', `php/request.php/student/${studentId}`, (student) => {
+        // Create the popup container
+        let popupContainer = document.createElement('div');
+        popupContainer.classList.add('popup-container');
+
+        // Create the popup content
+        let popupContent = document.createElement('div');
+        popupContent.classList.add('popup-content');
+
+        // Add student information to the popup content
+        let studentInfo = `
+            <div class="popup-header">
+                <button class="close-button">Retour</button>
+                <span class="student-grade">${student.Nom_Grade}</span>
+            </div>
+            <div class="popup-left">
+                <img src="path/to/profile/pictures/${student.Pdp_Membre}" alt="Profile Picture" class="profile-picture">
+                <h3>${student.Nom_Membre}</h3>
+                <p>${student.Nom_Role}</p>
+            </div>
+            <div class="popup-center">
+                <p>Groupe: ${student.Grp_Membre}</p>
+                <p>Email: ${student.Mail_Membre}</p>
+                <p>Nom: ${student.Nom_Membre}</p>
+                <button class="inscriptions-button">Afficher les inscriptions</button>
+            </div>
+            <div class="popup-footer">
+                <button class="delete-button">Supprimer le compte</button>
+            </div>
+        `;
+        popupContent.innerHTML = studentInfo;
+
+        // Add event listener to close button
+        popupContent.querySelector('.close-button').addEventListener('click', () => {
+            document.body.removeChild(popupContainer);
+        });
+
+        // Add event listener to delete button
+        popupContent.querySelector('.delete-button').addEventListener('click', () => {
+            // Add logic to delete the student account
+            console.log("Deleting student:", student.Id_Membre);
+        });
+
+        // Add event listener to inscriptions button
+        popupContent.querySelector('.inscriptions-button').addEventListener('click', () => {
+            // Add logic to display the student's inscriptions
+            console.log("Displaying inscriptions for student:", student.Id_Membre);
+        });
+
+        // Append the popup content to the popup container
+        popupContainer.appendChild(popupContent);
+
+        // Append the popup container to the body
+        document.body.appendChild(popupContainer);
+    });
+}
+
 function loadStudents(students) {
     let container = document.getElementById('dropdown-container');
     container.innerHTML = ''; // Clear existing dropdowns
@@ -92,11 +150,15 @@ function loadStudents(students) {
                         studentName.textContent = student.Nom_Membre;
                         studentContainer.appendChild(studentName);
 
-                        let radio = document.createElement('input');
-                        radio.type = 'radio';
-                        radio.name = 'selected-student'; // All radios share the same name to allow only one selection
-                        radio.value = student.Id_Membre;
-                        studentContainer.appendChild(radio);
+                        let selectButton = document.createElement('button');
+                            selectButton.textContent = "Sélect.";
+                            selectButton.classList.add('select-button');
+
+                            selectButton.addEventListener('click', () => {
+                                showStudentPopup(student.Id_Membre);
+                            });
+
+                        studentContainer.appendChild(selectButton);
 
                         studentList.appendChild(studentContainer);
                     });
@@ -173,7 +235,7 @@ function loadStudents(students) {
                             selectButton.classList.add('select-button');
 
                             selectButton.addEventListener('click', () => {
-                                console.log("Selected student:", student.Id_Membre);
+                                showStudentPopup(student.Id_Membre);
                             });
 
                             studentContainer.appendChild(selectButton);

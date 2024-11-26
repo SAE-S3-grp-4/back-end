@@ -165,6 +165,18 @@ if ($requestMethod == "GET") {
     }
 }
 
+if ($requestMethod == "GET") {
+    if ($requestRessource === 'student') {
+        if (isset($id) && is_numeric($id)) {
+            $data = dbRequestStudentDetails($db, $id);
+        } else {
+            header('HTTP/1.1 400 Bad Request');
+            echo json_encode(['error' => 'Invalid student ID']);
+            exit;
+        }
+    }
+}
+
 if ($requestMethod == "POST") {
     if ($requestRessource == 'produit-modify') {
         $id = isset($_POST["id"]) ? filter_var($_POST["id"], FILTER_SANITIZE_NUMBER_INT) : null;
