@@ -1,4 +1,3 @@
-/* Reset styles */
 body, h1, h2, input, button, div {
     margin: 0;
     padding: 0;
@@ -6,9 +5,6 @@ body, h1, h2, input, button, div {
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* Aligner les éléments à gauche */
     height: 100vh;
     overflow-y: auto;
     font-family: Arial, sans-serif;
@@ -16,9 +12,9 @@ body {
     color: #fff;
 }
 
-.header {
+header {
     width: 100%;
-    text-align: center; /* Centrer le titre */
+    text-align: center;
     margin-bottom: 1rem;
 }
 
@@ -31,15 +27,23 @@ body {
     color: #ff99ff;
 }
 
-.-member-container {
-    text-align: left;
-    width: 100%;
+.main-container {
+    display: flex; /* Active Flexbox */
+    align-items: flex-start; /* Aligne les divs en haut */
+    width: 100%; /* S'assure que le conteneur prend toute la largeur */
     padding: 1rem;
+    position: relative; /* Permet de positionner la div des boutons indépendamment */
+}
+
+.member-container {
+    width: 30%;
+    margin-top: 5rem;
+    margin-left: 2rem;
 }
 
 .content {
     display: flex;
-    justify-content: flex-start; /* Aligner les éléments à gauche */
+    justify-content: flex-start;
     align-items: flex-start;
     gap: 1rem;
 }
@@ -118,7 +122,6 @@ body {
     margin-left: 1rem;
 }
 
-/* Classe cachée pour masquer les éléments par défaut */
 .hidden {
     display: none;
 }
@@ -127,76 +130,70 @@ body {
 .label-container h3,
 .label-container h4 {
     margin: 0;
-    padding: 0.5rem; /* Ajout de padding pour toute la ligne */
-    width: 100%; /* Assurez-vous que l'élément prend toute la largeur */
-    box-sizing: border-box; /* Inclure le padding dans la largeur totale */
-    border-radius: 5px; /* Ajout de border-radius */
-    transition: background-color 0.3s ease, border-radius 0.3s ease; /* Ajout de transition */
+    padding: 0.5rem;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, border-radius 0.3s ease;
 }
 
 .label-container h2:hover,
 .label-container h3:hover,
 .label-container h4:hover {
     background-color: #3a3a5e;
-    border-radius: 5px; /* Ajout de border-radius pour l'effet de survol */
+    border-radius: 5px;
 }
 
-/* Style pour l'input de type radio */
-input[type="radio"] {
-    appearance: none;
-    width: 1.5rem;
-    height: 1.5rem;
-    border: 2px solid #00b4d8;
-    border-radius: 50%;
-    outline: none;
+.select-button {
+    background-color: #00b4d8 !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 3px !important;
+    padding: 0.3rem 0.6rem !important;
+    font-size: 0.8rem !important;
     cursor: pointer;
-    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
+    width: auto !important;
+    height: auto !important;
+    display: inline-block !important;
+    box-sizing: content-box !important;
+    margin: 0 !important;
+    transition: background-color 0.3s ease !important;
 }
 
-input[type="radio"]:checked::before {
-    content: '';
-    display: block;
-    width: 0.75rem;
-    height: 0.75rem;
-    border-radius: 50%;
-    background-color: #00b4d8;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.select-button:hover {
+    background-color: #0077a7 !important;
 }
 
-input[type="radio"]:focus {
-    box-shadow: 0 0 0 3px rgba(0, 180, 216, 0.5);
-}
+
 
 .button-container {
+    position: absolute; /* Position absolue pour un placement précis */
+    left: 50%; /* Place le centre de la div au milieu de la page */
+    transform: translateX(-50%); /* Recentre la div en ajustant la moitié de sa largeur */
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    margin-top: 2rem;
+    flex-direction: column; /* Aligne les boutons verticalement */
+    align-items: center; /* Centre les boutons dans leur propre div */
+    gap: 5rem; /* Espacement entre les boutons */
+    margin-top: 5rem; /* Ajustez pour l'espacement vertical */
 }
 
 .center-button {
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Centrer le contenu */
-    width: 300px; /* Augmenter la largeur */
-    padding: 1.5rem 3rem; /* Augmenter la taille des boutons */
-    font-size: 1.5rem; /* Augmenter la taille de la police */
+    width: 300px;
+    padding: 1.5rem 3rem;
+    font-size: 1.5rem;
     color: #fff;
     background-color: #2b2b59;
     border: none;
-    border-radius: 5px;
+    border-radius: 15px;
     cursor: pointer;
-    text-decoration: none; /* Supprimer la décoration de texte */
+    text-decoration: none;
     transition: background-color 0.3s ease;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+
 }
 
 .center-button i {
-    margin-right: 1rem; /* Ajuster l'espace entre l'icône et le texte */
+    margin-right: 1rem;
 }
 
 .center-button:hover {

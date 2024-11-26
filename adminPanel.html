@@ -9,22 +9,21 @@
     <script src="js/ajax.js" defer></script>
     <script src="js/loading_students.js" defer></script>
 </head>
+<header>
+    <h1 class="title">Panel <span class="highlight">Administrateur</span></h1>
+</header>
 <body>
-<div class="member-container">
-    <!-- Header -->
-    <header>
-        <h1 class="title">Panel <span class="highlight">Administrateur</span></h1>
-    </header>
-
-    <div class="content">
-        <!-- Recherche et affichage des membres -->
-        <aside class="search-section">
-            <input type="text" id="search-input" placeholder="Rechercher un membre">
-            <button id="search-button">Rechercher</button>
-            <section class="member-list" id="dropdown-container">
-                <!-- Dropdowns will be dynamically added here -->
-            </section>
-        </aside>
+    <div class="main-container">
+        <div class="member-container">
+            <div class="content">
+                <aside class="search-section">
+                    <input type="text" id="search-input" placeholder="Rechercher un membre">
+                    <button id="search-button">Rechercher</button>
+                    <section class="member-list" id="dropdown-container">
+                    </section>
+                </aside>
+            </div>
+        </div>
         <div class="button-container">
             <a href="gestionBoutique.html" class="center-button">
                 <i class="fas fa-store"></i>Gestion de la boutique
@@ -32,8 +31,11 @@
             <a href="gestionEvent.html" class="center-button">
                 <i class="fas fa-calendar-alt"></i>Gestion des évenements
             </a>
+            <a href="gestionRole.html" class="center-button">
+                <i class="fas fa-calendar-alt"></i>Gestion des rôles
+            </a>
         </div>
     </div>
-</div>
+    
 </body>
 </html>

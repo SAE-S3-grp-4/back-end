@@ -168,11 +168,16 @@ function loadStudents(students) {
                             studentName.textContent = student.Nom_Membre;
                             studentContainer.appendChild(studentName);
 
-                            let radio = document.createElement('input');
-                            radio.type = 'radio';
-                            radio.name = 'selected-student'; // All radios share the same name to allow only one selection
-                            radio.value = student.Id_Membre;
-                            studentContainer.appendChild(radio);
+                            let selectButton = document.createElement('button');
+                            selectButton.textContent = "Sélect.";
+                            selectButton.classList.add('select-button');
+
+                            selectButton.addEventListener('click', () => {
+                                console.log("Selected student:", student.Id_Membre);
+                            });
+
+                            studentContainer.appendChild(selectButton);
+
 
                             studentList.appendChild(studentContainer);
                         });
