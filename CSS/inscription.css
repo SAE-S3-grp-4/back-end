@@ -6,8 +6,12 @@ body, h1, h2, p, a, input, button, select, form {
 }
 
 body {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(to bottom, #091540, #021a40);
+    font-family: 'Poppins', sans-serif;
+    background-image: linear-gradient(rgba(19, 21, 77, 0.4), rgba(44, 49, 178, 0.4)), url("../img/pageConnexion/background2.PNG");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -16,20 +20,14 @@ body {
     overflow: hidden;
 }
 
-.background {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
 .signup-container {
-    background: rgba(255, 255, 255, 0.1);
+    background: linear-gradient(180deg, rgba(255, 72, 215, 0.25) 0%, rgba(234, 234, 234, 0.25) 100%);
+    filter: drop-shadow(20px 50px 100px rgba(113, 246, 255, 0.25));
+    border: 1px solid rgba(23, 32, 117, 0.50);
     padding: 2rem;
-    border-radius: 15px;
-    width: 350px;
+    border-radius: 20px;
+    width: 400px;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
     text-align: center;
     backdrop-filter: blur(10px);
@@ -55,6 +53,12 @@ body {
     color: #ffffff;
 }
 
+.orgaLabels {
+    display: flex;
+    justify-content: space-between; /* Espacement équivalent entre les éléments */
+    gap: 1rem; /* Espacement entre les champs */
+}
+
 .form-group {
     margin-bottom: 1.5rem;
     text-align: left;
@@ -72,7 +76,7 @@ input, select {
     border: none;
     border-radius: 5px;
     font-size: 1rem;
-    background: rgba(255, 255, 255, 0.2);
+    background: #34448E;
     color: white;
     outline: none;
 }
@@ -86,9 +90,10 @@ input:focus, select:focus {
 }
 
 select option {
-    background: #021a40;
-    color: white;
+    background: #34448E;
+    color: #cfcfcf;
 }
+
 
 .btn-signup {
     width: 100%;
@@ -111,5 +116,15 @@ select option {
     color: red;
     margin-bottom: 1rem;
     text-align: center;
+}
+
+#mdp {
+
+    text-align: left;
+}
+
+#mdp2 {
+    margin-bottom: 1rem;
+    text-align: left;
 }
 

@@ -11,7 +11,7 @@ function ajaxRequest(type, url, callback, data = null) {
     xhr.onload = () => {
         if (xhr.status >= 200 && xhr.status < 300) {
             try {
-                console.log('Response Text:', xhr.responseText); // Debugging line
+                //console.log('Response Text:', xhr.responseText); // Debugging line
                 let response = xhr.responseText ? JSON.parse(xhr.responseText) : {};
                 callback(response);
             } catch (e) {

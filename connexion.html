@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion</title>
     <link rel="stylesheet" href="CSS/connexion.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <script src="js/ajax.js"></script>
     <script src="js/connexion.js"></script>
 </head>
@@ -18,15 +19,16 @@
         <div class="form-box">
             <a href="#" class="retour">Retour</a>
             <h1>Connexion</h1>
-            <form>
+            <div id="error-message" class="error-message" style="display: none;"></div>
+            <form id="login-form">
                 <div class="input-group">
                     <label for="username">Nom d'utilisateur </label>
-                    <input type="text" id="username" placeholder="Nom d’utilisateur">
+                    <input type="text" id="username" name="username" placeholder="Nom d’utilisateur">
                     <a href="#" class="link"> Nom d'utilisateur oublié ?</a>
                 </div>
                 <div class="input-group">
                     <label for="password">Mot de passe</label>
-                    <input type="password" id="password" placeholder="Mot de passe">
+                    <input type="password" id="password" name="password" placeholder="Mot de passe">
                     <a href="#" class="link">Mot de passe oublié ?</a>
                 </div>
                 <button type="submit" class="btn">Se connecter</button>

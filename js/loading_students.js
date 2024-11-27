@@ -23,18 +23,18 @@ function showStudentPopup(studentId) {
             <div class="popup-content">
                 <div class="popup-header">
                     <button class="close-button">Retour</button>
-                    <span class="student-grade">Grade ${student.Nom_Grade}</span>
+                    <span class="student-grade">Grade : ${student.Nom_Grade}</span>
                 </div>
                 <div class="popup-body">
                     <div class="popup-left">
-                        <img src="img/imgMembre/${student.Pdp_Membre}" alt="Profile Picture" class="profile-picture">
-                        <h3>${student.Nom_Membre}</h3>
+                        <img src="img/imgMembre/${student.Pdp_Membre}" alt="Photo de profil" class="profile-picture">
+                        <h3>${student.Prenom_Membre} ${student.Nom_Membre}</h3>
                         <p>${student.Nom_Role}</p>
                     </div>
                     <div class="popup-center">
-                        <p>Groupe : ${student.Grp_Membre}</p>
-                        <p>Email : ${student.Mail_Membre}</p>
-                        <p>Nom : ${student.Nom_Membre}</p>
+                        <p><b>Groupe : </b>${student.Grp_Membre}</p>
+                        <p><b>Email : </b>${student.Mail_Membre}</p>
+                        <p><b>Pseudo : </b>${student.Pseudo_Membre}</p>
                         <button class="inscriptions-button">Voir la liste des inscriptions</button>
                     </div>
                 </div>
@@ -52,7 +52,18 @@ function showStudentPopup(studentId) {
 
         // Bouton supprimer
         popupContainer.querySelector('.delete-button').addEventListener('click', () => {
-            console.log("Compte supprimé :", student.Id_Membre);
+            const confirmDelete = confirm("Êtes-vous sûr de vouloir supprimer ce compte ?");
+            if (confirmDelete) {
+                ajaxRequest('DELETE', `php/controllerPanelAdmin.php/student/${student.Id_Membre}`, (response) => {
+                    if (response.success) {
+                        alert("Compte supprimé avec succès !");
+                        document.body.removeChild(popupContainer); // Fermer le popup
+                        // Rafraîchir la liste des étudiants si nécessaire
+                    } else {
+                        alert("Échec de la suppression du compte.");
+                    }
+                });
+            }
         });
 
         // Affichage des inscriptions
@@ -220,7 +231,7 @@ function loadStudents(students) {
                             studentContainer.classList.add('student-container');
 
                             let studentName = document.createElement('span');
-                            studentName.textContent = student.Nom_Membre;
+                            studentName.textContent = student.Prenom_Membre + ' ' + student.Nom_Membre;
                             studentContainer.appendChild(studentName);
 
                             let selectButton = document.createElement('button');
@@ -254,7 +265,6 @@ function loadStudents(students) {
 
 document.addEventListener('DOMContentLoaded', () => {
     ajaxRequest('GET', 'php/controllerPanelAdmin.php/students', (students) => {
-        console.log('Students loaded:', students);
         loadStudents(students);
     });
 
@@ -263,11 +273,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const searchStudents = () => {
         const searchTerm = searchInput.value.toLowerCase();
-        console.log('Searching for:', searchTerm);
         const studentContainers = document.querySelectorAll('.student-container');
         studentContainers.forEach(container => {
             const studentName = container.querySelector('span').textContent.toLowerCase();
-            console.log('Checking student:', studentName);
             if (studentName.includes(searchTerm)) {
                 container.style.display = 'flex';
                 container.closest('.student-list').classList.remove('hidden'); // Ensure the parent list is visible
