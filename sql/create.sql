@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS PROMO;
 DROP TABLE IF EXISTS GRADE;
 DROP TABLE IF EXISTS ROLE;
 
+
 CREATE TABLE GRADE(
    Id_Grade INT AUTO_INCREMENT,
    Nom_Grade VARCHAR(50) NOT NULL,
@@ -32,7 +33,7 @@ CREATE TABLE PRODUIT(
    Prix_Produit DECIMAL(15,2) NOT NULL,
    Description_Produit VARCHAR(150),
    Stock_Produit INT NOT NULL,
-   Img_Produit VARCHAR(250),
+   Img_Produit VARCHAR(255),
    PRIMARY KEY(Id_Produit)
 );
 
@@ -60,13 +61,13 @@ CREATE TABLE MEMBRE(
    Prenom_Membre VARCHAR(50) NOT NULL,
    Pseudo_Membre VARCHAR(50) NOT NULL,
    Mail_Membre VARCHAR(50) NOT NULL,
-   Mdp_Membre VARCHAR(50) NOT NULL,
+   Mdp_Membre VARCHAR(255) NOT NULL,
    Grp_Membre VARCHAR(50) NOT NULL,
-   Pdp_Membre VARCHAR(120) NOT NULL,
+   Pdp_Membre VARCHAR(255) ,
    Id_Grade INT,
    Id_Role INT,
    PRIMARY KEY(Id_Membre),
-   UNIQUE(Nom_Membre),
+   UNIQUE (Pseudo_Membre),
    UNIQUE(Mail_Membre),
    FOREIGN KEY(Id_Grade) REFERENCES GRADE(Id_Grade),
    FOREIGN KEY(Id_Role) REFERENCES ROLE(Id_Role)
@@ -74,13 +75,13 @@ CREATE TABLE MEMBRE(
 
 CREATE TABLE COMMANDE(
    Id_Commande INT AUTO_INCREMENT,
-   Statut_Commande VARCHAR(50) NOT NULL,
+   Statut_Commande VARCHAR(60) NOT NULL,
    Date_Commande DATETIME NOT NULL,
    Id_Promo INT,
    Id_Membre INT NOT NULL,
    PRIMARY KEY(Id_Commande),
    FOREIGN KEY(Id_Promo) REFERENCES PROMO(Id_Promo),
-   FOREIGN KEY(Id_Membre) REFERENCES Membre(Id_Membre)
+   FOREIGN KEY(Id_Membre) REFERENCES MEMBRE(Id_Membre)
 );
 
 CREATE TABLE BON_DE_COMMANDE(
@@ -104,7 +105,6 @@ CREATE TABLE INSCRIPTION(
    FOREIGN KEY(Id_Commande) REFERENCES COMMANDE(Id_Commande),
    FOREIGN KEY(Id_Event) REFERENCES EVENEMENT(Id_Event)
 );
-
 
 -- Insertion pour la table GRADE
 INSERT INTO GRADE (Nom_Grade, Prix_Grade, Description_Grade, Avantage_Grade)
@@ -163,18 +163,19 @@ VALUES
 ('SUMMER', 15.00);
 
 -- Insertion pour la table MEMBRE
-INSERT INTO MEMBRE (Nom_Membre, Mail_Membre, Mdp_Membre, Grp_Membre, Pdp_Membre, Id_Grade, Id_Role)
+INSERT INTO MEMBRE (Nom_Membre, Prenom_Membre, Pseudo_Membre, Mail_Membre, Mdp_Membre, Grp_Membre, Pdp_Membre, Id_Grade, Id_Role)
 VALUES
-('Lucas Dupont', 'lucas.dupont@example.com', 'password123', 'TP11A', 'lucas_profile.png', NULL, 1),
-('Marie Lefevre', 'marie.lefevre@example.com', 'password456', 'TP22C', 'marie_profile.png', 3, 2),
-('Antoine Martin', 'antoine.martin@example.com', 'password789', 'TP11B', 'antoine_profile.png', 2, 2),
-('Claire Dubois', 'claire.dubois@example.com', '000000000', 'TP31A', 'claire_profile.png', 1, 2),
-('Sophie Bernard', 'sophie.bernard@example.com', '987654321', 'TP32D', 'sophie_profile.png', NULL, 1),
-('Thomas Leroy', 'thomas.leroy@example.com', 'gjosfezg526', 'TP11B', 'thomas_profile.png', 3, 2),
-('Julie Moreau', 'julie.moreau@example.com', '1d5f2e9s3qf', 'Enseignant', 'julie_profile.png', 2, 2),
-('Pierre Simon', 'pierre.simon@example.com', 'password', 'TP12D', 'pierre_profile.png', NULL, 1),
-('Nicolas Petit', 'nicolas.petit@example.com', 'bonjour', 'TP22C', 'nicolas_profile.png', 2, 2),
-('Emma Roux', 'emma.roux@example.com', '123456789', 'TP31B', 'emma_profile.png', 3, 3);
+('Dupont', 'Lucas', 'LucasD','lucas.dupont@example.com', 'password123', 'TP11A', 'lucas.jpg', NULL, 1),
+('Lefevre', 'Marie', 'MarieL', 'marie.lefevre@example.com', 'password456', 'TP22C', 'marie_profile.png', 3, 2),
+('Martin', 'Antoine', 'AntoineM', 'antoine.martin@example.com', 'password789', 'TP11B', 'antoine_profile.png', 2, 2),
+('Dubois', 'Claire', 'ClaireD', 'claire.dubois@example.com', '000000000', 'TP31A', 'claire_profile.png', 1, 2),
+('Bernard', 'Sophie', 'SophieB', 'sophie.bernard@example.com', '987654321', 'TP32D', 'sophie_profile.png', NULL, 1),
+('Leroy', 'Thomas', 'ThomasL', 'thomas.leroy@example.com', 'gjosfezg526', 'TP11B', 'thomas_profile.png', 3, 2),
+('Moreau', 'Julie', 'JulieM', 'julie.moreau@example.com', '1d5f2e9s3qf', 'Enseignant', 'julie_profile.png', 2, 2),
+('Simon', 'Pierre', 'PierreS', 'pierre.simon@example.com', 'password', 'TP12D', 'pierre_profile.png', NULL, 1),
+('Petit', 'Nicolas', 'NicolasP', 'nicolas.petit@example.com', 'bonjour', 'TP22C', 'nicolas_profile.png', 2, 2),
+('Roux', 'Emma', 'EmmaR', 'emma.roux@example.com', '123456789', 'TP31B', 'emma_profile.png', 3, 3);
+('RYNDERSVITU', 'Enzo', 'admin', 'enzo.ryndersvitu@yahoo.com','$2y$10$DR/x68jR1IK/Yb6c.tceXe88jD0jcS5w.MJdlQJlSsHwLWdmivSYG', 'TP21A', 'lucas.jpg', NULL, 3)
 
 -- Insertion pour la table COMMANDE 
 INSERT INTO COMMANDE (Statut_Commande, Date_Commande, Id_Promo, Id_Membre)
@@ -229,4 +230,4 @@ VALUES
 (2, 17, 3),  
 (3, 18, 4),  
 (1, 19, 8),  
-(5, 20, 10);
+(5, 20, 10); 

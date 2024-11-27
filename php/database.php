@@ -35,7 +35,7 @@ function dbRequestUser($db)
 function dbLoginUser($db, $username, $password)
 {
     try {
-        $request = 'SELECT * FROM MEMBRE WHERE Nom_Membre = :username OR Mail_Membre = :username';
+        $request = 'SELECT * FROM MEMBRE WHERE Pseudo_Membre = :username OR Mail_Membre = :username';
         $statement = $db->prepare($request);
         $statement->bindParam(':username', $username, PDO::PARAM_STR);
         $statement->execute();
@@ -52,12 +52,14 @@ function dbLoginUser($db, $username, $password)
     }
 }
 
-function dbRegisterUser($db, $name, $email, $password, $group)
+function dbRegisterUser($db, $name, $surname, $pseudo, $email, $password, $group)
 {
     try {
-        $request = 'INSERT INTO MEMBRE (Nom_Membre, Mail_Membre, Mdp_Membre, Grp_Membre, Id_Role) VALUES (:name, :email, :password, :group, 1)';
+        $request = 'INSERT INTO MEMBRE (Nom_Membre, Prenom_Membre, Pseudo_Membre, Mail_Membre, Mdp_Membre, Grp_Membre, Id_Role) VALUES (:name, :surname, :pseudo, :email, :password, :group, 1)';
         $statement = $db->prepare($request);
         $statement->bindParam(':name', $name, PDO::PARAM_STR);
+        $statement->bindParam(':surname', $surname, PDO::PARAM_STR);
+        $statement->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
         $statement->bindParam(':email', $email, PDO::PARAM_STR);
         $statement->bindParam(':password', $password, PDO::PARAM_STR);
         $statement->bindParam(':group', $group, PDO::PARAM_STR);
@@ -69,18 +71,32 @@ function dbRegisterUser($db, $name, $email, $password, $group)
     }
 }
 
-function dbUserExists($db, $name, $email)
+function dbUserExists($db, $pseudo, $email)
 {
     try {
-        $request = 'SELECT COUNT(*) FROM MEMBRE WHERE Nom_Membre = :name OR Mail_Membre = :email';
+        $request = 'SELECT COUNT(*) FROM MEMBRE WHERE Pseudo_Membre = :pseudo OR Mail_Membre = :email';
         $statement = $db->prepare($request);
-        $statement->bindParam(':name', $name, PDO::PARAM_STR);
+        $statement->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
         $statement->bindParam(':email', $email, PDO::PARAM_STR);
         $statement->execute();
         $count = $statement->fetchColumn();
         return $count > 0;
     } catch (PDOException $exception) {
         error_log('User exists check error: ' . $exception->getMessage());
+        return false;
+    }
+}
+
+function dbRequestUserId($db, $username)
+{
+    try {
+        $request = 'SELECT Id_Membre FROM MEMBRE WHERE Pseudo_Membre = :username OR Mail_Membre = :username';
+        $statement = $db->prepare($request);
+        $statement->bindParam(':username', $username, PDO::PARAM_STR);
+        $statement->execute();
+        return $statement->fetchColumn();
+    } catch (PDOException $exception) {
+        error_log('Request error: ' . $exception->getMessage());
         return false;
     }
 }

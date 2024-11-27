@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ADIIL - Agenda</title>
     <link rel="stylesheet" href="css/evenements.css">
+    <script src="js/ajax.js" defer></script>
+    <script src="js/loading_events_visiteur.js" defer></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
     </style>
@@ -27,31 +29,15 @@
     <section class="agenda">
         <div class="month">
             <h3>Septembre</h3>
-            <div class="event">
-                <span>Lun 04</span>
-                <p>Présentation site</p>
-                <button>S'inscrire</button>
+            <div id="event-list-septembre" class="event-list">
+                <!-- Les événements de septembre seront ajoutés ici -->
             </div>
-            <div class="event">
-                <span>Lun 04</span>
-                <p>Début des grades</p>
-                <button>S'inscrire</button>
-            </div>
-            <div class="event">
-                <span>Lun 04</span>
-                <p>Soirée Boston</p>
-                <button class="unsubscribe">Désinscrire</button>
-            </div>
-            <!-- Ajoutez plus d'événements ici -->
         </div>
         <div class="month">
             <h3>Octobre</h3>
-            <div class="event">
-                <span>Lun 04</span>
-                <p>Présentation site</p>
-                <button>S'inscrire</button>
+            <div id="event-list-octobre" class="event-list">
+                <!-- Les événements d'octobre seront ajoutés ici -->
             </div>
-            <!-- Ajoutez plus d'événements -->
         </div>
     </section>
 </main>
