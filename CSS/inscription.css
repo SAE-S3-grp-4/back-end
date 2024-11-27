@@ -31,9 +31,6 @@ body {
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
     text-align: center;
     backdrop-filter: blur(10px);
-
-
-
 }
 
 .signup-container h1 {
@@ -93,9 +90,10 @@ input:focus, select:focus {
 }
 
 select option {
-    background: #021a40;
+    background: #34448E;
     color: #cfcfcf;
 }
+
 
 .btn-signup {
     width: 100%;
@@ -118,5 +116,15 @@ select option {
     color: red;
     margin-bottom: 1rem;
     text-align: center;
+}
+
+#mdp {
+
+    text-align: left;
+}
+
+#mdp2 {
+    margin-bottom: 1rem;
+    text-align: left;
 }
 
