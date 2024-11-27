@@ -4,7 +4,9 @@ require_once('database.php');
 header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
+    $name = filter_var($_POST['nom'], FILTER_SANITIZE_STRING);
+    $surname = filter_var($_POST['prenom'], FILTER_SANITIZE_STRING);
+    $pseudo = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
     $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
     $confirmPassword = filter_var($_POST['confirm-password'], FILTER_SANITIZE_STRING);
@@ -19,10 +21,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $db = dbConnect();
     if ($db) {
-        if (dbUserExists($db, $name, $email)) {
+        if (dbUserExists($db, $pseudo, $email)) {
             echo json_encode(['success' => false, 'error' => 'Le nom d\'utilisateur ou l\'email est déjà utilisé']);
         } else {
-            $result = dbRegisterUser($db, $name, $email, $hashedPassword, $group);
+            $result = dbRegisterUser($db, $name, $surname, $pseudo, $email, $hashedPassword, $group);
             if ($result) {
                 echo json_encode(['success' => true]);
             } else {
