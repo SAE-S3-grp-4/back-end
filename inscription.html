@@ -13,14 +13,18 @@
         <form id="signup-form" action="inscription.php" method="POST">
             
         <div class="orgaLabels">
+
             <div class="form-group">
                 <label for="prenom">Prénom</label>
                 <input type="text" id="prenom" name="prenom" placeholder="Prénom" required>
             </div>
+
             <div class="form-group">
                 <label for="nom">Nom</label>
                 <input type="text" id="nom" name="nom" placeholder="Nom" required>
             </div>
+
+        </div>
 
             <div class="form-group">
                 <label for="group">Groupe TP</label>
@@ -44,23 +48,23 @@
                     <option value="Enseignant">Enseignant</option>
                 </select>
             </div>
-        </div>
-
 
             <div class="form-group">
                 <label for="username">Nom d'utilisateur</label>
                 <input type="text" id="username" name="username" placeholder="Votre nom d'utilsateur" required>
             </div>
+
             <div class="form-group">
                 <label for="email">Adresse mail</label>
                 <input type="email" id="email" name="email" placeholder="Votre adresse mail" required>
             </div>
-            <div class="form-group">
+
+            <div class="form-group" id="mdp">
                 <label for="password">Mot de passe</label>
                 <input type="password" id="password" name="password" placeholder="Créez un mot de passe" required>
             </div>
-            <div class="form-group">
-                <label for="confirm-password">Confirmation du mot de passe</label>
+
+            <div class="form-group" id="mdp2">
                 <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirmez le mot de passe" required>
             </div>
             
