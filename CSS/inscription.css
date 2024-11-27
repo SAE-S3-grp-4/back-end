@@ -14,7 +14,8 @@ body {
     
     height: 100vh;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
+    gap: 1rem;
     align-items: center;
     color: white;
     overflow: hidden;
@@ -24,13 +25,13 @@ body {
 .signup-container {
     background: linear-gradient(180deg, rgba(255, 72, 215, 0.25) 0%, rgba(234, 234, 234, 0.25) 100%);
     filter: drop-shadow(20px 50px 100px rgba(113, 246, 255, 0.25));
-    border: 1px solid rgba(23, 32, 117, 0.50);
     padding: 2rem;
     border-radius: 20px;
     width: 400px;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
     text-align: center;
     backdrop-filter: blur(10px);
+    border: 2px solid #4F75FF;
 }
 
 .signup-container h1 {
@@ -42,10 +43,10 @@ body {
 .back-link {
     position: absolute;
     top: 20px;
-    left: 20px;
-    color: #d1d1d1;
+    left: 30px;
+    color: white;
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     transition: color 0.3s ease;
 }
 
@@ -55,8 +56,8 @@ body {
 
 .orgaLabels {
     display: flex;
-    justify-content: space-between; /* Espacement équivalent entre les éléments */
-    gap: 1rem; /* Espacement entre les champs */
+    justify-content: space-between;
+    gap: 1rem;
 }
 
 .form-group {
@@ -66,18 +67,19 @@ body {
 
 label {
     font-size: 0.9rem;
-    color: #d1d1d1;
+    color: white;
 }
 
 input, select {
     width: 100%;
     padding: 0.8rem;
-    margin-top: 0.5rem;
-    border: none;
-    border-radius: 5px;
+    margin-top: 0rem;
+    border-radius: 15px;
+    border: 2px solid rgba(44, 49, 178);
     font-size: 1rem;
     background: #34448E;
     color: white;
+    border-style: solid;
     outline: none;
 }
 
@@ -98,8 +100,8 @@ select option {
 .btn-signup {
     width: 100%;
     padding: 0.8rem;
-    border: none;
-    border-radius: 5px;
+    border: 2px solid #4F75FF;
+    border-radius: 50px;
     background: #6ea8fe;
     color: white;
     font-size: 1rem;
@@ -118,13 +120,29 @@ select option {
     text-align: center;
 }
 
-#mdp {
+#nom {
+    margin-bottom: 0.5rem;
+}
 
-    text-align: left;
+
+#mdp {
+    margin-bottom: 0.3rem;
 }
 
 #mdp2 {
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     text-align: left;
+}
+
+.deco1 {
+    margin-top: 400px;
+
+    z-index: 1;
+}
+
+.deco2 {
+    margin-bottom: 350px;
+    margin-right: 50px;
+
 }
 
