@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $user = dbLoginUser($db, $username, $password);
         if ($user) {
             $_SESSION['user'] = $user;
+            $_SESSION['Id_User'] = dbRequestUserId($db, $username);
             $_SESSION['is_admin'] = ($user['Id_Role'] == 3);
             echo json_encode(['success' => true]);
         } else {
