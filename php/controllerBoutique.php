@@ -34,30 +34,42 @@ if ($requestRessource == 'produits') {
     $data = dbRequestProduct($db);
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET' && strpos($_SERVER['REQUEST_URI'], 'isLoggedIn') !== false) {
-    header('Content-Type: application/json');
-    echo json_encode(['loggedIn' => isset($_SESSION['user_id'])]);
-    exit;
+if ($requestMethod == "GET") {
+    if ($requestRessource == "isLogged") {
+        if (isset($_SESSION['Id_User'])) {
+            $data = json_encode(['isLogged' => true]);
+        } else {
+            $data = json_encode(['isLogged' => false]);
+        }
+    }
 }
 
 // Handle adding product to cart
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'], 'addToCart') !== false) {
-    if (isset($_SESSION['user_id'])) {
-        $userId = $_SESSION['user_id'];
-        $productId = filter_input(INPUT_POST, 'productId', FILTER_SANITIZE_NUMBER_INT);
-        if ($productId) {
-            $result = addToCart($userId, $productId);
-            header('Content-Type: application/json');
-            echo json_encode(['success' => $result]);
-        } else {
-            header('HTTP/1.1 400 Bad Request');
-            echo json_encode(['error' => 'Invalid product ID']);
+if ($requestMethod == "GET") {
+    if ($requestRessource == "addToCart") {
+        if (isset($_SESSION['Id_User'])) {
+            if (isset($id) && is_numeric($id)) {
+                // Vérifiez si l'utilisateur est connecté
+                if (isset($_SESSION['Id_User']) && is_numeric($_SESSION['Id_User'])) {
+                    $userId = $_SESSION['Id_User'];
+                    error_log('User ID from session: ' . $userId);
+                } else {
+                    error_log('User is not authenticated or invalid user ID');
+                    header('HTTP/1.1 401 Unauthorized');
+                    echo json_encode(['error' => 'User is not authenticated']);
+                    exit;
+                }
+
+                // Utilisez $userId dans votre fonction addToCart
+                $data = addToCart($db, $userId, $id);
+            } else {
+                header('HTTP/1.1 400 Bad Request');
+                echo json_encode(['error' => 'Invalid product ID']);
+                exit;
+            }
+
         }
-    } else {
-        header('HTTP/1.1 401 Unauthorized');
-        echo json_encode(['error' => 'User not logged in']);
     }
-    exit;
 }
 
 // Send data to the client.

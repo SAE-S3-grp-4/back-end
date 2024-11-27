@@ -42,7 +42,7 @@ if ($requestMethod == "POST") {
 
         if ($nom && $description && $prix && $stock && $img) {
             // Ensure the target directory exists
-            $targetDir = "../imgProduits/";
+            $targetDir = "../img/imgProduits/";
             if (!is_dir($targetDir)) {
                 mkdir($targetDir, 0777, true);
             }
@@ -100,7 +100,7 @@ if ($requestMethod == "POST") {
 
         if ($id && $nom && $description && $prix && $stock) {
             if ($img) {
-                $targetDir = "img/";
+                $targetDir = "../img/imgProduits/";
                 if (!is_dir($targetDir)) {
                     mkdir($targetDir, 0777, true);
                 }

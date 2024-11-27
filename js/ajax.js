@@ -1,5 +1,19 @@
 'use strict';
 
+function httpErrors(xhr) {
+    console.log(xhr); // Log the xhr object to the console for debugging
+    const errorElement = document.getElementById('error');
+    if (errorElement) {
+        if (xhr.status === 400) {
+            errorElement.innerHTML = 'Error 400: Bad Request - The server could not understand the request due to invalid syntax.';
+        } else {
+            errorElement.innerHTML = `Error: ${xhr.status} - ${xhr.statusText}`;
+        }
+    } else {
+        console.error('Error element not found in the DOM.');
+    }
+}
+
 function ajaxRequest(type, url, callback, data = null) {
     let xhr = new XMLHttpRequest();
     xhr.open(type, url);
@@ -11,7 +25,6 @@ function ajaxRequest(type, url, callback, data = null) {
     xhr.onload = () => {
         if (xhr.status >= 200 && xhr.status < 300) {
             try {
-                //console.log('Response Text:', xhr.responseText); // Debugging line
                 let response = xhr.responseText ? JSON.parse(xhr.responseText) : {};
                 callback(response);
             } catch (e) {
@@ -19,7 +32,7 @@ function ajaxRequest(type, url, callback, data = null) {
                 console.error('Response Text:', xhr.responseText);
             }
         } else {
-            httpErrors(xhr.status);
+            httpErrors(xhr);
         }
     };
 
@@ -28,20 +41,4 @@ function ajaxRequest(type, url, callback, data = null) {
     };
 
     xhr.send(data);
-}
-
-function httpErrors(errorCode) {
-    let messages = {
-        400: 'Bad Request',
-        401: 'Unauthorized',
-        403: 'Forbidden',
-        404: 'Not Found',
-        500: 'Internal Server Error',
-        503: 'Service Unavailable'
-    };
-
-    if (errorCode in messages) {
-        document.getElementById('errors').innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> <strong>' + messages[errorCode] + '</strong>';
-        document.getElementById('errors').style.display = 'block';
-    }
 }
