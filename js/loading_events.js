@@ -1,3 +1,22 @@
+function displayValidationMessage(message) {
+    let validationMessageDiv = document.getElementById('validation-message');
+    validationMessageDiv.innerText = message;
+    validationMessageDiv.style.display = 'block';
+    setTimeout(() => {
+        validationMessageDiv.style.display = 'none';
+    }, 3000); // Hide after 3 seconds
+}
+
+function displayErrorMessage(message) {
+    let errorMessageDiv = document.getElementById('error-message');
+    errorMessageDiv.innerText = message;
+    errorMessageDiv.style.display = 'block';
+    setTimeout(() => {
+        errorMessageDiv.style.display = 'none';
+    }, 3000); // Hide after 3 seconds
+}
+
+
 document.getElementById("add-event").addEventListener('submit', (event) => {
     event.preventDefault();
     let nom = document.getElementById('event-title').value;
@@ -7,13 +26,15 @@ document.getElementById("add-event").addEventListener('submit', (event) => {
     let nbPlace = document.getElementById('event-nbPlace').value;
     let dateFinInscription = document.getElementById('event-dateFinInscription').value;
 
-    console.log("Ajout d'un event");
+    
 
     let data = `nom=${encodeURIComponent(nom)}&description=${encodeURIComponent(description)}&prix=${encodeURIComponent(prix)}&date=${encodeURIComponent(date)}&nbPlace=${encodeURIComponent(nbPlace)}&dateFinInscription=${encodeURIComponent(dateFinInscription)}`;
 
     ajaxRequest('POST', 'php/controllerGestionEvent.php/event', () => {
         ajaxRequest('GET', 'php/controllerGestionEvent.php/events', loadEvents);
     }, data);
+
+    displayValidationMessage('Evenement ajouté avec succès !');
 
     document.getElementById('event-title').value = '';
     document.getElementById('event-description').value = '';
@@ -23,18 +44,69 @@ document.getElementById("add-event").addEventListener('submit', (event) => {
     document.getElementById('event-dateFinInscription').value = '';
 });
 
+
+
 document.getElementById("event-list").addEventListener('click', (event) => {
-    if (event.target.classList.contains('btn-delete')) {
+    if(event.target.classList.contains('btn-delete')){
         const eventId = parseInt(event.target.dataset.id, 10);
-        if (!isNaN(eventId)) {
-            ajaxRequest('DELETE', `php/controllerGestionEvent.php/event/${eventId}`, () => {
-                ajaxRequest('GET', 'php/controllerGestionEvent.php/events', loadEvents);
+        if(!isNaN(eventId)){
+            Swal.fire({
+                title: 'Etes-vous sûr ?',
+                text: 'Vous ne pourrez pas annuler cette action !',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#00b4d8',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Oui, supprimer !',
+                cancelButtonText: 'Annuler',
+                customClass: {
+                    popup: 'custom-swal-popup',
+                    title: 'custom-swal-title',
+                    content: 'custom-swal-content',
+                    confirmButton: 'custom-swal-confirm-button',
+                    cancelButton: 'custom-swal-cancel-button'
+                }
+            }).then((result) => {
+                if(result.isConfirmed){
+                    console.log('Attempting to delete event:', eventId);
+                    ajaxRequest('DELETE', `php/controllerGestionEvent.php/event/${eventId}`, (response) => {
+                        const isSuccess = response === true || (response && response.success);
+                        if(isSuccess){
+                            Swal.fire({
+                                title: 'Supprimé !',
+                                text: 'L\'événement a été supprimé.',
+                                icon: 'success',
+                                customClass: {
+                                    popup: 'custom-swal-popup',
+                                    title: 'custom-swal-title',
+                                    content: 'custom-swal-content',
+                                    confirmButton: 'custom-swal-confirm-button',
+                                    cancelButton: 'custom-swal-cancel-button'
+                                }
+                            }).then(() => {
+                                ajaxRequest('GET', 'php/controllerGestionEvent.php/events', loadEvents);
+                            })
+                        } else {
+                            const errorMsg = response?.error || 'Erreur inconnue';
+                            console.error('Delete failed:', errorMsg);
+                            Swal.fire({
+                                title: 'Erreur !',
+                                text: `Échec de la suppression du produit : ${errorMsg}`,
+                                icon: 'error',
+                                customClass: {
+                                    popup: 'custom-swal-popup',
+                                    title: 'custom-swal-title',
+                                    content: 'custom-swal-content',
+                                    confirmButton: 'custom-swal-confirm-button'
+                                }
+                            });
+                        }
+                    });
+                }
             });
-        } else {
-            console.error('Invalid event ID');
         }
     }
-});
+})
 
 document.getElementById("event-list").addEventListener('click', (event) => {
     if (event.target.classList.contains('btn-modify')) {
@@ -78,6 +150,8 @@ document.getElementById("form-modify-event").addEventListener('submit', (event) 
     data.append('prix', prix);
     data.append('nbPlace', nbPlace);
     data.append('dateFinInscription', dateFinInscription);
+
+    displayValidationMessage('Evenement modifié avec succès !');
 
     ajaxRequest('POST', 'php/controllerGestionEvent.php/event-modify', (response) => {
         console.log('Réponse du serveur:', response);

@@ -16,31 +16,63 @@ function displayErrorMessage(message) {
     }, 3000); // Hide after 3 seconds
 }
 
-document.getElementById('promo-form').addEventListener('submit', function(event) {
-    event.preventDefault();
 
-    let formData = new FormData(this);
-    ajaxRequest('POST', 'php/controllerGestionPromo.php/promo', function(response) {
-        if (response.success) {
-            displayValidationMessage('Code promo ajouté.');
-            ajaxRequest('GET', 'php/controllerGestionPromo.php/promos', loadPromos); // Refresh the promo list
-        } else {
-            displayErrorMessage(response.error);
-        }
-    }, formData);
-});
 
 document.getElementById("promo-list").addEventListener('click', (event) => {
     if (event.target.classList.contains('btn-delete')) {
         const promoId = parseInt(event.target.dataset.id, 10);
-        if (!isNaN(promoId)) {
-            displayValidationMessage('Code promo supprimé.');
-            ajaxRequest('DELETE', `php/controllerGestionPromo.php/promo/${promoId}`, () => {
-                ajaxRequest('GET', 'php/controllerGestionPromo.php/promos', loadPromos);
-            });
-        } else {
-            console.error('Invalid promo ID');
-        }
+        Swal.fire({
+            title: "Etes-vous sûr ?",
+            text: "Vous ne pourrez pas annuler cette action !",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#00b4d8',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Oui, supprimer !',
+            cancelButtonText: 'Annuler',
+            customClass: {
+                popup: 'custom-swal-popup',
+                title: 'custom-swal-title',
+                content: 'custom-swal-content',
+                confirmButton: 'custom-swal-confirm-button',
+                cancelButton: 'custom-swal-cancel-button'
+            }
+        }).then((result) => {
+            if(result.isConfirmed){                
+                ajaxRequest('DELETE', `php/controllerGestionPromo.php/promo/${promoId}`, (response) => {                    
+                    const isSuccess = response === true || (response && response.success);
+                    if(isSuccess){
+                        Swal.fire({
+                            title: 'Supprimé !',
+                            text: 'Le code promo a été supprimé.',
+                            icon: 'success',
+                            customClass: {
+                                popup: 'custom-swal-popup',
+                                title: 'custom-swal-title',
+                                content: 'custom-swal-content',
+                                confirmButton: 'custom-swal-confirm-button'
+                            }
+                        }).then(() => {
+                            ajaxRequest('GET', 'php/controllerGestionPromo.php/promos', loadPromos);
+                        });
+                    } else {
+                        const errorMsg = response?.error || 'Erreur inconnue';
+                        console.error('Delete failed:', errorMsg);
+                        Swal.fire({
+                            title: 'Erreur !',
+                            text: `Échec de la suppression du produit : ${errorMsg}`,
+                            icon: 'error',
+                            customClass: {
+                                popup: 'custom-swal-popup',
+                                title: 'custom-swal-title',
+                                content: 'custom-swal-content',
+                                confirmButton: 'custom-swal-confirm-button'
+                            }
+                        });
+                    }
+                });
+            }
+        });
     }
 
     if (event.target.classList.contains('btn-modify')) {
@@ -83,7 +115,7 @@ document.getElementById("form-modify-promo").addEventListener('submit', (event) 
     console.log("Modification du code promo", id, nom, pourcentage);
     console.log("Données du formulaire:", formData);
 
-    displayValidationMessage('Code promo modifié.');
+    displayValidationMessage('Code promo modifié avec succès !');
 
     // Envoyer la requête
     ajaxRequest('POST', 'php/controllerGestionPromo.php/promo-modify', (response) => {

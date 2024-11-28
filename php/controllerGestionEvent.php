@@ -8,8 +8,6 @@ require_once('modeleGestionEvent.php');
 // Database connexion.
 $db = dbConnect();
 
-$login = 'cir2';
-
 if (!$db) {
     header('HTTP/1.1 503 Service Unavailable');
     exit;

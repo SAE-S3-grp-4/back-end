@@ -6,6 +6,8 @@
   <title>Gestion des événements</title>
   <link rel="stylesheet" href="CSS/gestionEvent.css">
   <script src="js/ajax.js" defer></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       ajaxRequest('GET', 'php/check_admin.php', function(response) {
@@ -61,7 +63,8 @@
     </form>
   </section>
 
-  <div id="errors" style="display: none;"></div>
+  <div id="validation-message" style="display: none;"></div>
+  <div id="error-message" style="display: none;"></div>
 
   <!-- Formulaire de modification d'événement -->
   <section class="event-modification" id="modify-event" style="display: none;">

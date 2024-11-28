@@ -59,10 +59,35 @@ function dbRequestStudents($db)
 function deleteStudentById($db, $id)
 {
     try {
+        $db->beginTransaction();
+
+        $request = "DELETE FROM INSCRIPTION WHERE Id_Commande IN (SELECT Id_Commande FROM COMMANDE WHERE Id_Membre = :id)";
+        $statement = $db->prepare($request);
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
+        $statement->execute();
+        error_log('Deleted INSCRIPTION');
+
+        $request = "DELETE FROM BON_DE_COMMANDE WHERE Id_Commande IN (SELECT Id_Commande FROM COMMANDE WHERE Id_Membre = :id)";
+        $statement = $db->prepare($request);
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
+        $statement->execute();
+        error_log('Deleted BON_DE_COMMANDE');
+
+        // Supprimer les commandes de l'étudiant
+        $request = "DELETE FROM COMMANDE WHERE Id_Membre = :id";
+        $statement = $db->prepare($request);
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
+        $statement->execute();
+        error_log('Deleted COMMANDE');
+
+        // Supprimer l'étudiant
         $request = "DELETE FROM MEMBRE WHERE Id_Membre = :id";
         $statement = $db->prepare($request);
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->execute();
+        error_log('Deleted MEMBRE');
+
+        $db->commit();
     } catch (PDOException $exception) {
         error_log('Request error: ' . $exception->getMessage());
         return false;

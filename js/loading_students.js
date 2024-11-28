@@ -14,6 +14,8 @@ const classGroups = {
     'Autre': ['Enseignant']
 };
 
+
+
 function showStudentPopup(studentId) {
     ajaxRequest('GET', `php/controllerPanelAdmin.php/student/${studentId}`, (student) => {
         let popupContainer = document.createElement('div');
@@ -52,18 +54,39 @@ function showStudentPopup(studentId) {
 
         // Bouton supprimer
         popupContainer.querySelector('.delete-button').addEventListener('click', () => {
-            const confirmDelete = confirm("Êtes-vous sûr de vouloir supprimer ce compte ?");
-            if (confirmDelete) {
-                ajaxRequest('DELETE', `php/controllerPanelAdmin.php/student/${student.Id_Membre}`, (response) => {
-                    if (response.success) {
-                        alert("Compte supprimé avec succès !");
-                        document.body.removeChild(popupContainer); // Fermer le popup
-                        // Rafraîchir la liste des étudiants si nécessaire
-                    } else {
-                        alert("Échec de la suppression du compte.");
-                    }
-                });
-            }
+            Swal.fire({
+                title: 'Êtes-vous sûr ?',
+                text: "Vous ne pourrez pas annuler cette action !",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Oui, supprimer !',
+                cancelButtonText: 'Annuler'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    ajaxRequest('DELETE', `php/controllerPanelAdmin.php/student/${studentId}`, (response) => {
+                        if (response.success) {
+                            Swal.fire(
+                                'Supprimé !',
+                                'Le compte a été supprimé.',
+                                'success'
+                            ).then(() => {
+                                document.body.removeChild(popupContainer);
+                                ajaxRequest('GET', 'php/controllerPanelAdmin.php/students', (students) => {
+                                    loadStudents(students);
+                                });
+                            });
+                        } else {
+                            Swal.fire(
+                                'Erreur !',
+                                'Échec de la suppression du compte : ' + response.error,
+                                'error'
+                            );
+                        }
+                    });
+                }
+            });
         });
 
         // Affichage des inscriptions
@@ -151,7 +174,7 @@ function loadStudents(students) {
                         studentContainer.classList.add('student-container');
 
                         let studentName = document.createElement('span');
-                        studentName.textContent = student.Nom_Membre;
+                        studentName.textContent = student.Prenom_Membre + ' ' + student.Nom_Membre;
                         studentContainer.appendChild(studentName);
 
                         let selectButton = document.createElement('button');
@@ -281,6 +304,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 container.closest('.student-list').classList.remove('hidden'); // Ensure the parent list is visible
                 container.closest('.td-content').classList.remove('hidden'); // Ensure the parent list is visible
                 container.closest('.info-content').classList.remove('hidden'); // Ensure the parent list is visible
+                container.closest('.student-list').classList.remove('hidden'); // Ensure the parent list is visible
             } else {
                 container.style.display = 'none';
             }
@@ -294,3 +318,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+
+ajaxRequest("GET", "php/controllerPanelAdmin.php/students", loadStudents);

@@ -1,3 +1,22 @@
+function displayValidationMessage(message) {
+    let validationMessageDiv = document.getElementById('validation-message');
+    validationMessageDiv.innerText = message;
+    validationMessageDiv.style.display = 'block';
+    setTimeout(() => {
+        validationMessageDiv.style.display = 'none';
+    }, 3000); // Hide after 3 seconds
+}
+
+function displayErrorMessage(message) {
+    let errorMessageDiv = document.getElementById('error-message');
+    errorMessageDiv.innerText = message;
+    errorMessageDiv.style.display = 'block';
+    setTimeout(() => {
+        errorMessageDiv.style.display = 'none';
+    }, 3000); // Hide after 3 seconds
+}
+
+
 document.getElementById("add-product").addEventListener('submit', (event) => {
     event.preventDefault();
     let nom = document.getElementById('product-name').value;
@@ -20,6 +39,8 @@ document.getElementById("add-product").addEventListener('submit', (event) => {
         ajaxRequest('GET', 'php/controllerGestionBoutique.php/produits', loadProduits);
     }, formData);
 
+    displayValidationMessage("Produit ajouté avec succès !");
+
     document.getElementById('product-name').value = '';
     document.getElementById('product-description').value = '';
     document.getElementById('product-price').value = '';
@@ -27,18 +48,65 @@ document.getElementById("add-product").addEventListener('submit', (event) => {
     document.getElementById('product-image').value = '';
 });
 
+
 document.getElementById("product-list").addEventListener('click', (event) => {
-    if (event.target.classList.contains('btn-delete')) {
-        const productId = parseInt(event.target.dataset.id, 10);
-        if (!isNaN(productId)) {
-            ajaxRequest('DELETE', `php/controllerGestionBoutique.php/produit/${productId}`, () => {
-                ajaxRequest('GET', 'php/controllerGestionBoutique.php/produits', loadProduits);
-            });
-        } else {
-            console.error('Invalid product ID');
-        }
+    if(event.target.classList.contains("btn-delete")){
+        const productId = parseInt(event.target.getAttribute("data-id"), 10);
+        Swal.fire({
+            title: "Etes-vous sûr ?",
+            text: "Vous ne pourrez pas annuler cette action !",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#00b4d8',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Oui, supprimer !',
+            cancelButtonText: 'Annuler',
+            customClass: {
+                popup: 'custom-swal-popup',
+                title: 'custom-swal-title',
+                content: 'custom-swal-content',
+                confirmButton: 'custom-swal-confirm-button',
+                cancelButton: 'custom-swal-cancel-button'
+            }
+        }).then((result) => {
+            if(result.isConfirmed){                
+                ajaxRequest('DELETE', `php/controllerGestionBoutique.php/produit/${productId}`, (response) => {                    
+                    const isSuccess = response === true || (response && response.success);
+                    if(isSuccess){
+                        Swal.fire({
+                            title: 'Supprimé !',
+                            text: 'Le produit a été supprimé.',
+                            icon: 'success',
+                            customClass: {
+                                popup: 'custom-swal-popup',
+                                title: 'custom-swal-title',
+                                content: 'custom-swal-content',
+                                confirmButton: 'custom-swal-confirm-button'
+                            }
+                        }).then(() => {
+                            ajaxRequest('GET', 'php/controllerGestionBoutique.php/produits', loadProduits);
+                        });
+                    } else {
+                        const errorMsg = response?.error || 'Erreur inconnue';
+                        console.error('Delete failed:', errorMsg);
+                        Swal.fire({
+                            title: 'Erreur !',
+                            text: `Échec de la suppression du produit : ${errorMsg}`,
+                            icon: 'error',
+                            customClass: {
+                                popup: 'custom-swal-popup',
+                                title: 'custom-swal-title',
+                                content: 'custom-swal-content',
+                                confirmButton: 'custom-swal-confirm-button'
+                            }
+                        });
+                    }
+                });
+            }
+        });
     }
 });
+
 
 document.getElementById("product-list").addEventListener('click', (event) => {
     if (event.target.classList.contains('btn-modify')) {
@@ -88,8 +156,7 @@ document.getElementById("form-modify-product").addEventListener('submit', (event
         formData.append('image', image);
     }
 
-    console.log("Modification du produit", id, nom, description, prix, stock, image);
-    console.log("Données du formulaire:", formData);
+    displayValidationMessage("Produit modifié avec succès !");
 
     // Envoyer la requête
     ajaxRequest('POST', 'php/controllerGestionBoutique.php/produit-modify', (response) => {

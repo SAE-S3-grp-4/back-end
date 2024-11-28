@@ -174,8 +174,8 @@ VALUES
 ('Moreau', 'Julie', 'JulieM', 'julie.moreau@example.com', '1d5f2e9s3qf', 'Enseignant', 'julie_profile.png', 2, 2),
 ('Simon', 'Pierre', 'PierreS', 'pierre.simon@example.com', 'password', 'TP12D', 'pierre_profile.png', NULL, 1),
 ('Petit', 'Nicolas', 'NicolasP', 'nicolas.petit@example.com', 'bonjour', 'TP22C', 'nicolas_profile.png', 2, 2),
-('Roux', 'Emma', 'EmmaR', 'emma.roux@example.com', '123456789', 'TP31B', 'emma_profile.png', 3, 3);
-('RYNDERSVITU', 'Enzo', 'admin', 'enzo.ryndersvitu@yahoo.com','$2y$10$DR/x68jR1IK/Yb6c.tceXe88jD0jcS5w.MJdlQJlSsHwLWdmivSYG', 'TP21A', 'lucas.jpg', NULL, 3)
+('Roux', 'Emma', 'EmmaR', 'emma.roux@example.com', '123456789', 'TP31B', 'emma_profile.png', 3, 3),
+('RYNDERSVITU', 'Enzo', 'admin', 'enzo.ryndersvitu@yahoo.com','$2y$10$DR/x68jR1IK/Yb6c.tceXe88jD0jcS5w.MJdlQJlSsHwLWdmivSYG', 'TP21A', 'lucas.jpg', NULL, 3);
 
 -- Insertion pour la table COMMANDE 
 INSERT INTO COMMANDE (Statut_Commande, Date_Commande, Id_Promo, Id_Membre)
