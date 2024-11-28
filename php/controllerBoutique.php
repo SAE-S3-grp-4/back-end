@@ -49,18 +49,7 @@ if ($requestMethod == "GET") {
     if ($requestRessource == "addToCart") {
         if (isset($_SESSION['Id_User'])) {
             if (isset($id) && is_numeric($id)) {
-                // Vérifiez si l'utilisateur est connecté
-                if (isset($_SESSION['Id_User']) && is_numeric($_SESSION['Id_User'])) {
-                    $userId = $_SESSION['Id_User'];
-                    error_log('User ID from session: ' . $userId);
-                } else {
-                    error_log('User is not authenticated or invalid user ID');
-                    header('HTTP/1.1 401 Unauthorized');
-                    echo json_encode(['error' => 'User is not authenticated']);
-                    exit;
-                }
-
-                // Utilisez $userId dans votre fonction addToCart
+                $userId = $_SESSION['Id_User'];
                 $data = addToCart($db, $userId, $id);
             } else {
                 header('HTTP/1.1 400 Bad Request');

@@ -36,44 +36,49 @@ function dbRequestProduct($db)
     return $result;
 }
 
-function addToCart($db, $userId, $productId)
+function addToCart($db, $userId, $productId): bool
 {
     try {
-        $checkUser = 'SELECT COUNT(*) FROM membre WHERE Id_Membre = :user_id';
-        $statement = $db->prepare($checkUser);
+        $verifExiste = 'SELECT Id_Commande FROM COMMANDE WHERE Id_Membre = :user_id AND Statut_Commande = "Dans le panier" AND Id_Commande = ANY (SELECT Id_Commande FROM BON_DE_COMMANDE WHERE Id_Produit = :product_id);';
+        $statement = $db->prepare($verifExiste);
         $statement->bindParam(':user_id', $userId, PDO::PARAM_INT);
-        $statement->execute();
-        if ($statement->fetchColumn() == 0) {
-            error_log('User ID does not exist: ' . $userId);
-            header('HTTP/1.1 400 Bad Request');
-            echo json_encode(['error' => 'User ID does not exist']);
-            return false;
-        }
-
-        // Create a new order
-        $insertCommande = 'INSERT INTO COMMANDE (Statut_Commande, Date_Commande, Id_Membre) VALUES (:statut, :date, :user_id);';
-        $statement = $db->prepare($insertCommande);
-        $statut = 'Dans le panier';
-        $date = '1000-01-01 00:00:00.000000';
-        $statement->bindParam(':date', $date, PDO::PARAM_STR);
-        $statement->bindParam(':user_id', $userId, PDO::PARAM_INT);
-        $statement->bindParam(':statut', $statut, PDO::PARAM_STR);
-        $statement->execute();
-        $orderId = $db->lastInsertId();
-
-        // Debugging: Log the new order ID
-        error_log('New order ID: ' . $orderId);
-
-        // Create a Bon de commande
-        $insertBonDeCommande = 'INSERT INTO BON_DE_COMMANDE (Qte_Produit, Id_Commande, Id_Produit) VALUES (1, :order_id, :product_id);';
-        $statement = $db->prepare($insertBonDeCommande);
-        $statement->bindParam(':order_id', $orderId, PDO::PARAM_INT);
         $statement->bindParam(':product_id', $productId, PDO::PARAM_INT);
         $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-        // Debugging: Log the product ID added to the order
-        error_log('Product ID added to order: ' . $productId);
+        if (count($result) > 0) {
 
+            // Update the existing order
+            $updateCommande = 'UPDATE COMMANDE SET Date_Commande = NOW() WHERE Id_Commande = :order_id;';
+            $statement = $db->prepare($updateCommande);
+            $statement->bindParam(':order_id', $result[0]['Id_Commande'], PDO::PARAM_INT);
+            $statement->execute();
+
+            // Update the existing Bon de commande
+            $updateBonDeCommande = 'UPDATE BON_DE_COMMANDE SET Qte_Produit = Qte_Produit + 1 WHERE Id_Commande = :order_id AND Id_Produit = :product_id;';
+            $statement = $db->prepare($updateBonDeCommande);
+            $statement->bindParam(':order_id', $result[0]['Id_Commande'], PDO::PARAM_INT);
+            $statement->bindParam(':product_id', $productId, PDO::PARAM_INT);
+            $statement->execute();
+
+        }else{
+            // Create a new order
+            $insertCommande = 'INSERT INTO COMMANDE (Statut_Commande, Date_Commande, Id_Membre) VALUES (:statut, NOW(), :user_id);';
+            $statement = $db->prepare($insertCommande);
+            $statut = 'Dans le panier';
+            $statement->bindParam(':user_id', $userId, PDO::PARAM_INT);
+            $statement->bindParam(':statut', $statut, PDO::PARAM_STR);
+            $statement->execute();
+            $orderId = $db->lastInsertId();
+
+
+            // Create a Bon de commande
+            $insertBonDeCommande = 'INSERT INTO BON_DE_COMMANDE (Qte_Produit, Id_Commande, Id_Produit) VALUES (1, :order_id, :product_id);';
+            $statement = $db->prepare($insertBonDeCommande);
+            $statement->bindParam(':order_id', $orderId, PDO::PARAM_INT);
+            $statement->bindParam(':product_id', $productId, PDO::PARAM_INT);
+            $statement->execute();
+        }
         return true;
     } catch (PDOException $exception) {
         error_log('Request error: ' . $exception->getMessage());
