@@ -22,11 +22,15 @@ document.getElementById('promo-form').addEventListener('submit', function(event)
     let formData = new FormData(this);
     ajaxRequest('POST', 'php/controllerGestionPromo.php/promo', function(response) {
         if (response.success) {
-            displayValidationMessage('Code promo ajouté.');
+            displayValidationMessage('Code promo ajouté avec succès !');
             ajaxRequest('GET', 'php/controllerGestionPromo.php/promos', loadPromos); // Refresh the promo list
         } else {
             displayErrorMessage(response.error);
         }
+
+        document.getElementById('promo-name').value = '';
+        document.getElementById('promo-percentage').value = '';
+        
     }, formData);
 });
 
