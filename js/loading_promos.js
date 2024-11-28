@@ -16,7 +16,19 @@ function displayErrorMessage(message) {
     }, 3000); // Hide after 3 seconds
 }
 
+document.getElementById('promo-form').addEventListener('submit', function(event) {
+    event.preventDefault();
 
+    let formData = new FormData(this);
+    ajaxRequest('POST', 'php/controllerGestionPromo.php/promo', function(response) {
+        if (response.success) {
+            displayValidationMessage('Code promo ajouté.');
+            ajaxRequest('GET', 'php/controllerGestionPromo.php/promos', loadPromos); // Refresh the promo list
+        } else {
+            displayErrorMessage(response.error);
+        }
+    }, formData);
+});
 
 document.getElementById("promo-list").addEventListener('click', (event) => {
     if (event.target.classList.contains('btn-delete')) {
@@ -124,6 +136,8 @@ document.getElementById("form-modify-promo").addEventListener('submit', (event) 
         document.getElementById('modify-promo').style.display = 'none';
     }, formData);
 });
+
+
 
 
 function loadPromos(promos) {
