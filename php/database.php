@@ -90,12 +90,11 @@ function dbUserExists($db, $pseudo, $email)
 function dbRequestUserId($db, $username)
 {
     try {
-        $request = 'SELECT Id_Membre FROM MEMBRE WHERE Pseudo_Membre = :username';
+        $request = 'SELECT Id_Membre FROM MEMBRE WHERE Pseudo_Membre = :username OR Mail_Membre = :username';
         $statement = $db->prepare($request);
         $statement->bindParam(':username', $username, PDO::PARAM_STR);
         $statement->execute();
-        $userId = $statement->fetchColumn();
-        return $userId;
+        return $statement->fetchColumn();
     } catch (PDOException $exception) {
         error_log('Request error: ' . $exception->getMessage());
         return false;

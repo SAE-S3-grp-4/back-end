@@ -1,6 +1,9 @@
 <?php
 // Database connection
 require_once('constantes.php');
+ini_set('log_errors', 'On');
+ini_set('error_log', 'C:/xampp/php/logs/php_error.log');
+error_log('Ceci est un test de journalisation.');
 
 function dbConnect()
 {
@@ -33,25 +36,47 @@ function dbRequestProduct($db)
     return $result;
 }
 
-function addToCart($userId, $productId) {
-    $pdo = dbConnect();
+function addToCart($db, $userId, $productId)
+{
     try {
-        $pdo->beginTransaction();
+        $checkUser = 'SELECT COUNT(*) FROM membre WHERE Id_Membre = :user_id';
+        $statement = $db->prepare($checkUser);
+        $statement->bindParam(':user_id', $userId, PDO::PARAM_INT);
+        $statement->execute();
+        if ($statement->fetchColumn() == 0) {
+            error_log('User ID does not exist: ' . $userId);
+            header('HTTP/1.1 400 Bad Request');
+            echo json_encode(['error' => 'User ID does not exist']);
+            return false;
+        }
 
         // Create a new order
-        $stmt = $pdo->prepare("INSERT INTO COMMANDE (Statut_Commande, Date_Commande, Id_Membre) VALUES ('Dans le panier', NOW(), :user_id)");
-        $stmt->execute(['user_id' => $userId]);
-        $orderId = $pdo->lastInsertId();
+        $insertCommande = 'INSERT INTO COMMANDE (Statut_Commande, Date_Commande, Id_Membre) VALUES (:statut, :date, :user_id);';
+        $statement = $db->prepare($insertCommande);
+        $statut = 'Dans le panier';
+        $date = '1000-01-01 00:00:00.000000';
+        $statement->bindParam(':date', $date, PDO::PARAM_STR);
+        $statement->bindParam(':user_id', $userId, PDO::PARAM_INT);
+        $statement->bindParam(':statut', $statut, PDO::PARAM_STR);
+        $statement->execute();
+        $orderId = $db->lastInsertId();
 
-        // Create a corresponding order slip
-        $stmt = $pdo->prepare("INSERT INTO BON_DE_COMMANDE (Qte_Produit, Id_Commande, Id_Produit) VALUES (1, :order_id, :product_id)");
-        $stmt->execute(['order_id' => $orderId, 'product_id' => $productId]);
+        // Debugging: Log the new order ID
+        error_log('New order ID: ' . $orderId);
 
-        $pdo->commit();
+        // Create a Bon de commande
+        $insertBonDeCommande = 'INSERT INTO BON_DE_COMMANDE (Qte_Produit, Id_Commande, Id_Produit) VALUES (1, :order_id, :product_id);';
+        $statement = $db->prepare($insertBonDeCommande);
+        $statement->bindParam(':order_id', $orderId, PDO::PARAM_INT);
+        $statement->bindParam(':product_id', $productId, PDO::PARAM_INT);
+        $statement->execute();
+
+        // Debugging: Log the product ID added to the order
+        error_log('Product ID added to order: ' . $productId);
+
         return true;
-    } catch (PDOException $e) {
-        $pdo->rollBack();
-        error_log('Add to cart error: ' . $e->getMessage());
+    } catch (PDOException $exception) {
+        error_log('Request error: ' . $exception->getMessage());
         return false;
     }
 }
