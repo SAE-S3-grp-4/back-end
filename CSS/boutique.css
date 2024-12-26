@@ -5,6 +5,31 @@ body, h1, h2, p, img, button {
     box-sizing: border-box;
 }
 
+.header {
+    width: 100%;
+    background-color: #1E2E71;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.navbar ul {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+}
+.navbar .logo img {
+    height: 30px; /* Ajuste la hauteur du logo */
+    width: auto;  /* Conserve les proportions */
+    margin: 0;    /* Réduit l'espacement autour du logo */
+}
 body {
     font-family: Arial, sans-serif;
     background: linear-gradient(135deg, #1e1e2f, #3a3a5e);
@@ -17,25 +42,13 @@ body {
     text-align: center;
 }
 
+
 .store-container {
     width: 90%;
     max-width: 1200px;
 }
 
-header {
-    margin-bottom: 2rem;
-}
 
-header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    color: #ff99ff;
-}
-
-header p {
-    font-size: 1.2rem;
-    color: #c8c8e8;
-}
 
 /* Section Produits */
 .product-list {
