@@ -7,7 +7,17 @@
     <link rel="stylesheet" href="CSS/connexion.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <script src="js/ajax.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            ajaxRequest('GET', 'php/check_connexion.php', function(response) {
+                if (response.is_conected) {
+                    window.location.href = 'profil.html';
+                }
+            });
+        });
+    </script>
     <script src="js/connexion.js"></script>
+
 </head>
 <body>
 

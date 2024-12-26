@@ -12,7 +12,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             ajaxRequest('GET', 'php/check_admin.php', function(response) {
                 if (!response.is_admin) {
-                    window.location.href = 'connexion.html';
+                    window.location.href = 'accueil.html';
                 }
             });
         });
