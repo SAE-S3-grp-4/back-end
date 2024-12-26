@@ -1,27 +1,33 @@
 document.getElementById("product-list").addEventListener('click', (event) => {
     if (event.target.classList.contains('btn-add-to-cart')) {
-        const productId = parseInt(event.target.getAttribute('data-id'), 10);
-        if (!isNaN(productId)) {
-            ajaxRequest('GET', 'php/controllerBoutique.php/isLogged', (response) => {
-                if (response) {
-                    console.log("User is logged in");
-                    ajaxRequest('GET', `php/controllerBoutique.php/addToCart/${productId}`, (response) => {
-                        console.log("Add to cart response", response);
+        ajaxRequest('GET', 'php/check_connexion.php', (response) => {
+            if (response.is_connected) {
+                const productId = parseInt(event.target.getAttribute('data-id'), 10);
+                if (!isNaN(productId)) {
+                    ajaxRequest('GET', 'php/controllerBoutique.php/isLogged', (response) => {
                         if (response) {
-                            alert('Produit ajouté au panier');
+                            console.log("User is logged in");
+                            ajaxRequest('GET', `php/controllerBoutique.php/addToCart/${productId}`, (response) => {
+                                console.log("Add to cart response", response);
+                                if (response) {
+                                    alert('Produit ajouté au panier');
+                                } else {
+                                    alert('Erreur lors de l\'ajout au panier');
+                                }
+                            }, {productId: productId});
                         } else {
-                            alert('Erreur lors de l\'ajout au panier');
+                            window.location.href = 'connexion.html';
                         }
-                    }, { productId: productId });
+                    });
                 } else {
-                    window.location.href = 'connexion.html';
+                    console.error('Invalid product ID');
                 }
-            });
-        } else {
-            console.error('Invalid product ID');
-        }
-    }
-});
+            }
+            else {
+                alert("Vous devez être connecté pour ajouter un produit au panier");
+            }
+    });
+}});
 
 function loadProducts() {
     ajaxRequest('GET', 'php/controllerBoutique.php/produits', (produits) => {

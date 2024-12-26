@@ -10,7 +10,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             ajaxRequest('GET', 'php/check_connexion.php', function(response) {
-                if (response.is_conected) {
+                if (response.is_connected) {
                     window.location.href = 'profil.html';
                 }
             });
