@@ -7,7 +7,7 @@ body, h1, h2, p, img, button {
 
 .header {
     width: 100%;
-    background-color: #1E2E71;
+    background-color: #282850;
     padding-top: 1rem;
     padding-bottom: 1rem;
 }
@@ -30,6 +30,7 @@ body, h1, h2, p, img, button {
     width: auto;  /* Conserve les proportions */
     margin: 0;    /* Réduit l'espacement autour du logo */
 }
+
 body {
     font-family: Arial, sans-serif;
     background: linear-gradient(135deg, #1e1e2f, #3a3a5e);

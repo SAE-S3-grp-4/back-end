@@ -15,35 +15,29 @@ body {
 
 /* Header styles */
 .header {
-    background-color: #252545;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 1rem 2rem;
+    width: 100%;
+    background-color: #282850;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }
 
 .navbar ul {
-    list-style: none;
     display: flex;
-}
-
-.navbar ul li {
-    margin: 0 1rem;
+    justify-content: space-around;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .navbar ul li a {
-    text-decoration: none;
     color: #fff;
-    transition: color 0.3s ease;
+    text-decoration: none;
+    font-weight: 500;
 }
-
-.navbar ul li a:hover {
-    color: #00b4d8;
-}
-
-.navbar ul li div{
-    width: 80px;
-    height: auto;
+.navbar .logo img {
+    height: 30px; /* Ajuste la hauteur du logo */
+    width: auto;  /* Conserve les proportions */
+    margin: 0;    /* Réduit l'espacement autour du logo */
 }
 
 /* Hero Section */

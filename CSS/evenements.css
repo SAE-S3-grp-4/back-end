@@ -1,13 +1,15 @@
 body {
     background: linear-gradient(259.73deg, #0F103F 17.24%, #1B1D72 54.11%, #272AA5 91.73%);
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Arial', sans-serif;
     margin: 0;
     color: #fff;
 }
 
 .header {
-    background-color: #1E2E71;
-    padding: 1rem;
+    width: 100%;
+    background-color: #282850;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }
 
 .navbar ul {
@@ -22,6 +24,11 @@ body {
     color: #fff;
     text-decoration: none;
     font-weight: 500;
+}
+.navbar .logo img {
+    height: 30px; /* Ajuste la hauteur du logo */
+    width: auto;  /* Conserve les proportions */
+    margin: 0;    /* Réduit l'espacement autour du logo */
 }
 
 .agenda {
