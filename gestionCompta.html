@@ -1,10 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comptabilité</title>
+    <link rel="stylesheet" href="CSS/gestionCompta.css">
+    <script src="js/ajax.js" defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            ajaxRequest('GET', 'php/check_admin.php', function(response) {
+                if (!response.is_admin) {
+                    window.location.href = 'accueil.html';
+                }
+            });
+        });
+    </script>
+    <script src="js/compta.js" defer></script>
 </head>
 <body>
+<div class="main-content">
+    <!-- Header -->
+    <header>
+        <h1 class="title">Panel <span class="highlight">Administrateur</span></h1>
+        <h2>Gestion de la <span class="highlight-secondary">Comptabilité</span></h2>
+    </header>
 
+    <!-- Formulaire d'importation d'une feuille de calcul -->
+    <section class="spreadsheet-import" id="add-spreadsheet">
+        <form method="POST" class="spreadsheet-form">
+            <h3>Importer une feuille de calcul</h3>
+            <div class="form-group">
+                <label for="spreadsheet-name">Nom :</label>
+                <input type="text" id="spreadsheet-name" name="name" placeholder="Nom de la feuille de calcul" required>
+            </div>
+            <div class="form-group">
+                <label for="spreadsheet-file">Fichier :</label>
+                <input type="file" id="spreadsheet-file" name="file" accept=".xls,.xlsx" required>
+            </div>
+            <button type="submit" class="btn-import">Importer</button>
+        </form>
+    </section>
+    <div id="validation-message" style="display: none;"></div>
+    <div id="error-message" style="display: none;"></div>
+
+    <!-- Formulaire de modification d'une feuille de calcul -->
+    <section class="spreadsheet-modification" id="modify-spreadsheet" style="display: none;">
+        <form id="form-modify-spreadsheet" class="spreadsheet-form">
+            <h3>Modifier une feuille de calcul</h3>
+            <input type="hidden" id="modify-spreadsheet-id">
+            <div class="form-group">
+                <label for="modify-spreadsheet-name">Nom :</label>
+                <input type="text" id="modify-spreadsheet-name" name="name" placeholder="Nom de la feuille de calcul" required>
+            </div>
+            <div class="form-group">
+                <label for="modify-spreadsheet-file">Fichier :</label>
+                <input type="file" id="modify-spreadsheet-file" name="file" accept=".xls,.xlsx,.ods">
+            </div>
+            <button type="submit" class="btn-save">Enregistrer les modifications</button>
+        </form>
+    </section>
+
+    <!-- Liste des feuilles de calcul -->
+    <section class="spreadsheet-list" id="spreadsheet-list">
+    </section>
+</div>
 </body>
 </html>
