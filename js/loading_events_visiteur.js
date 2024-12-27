@@ -34,6 +34,39 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
         });
+        agendaElement.addEventListener('click', (event) => {
+            if (event.target.classList.contains('unsubscribe')) {
+                ajaxRequest('GET', 'php/check_connexion.php', (response) => {
+                    if (response.is_connected) {
+                        const eventId = parseInt(event.target.getAttribute('data-id'), 10);
+                        if (!isNaN(eventId)) {
+                            ajaxRequest('GET', 'php/controllerEvent.php/isLogged', (response) => {
+                                if (response) {
+                                    console.log("User is logged in");
+                                    ajaxRequest('GET', `php/controllerEvent.php/delFromCart/${eventId}`, (response) => {
+                                        console.log("Del from cart response", response);
+                                        if (response) {
+                                            event.target.innerText = "S'inscrire";
+                                            event.target.classList.remove('unsubscribe');
+                                            event.target.classList.add('subscribe');
+                                            alert('Evenement supprimé du panier');
+                                        } else {
+                                            alert('Erreur lors de la suppression du panier');
+                                        }
+                                    });
+                                } else {
+                                    console.error('User is not logged in', response);
+                                }
+                            });
+                        } else {
+                            console.error('Invalid event ID');
+                        }
+                    } else {
+                        alert("Vous devez être connecté pour ajouter un évenement au panier");
+                    }
+                });
+            }
+        });
     } else {
         console.error('Element with ID "agenda" not found');
     }
@@ -81,9 +114,23 @@ function loadEvents(events) {
             p.innerText = event.Nom_Event;
 
             let button = document.createElement("button");
-            button.innerText = event.Is_Registered ? "Désinscrire" : "S'inscrire";
-            button.className = event.Is_Registered ? "unsubscribe" : "subscribe";
             button.setAttribute("data-id", event.Id_Event);
+            ajaxRequest('GET', 'php/check_connexion.php', (response) => {
+                if (response.is_connected) {
+                    ajaxRequest('GET', `php/controllerEvent.php/isSubscribed/${event.Id_Event}`, (response) => {
+                        //event.isSubscribed = response.isSubscribed;
+                        event.isSubscribed = response;
+                        button.innerText = event.isSubscribed ? "Désinscrire" : "S'inscrire";
+                        button.className = event.isSubscribed ? "unsubscribe" : "subscribe";
+                    });
+                }else {
+                    event.isSubscibed = false;
+                    button.innerText = event.isSubscribed ? "Désinscrire" : "S'inscrire";
+                    button.className = event.isSubscribed ? "unsubscribe" : "subscribe";
+                }
+            });
+
+
 
             d.append(span);
             d.append(p);
