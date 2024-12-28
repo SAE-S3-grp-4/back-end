@@ -1,8 +1,88 @@
+document.getElementById("cart-list").addEventListener('click', (event) => {
+    if (event.target.classList.contains('btn-add-product')) {
+        const productId = parseInt(event.target.getAttribute('product-id'), 10);
+        if (!isNaN(productId)) {
+                ajaxRequest('GET', `php/controllerBoutique.php/addToCart/${productId}`, (response) => {
+                    if (response) {
+                        ajaxRequest("GET","php/controllerPanier.php/commandes-produits", loadCommandesProduits);
+                    } else {
+                        alert('Erreur lors de la modification du panier');
+                    }
+                }, {productId: productId});
+        } else {
+            console.error('Invalid product ID');
+        }
+    } else if (event.target.classList.contains('btn-remove-product')) {
+        const productId = parseInt(event.target.getAttribute('product-id'), 10);
+        if (!isNaN(productId)) {
+                ajaxRequest('GET', `php/controllerBoutique.php/removeFromCart/${productId}`, (response) => {
+                    if (response) {
+                        ajaxRequest("GET","php/controllerPanier.php/commandes-produits", loadCommandesProduits);
+                    } else {
+                        alert('Erreur lors de la modification du panier');
+                    }
+                }, {productId: productId});
+        } else {
+            console.error('Invalid product ID');
+        }
+    } else if (event.target.classList.contains('btn-delete-product')) {
+        const productId = parseInt(event.target.getAttribute('product-id'), 10);
+        if (!isNaN(productId)) {
+                ajaxRequest('GET', `php/controllerBoutique.php/deleteFromCart/${productId}`, (response) => {
+                    if (response) {
+                        ajaxRequest("GET","php/controllerPanier.php/commandes-produits", loadCommandesProduits);
+                    } else {
+                        alert('Erreur lors de la modification du panier');
+                    }
+                }, {productId: productId});
+        } else {
+            console.error('Invalid product ID');
+        }
+    } else if (event.target.classList.contains('btn-add-event')) {
+        const eventId = parseInt(event.target.getAttribute('event-id'), 10);
+        if (!isNaN(eventId)) {
+                ajaxRequest('GET', `php/controllerEvent.php/addToCart/${eventId}`, (response) => {
+                    if (response) {
+                        ajaxRequest("GET","php/controllerPanier.php/commandes-produits", loadCommandesProduits);
+                    } else {
+                        alert('Erreur lors de la modification du panier');
+                    }
+                }, {eventId: eventId});
+        } else {
+            console.error('Invalid event ID');
+        }
+    } else if (event.target.classList.contains('btn-remove-event')) {
+        const eventId = parseInt(event.target.getAttribute('event-id'), 10);
+        if (!isNaN(eventId)) {
+                ajaxRequest('GET', `php/controllerEvent.php/removeFromCart/${eventId}`, (response) => {
+                    if (response) {
+                        ajaxRequest("GET","php/controllerPanier.php/commandes-produits", loadCommandesProduits);
+                    } else {
+                        alert('Erreur lors de la modification du panier');
+                    }
+                }, {eventId: eventId});
+        } else {
+            console.error('Invalid event ID');
+        }
+    } else if (event.target.classList.contains('btn-delete-event')) {
+        const eventId = parseInt(event.target.getAttribute('event-id'), 10);
+        if (!isNaN(eventId)) {
+                ajaxRequest('GET', `php/controllerEvent.php/delFromCart/${eventId}`, (response) => {
+                    if (response) {
+                        ajaxRequest("GET","php/controllerPanier.php/commandes-produits", loadCommandesProduits);
+                    } else {
+                        alert('Erreur lors de la modification du panier');
+                    }
+                }, {eventId: eventId});
+        } else {
+            console.error('Invalid event ID');
+        }
+    }
+});
 
 
 
 
-let prixTotal = 0;
 
 function loadCommandesProduits(commandes) {
     if (!Array.isArray(commandes)) {
@@ -12,8 +92,9 @@ function loadCommandesProduits(commandes) {
 
 
     let container = document.getElementById("cart-list");
-    //container.innerHTML = ''; // Clear existing commandes
+    container.innerHTML = ''; // Clear existing commandes
 
+    prixTotal = 0;
 
     commandes.forEach((commande) => {
 
@@ -34,7 +115,7 @@ function loadCommandesProduits(commandes) {
 
         let rmButton = document.createElement("button");
         rmButton.innerText = '-';
-        rmButton.className = 'btn-remove';
+        rmButton.className = 'btn-remove-product';
         rmButton.setAttribute("product-id", commande.Id_Produit);
         rmButton.setAttribute("commande-id", commande.Id_Commande);
 
@@ -43,7 +124,7 @@ function loadCommandesProduits(commandes) {
 
         let addButton = document.createElement("button");
         addButton.innerText = '+';
-        addButton.className = 'btn-add';
+        addButton.className = 'btn-add-product';
         addButton.setAttribute("product-id", commande.Id_Produit);
         addButton.setAttribute("commande-id", commande.Id_Commande);
 
@@ -61,7 +142,7 @@ function loadCommandesProduits(commandes) {
 
         let deleteButton = document.createElement("button");
         deleteButton.innerText = '🗑️';
-        deleteButton.className = 'delete-btn';
+        deleteButton.className = 'btn-delete-product';
         deleteButton.setAttribute("product-id", commande.Id_Produit);
         deleteButton.setAttribute("commande-id", commande.Id_Commande);
 
@@ -78,8 +159,7 @@ function loadCommandesProduits(commandes) {
         prixTotal += commande.Prix_Produit * commande.Qte_Produit;
     });
 
-    let prixTotalPanier = document.getElementById("prix-total");
-    prixTotalPanier.innerHTML = prixTotal + ' €';
+    ajaxRequest("GET","php/controllerPanier.php/commandes-events", loadCommandesEvents);
 
 }
 
@@ -113,8 +193,8 @@ function loadCommandesEvents(commandes) {
 
         let rmButton = document.createElement("button");
         rmButton.innerText = '-';
-        rmButton.className = 'btn-remove';
-        rmButton.setAttribute("product-id", commande.Id_Event);
+        rmButton.className = 'btn-remove-event';
+        rmButton.setAttribute("event-id", commande.Id_Event);
         rmButton.setAttribute("commande-id", commande.Id_Commande);
 
         let qteProduit = document.createElement("span");
@@ -122,8 +202,8 @@ function loadCommandesEvents(commandes) {
 
         let addButton = document.createElement("button");
         addButton.innerText = '+';
-        addButton.className = 'btn-add';
-        addButton.setAttribute("product-id", commande.Id_Event);
+        addButton.className = 'btn-add-event';
+        addButton.setAttribute("event-id", commande.Id_Event);
         addButton.setAttribute("commande-id", commande.Id_Commande);
 
         commandeQteAction.append(rmButton);
@@ -140,8 +220,8 @@ function loadCommandesEvents(commandes) {
 
         let deleteButton = document.createElement("button");
         deleteButton.innerText = '🗑️';
-        deleteButton.className = 'delete-btn';
-        deleteButton.setAttribute("product-id", commande.Id_Event);
+        deleteButton.className = 'btn-delete-event';
+        deleteButton.setAttribute("event-id", commande.Id_Event);
         deleteButton.setAttribute("commande-id", commande.Id_Commande);
 
         commandeDeleteCell.append(deleteButton);
@@ -165,4 +245,4 @@ function loadCommandesEvents(commandes) {
 
 
 ajaxRequest("GET","php/controllerPanier.php/commandes-produits", loadCommandesProduits);
-ajaxRequest("GET","php/controllerPanier.php/commandes-events", loadCommandesEvents);
+

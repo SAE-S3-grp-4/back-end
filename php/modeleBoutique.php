@@ -39,10 +39,12 @@ function dbRequestProduct($db)
 function addToCart($db, $userId, $productId): bool
 {
     try {
-        $verifExiste = 'SELECT Id_Commande FROM COMMANDE WHERE Id_Membre = :user_id AND Statut_Commande = "Dans le panier" AND Id_Commande = ANY (SELECT Id_Commande FROM BON_DE_COMMANDE WHERE Id_Produit = :product_id);';
+        $statut = 'Dans le panier';
+        $verifExiste = 'SELECT Id_Commande FROM COMMANDE WHERE Id_Membre = :user_id AND Statut_Commande = :statut AND Id_Commande = ANY (SELECT Id_Commande FROM BON_DE_COMMANDE WHERE Id_Produit = :product_id);';
         $statement = $db->prepare($verifExiste);
         $statement->bindParam(':user_id', $userId, PDO::PARAM_INT);
         $statement->bindParam(':product_id', $productId, PDO::PARAM_INT);
+        $statement->bindParam(':statut', $statut, PDO::PARAM_STR);
         $statement->execute();
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
@@ -78,6 +80,92 @@ function addToCart($db, $userId, $productId): bool
             $statement->bindParam(':order_id', $orderId, PDO::PARAM_INT);
             $statement->bindParam(':product_id', $productId, PDO::PARAM_INT);
             $statement->execute();
+        }
+        return true;
+    } catch (PDOException $exception) {
+        error_log('Request error: ' . $exception->getMessage());
+        return false;
+    }
+}
+
+function removeFromCart($db, $userId, $productId): bool
+{
+    try {
+        $statut = 'Dans le panier';
+        $verifExiste = 'SELECT Id_Commande FROM COMMANDE WHERE Id_Membre = :user_id AND Statut_Commande = :statut AND Id_Commande = ANY (SELECT Id_Commande FROM BON_DE_COMMANDE WHERE Id_Produit = :product_id);';
+        $statement = $db->prepare($verifExiste);
+        $statement->bindParam(':user_id', $userId, PDO::PARAM_INT);
+        $statement->bindParam(':product_id', $productId, PDO::PARAM_INT);
+        $statement->bindParam(':statut', $statut, PDO::PARAM_STR);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        if (count($result) > 0) {
+
+            $verifQte = 'SELECT Qte_Produit FROM BON_DE_COMMANDE WHERE Id_Commande = :order_id AND Id_Produit = :product_id;';
+            $statement = $db->prepare($verifQte);
+            $statement->bindParam(':order_id', $result[0]['Id_Commande'], PDO::PARAM_INT);
+            $statement->bindParam(':product_id', $productId, PDO::PARAM_INT);
+            $statement->execute();
+            $resultQte = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            if($resultQte[0]['Qte_Produit'] > 1) {
+                // Update the date from the existing order
+                $updateCommande = 'UPDATE COMMANDE SET Date_Commande = NOW() WHERE Id_Commande = :order_id;';
+                $statement = $db->prepare($updateCommande);
+                $statement->bindParam(':order_id', $result[0]['Id_Commande'], PDO::PARAM_INT);
+                $statement->execute();
+
+                // Update the existing Bon de commande
+                $updateBonDeCommande = 'UPDATE BON_DE_COMMANDE SET Qte_Produit = Qte_Produit - 1 WHERE Id_Commande = :order_id AND Id_Produit = :product_id;';
+                $statement = $db->prepare($updateBonDeCommande);
+                $statement->bindParam(':order_id', $result[0]['Id_Commande'], PDO::PARAM_INT);
+                $statement->bindParam(':product_id', $productId, PDO::PARAM_INT);
+                $statement->execute();
+            } else {
+                deleteFromCart($db, $userId, $productId);
+            }
+
+
+        }else{
+            return false;
+        }
+        return true;
+    } catch (PDOException $exception) {
+        error_log('Request error: ' . $exception->getMessage());
+        return false;
+    }
+}
+
+function deleteFromCart($db, $userId, $productId): bool
+{
+    try {
+        $statut = 'Dans le panier';
+        $verifExiste = 'SELECT Id_Commande FROM COMMANDE WHERE Id_Membre = :user_id AND Statut_Commande = :statut AND Id_Commande = ANY (SELECT Id_Commande FROM BON_DE_COMMANDE WHERE Id_Produit = :product_id);';
+        $statement = $db->prepare($verifExiste);
+        $statement->bindParam(':user_id', $userId, PDO::PARAM_INT);
+        $statement->bindParam(':product_id', $productId, PDO::PARAM_INT);
+        $statement->bindParam(':statut', $statut, PDO::PARAM_STR);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        if (count($result) > 0) {
+            // Update the statut of the existing order
+            $statut = 'Annulée';
+            $updateCommande = 'UPDATE COMMANDE SET Date_Commande = NOW(), Statut_Commande=:statut WHERE Id_Commande = :order_id;';
+            $statement = $db->prepare($updateCommande);
+            $statement->bindParam(':order_id', $result[0]['Id_Commande'], PDO::PARAM_INT);
+            $statement->bindParam(':statut', $statut, PDO::PARAM_STR);
+            $statement->execute();
+
+            // Delete the existing Bon de commande
+            $deleteBonDeCommande = 'DELETE FROM BON_DE_COMMANDE WHERE Id_Commande = :order_id AND Id_Produit = :product_id;';
+            $statement = $db->prepare($deleteBonDeCommande);
+            $statement->bindParam(':order_id', $result[0]['Id_Commande'], PDO::PARAM_INT);
+            $statement->bindParam(':product_id', $productId, PDO::PARAM_INT);
+            $statement->execute();
+        }else{
+            return false;
         }
         return true;
     } catch (PDOException $exception) {

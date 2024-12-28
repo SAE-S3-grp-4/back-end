@@ -61,6 +61,40 @@ if ($requestMethod == "GET") {
     }
 }
 
+// Handle removing product from cart
+if ($requestMethod == "GET") {
+    if ($requestRessource == "removeFromCart") {
+        if (isset($_SESSION['Id_User'])) {
+            if (isset($id) && is_numeric($id)) {
+                $userId = $_SESSION['Id_User'];
+                $data = removeFromCart($db, $userId, $id);
+            } else {
+                header('HTTP/1.1 400 Bad Request');
+                echo json_encode(['error' => 'Invalid product ID']);
+                exit;
+            }
+
+        }
+    }
+}
+
+// Handle deleting product from cart
+if ($requestMethod == "GET") {
+    if ($requestRessource == "deleteFromCart") {
+        if (isset($_SESSION['Id_User'])) {
+            if (isset($id) && is_numeric($id)) {
+                $userId = $_SESSION['Id_User'];
+                $data = deleteFromCart($db, $userId, $id);
+            } else {
+                header('HTTP/1.1 400 Bad Request');
+                echo json_encode(['error' => 'Invalid product ID']);
+                exit;
+            }
+
+        }
+    }
+}
+
 // Send data to the client.
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-control: no-store, no-cache, must-revalidate');

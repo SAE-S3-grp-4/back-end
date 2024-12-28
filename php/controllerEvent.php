@@ -59,6 +59,22 @@ if ($requestMethod == "GET") {
 }
 
 if ($requestMethod == "GET") {
+    if ($requestRessource == "removeFromCart") {
+        if (isset($_SESSION['Id_User'])) {
+            if (isset($id) && is_numeric($id)) {
+                $userId = $_SESSION['Id_User'];
+                $data = removeFromCart($db, $userId, $id);
+            } else {
+                header('HTTP/1.1 400 Bad Request');
+                echo json_encode(['error' => 'Invalid product ID']);
+                exit;
+            }
+
+        }
+    }
+}
+
+if ($requestMethod == "GET") {
     if ($requestRessource == "delFromCart") {
         if (isset($_SESSION['Id_User'])) {
             if (isset($id) && is_numeric($id)) {

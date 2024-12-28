@@ -5,6 +5,32 @@ body {
     color: white;
 }
 
+.header {
+    width: 100%;
+    background-color: #282850;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.navbar ul {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+}
+.navbar .logo img {
+    height: 30px; /* Ajuste la hauteur du logo */
+    width: auto;  /* Conserve les proportions */
+    margin: 0;    /* Réduit l'espacement autour du logo */
+}
+
 .cart-container {
     max-width: 800px;
     margin: 50px auto;
@@ -66,7 +92,7 @@ td {
     background-color: #a29bfe;
 }
 
-.delete-btn {
+.btn-delete-product, .btn-delete-event {
     background-color: transparent;
     border: none;
     color: #ff7675;
@@ -74,7 +100,7 @@ td {
     font-size: 1.2rem;
 }
 
-.delete-btn:hover {
+.btn-delete-product:hover, .btn-delete-event:hover {
     color: #d63031;
 }
 

@@ -73,6 +73,51 @@ function addToCart($db, $userId, $eventId): bool
     }
 }
 
+function removeFromCart($db, $userId, $eventId): bool
+{
+    try {
+        $verifExiste = 'SELECT Id_Commande FROM COMMANDE WHERE Id_Membre = :user_id AND Statut_Commande = "Dans le panier" AND Id_Commande = ANY (SELECT Id_Commande FROM INSCRIPTION WHERE Id_Event = :event_id);';
+        $statement = $db->prepare($verifExiste);
+        $statement->bindParam(':user_id', $userId, PDO::PARAM_INT);
+        $statement->bindParam(':event_id', $eventId, PDO::PARAM_INT);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        if (count($result) > 0) {
+
+            $verifQte = 'SELECT Qte_Inscription FROM INSCRIPTION WHERE Id_Commande = :order_id AND Id_Event = :event_id;';
+            $statement = $db->prepare($verifQte);
+            $statement->bindParam(':order_id', $result[0]['Id_Commande'], PDO::PARAM_INT);
+            $statement->bindParam(':event_id', $eventId, PDO::PARAM_INT);
+            $statement->execute();
+            $resultQte = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            if ($resultQte[0]['Qte_Inscription'] > 1) {
+                // Update the existing Inscription
+                $updateInscription = 'UPDATE INSCRIPTION SET Qte_Inscription = Qte_Inscription - 1 WHERE Id_Commande = :order_id AND Id_Event = :event_id;';
+                $statement = $db->prepare($updateInscription);
+                $statement->bindParam(':order_id', $result[0]['Id_Commande'], PDO::PARAM_INT);
+                $statement->bindParam(':event_id', $eventId, PDO::PARAM_INT);
+                $statement->execute();
+
+                // Update the existing order
+                $updateCommande = 'UPDATE COMMANDE SET Date_Commande = NOW() WHERE Id_Commande = :order_id;';
+                $statement = $db->prepare($updateCommande);
+                $statement->bindParam(':order_id', $result[0]['Id_Commande'], PDO::PARAM_INT);
+                $statement->execute();
+            } else {
+                delFromCart($db, $userId, $eventId);
+            }
+        }else{
+            return false;
+        }
+        return true;
+    } catch (PDOException $exception) {
+        error_log('Request error: ' . $exception->getMessage());
+        return false;
+    }
+}
+
 function delFromCart($db, $userId, $eventId): bool
 {
     try {
@@ -91,7 +136,7 @@ function delFromCart($db, $userId, $eventId): bool
             $statement->bindParam(':order_id', $result[0]['Id_Commande'], PDO::PARAM_INT);
             $statement->execute();
 
-            // Update the existing Inscription
+            // Delete the existing Inscription
             $deleteInscription = 'DELETE FROM INSCRIPTION WHERE Id_Commande = :order_id AND Id_Event = :event_id;';
             $statement = $db->prepare($deleteInscription);
             $statement->bindParam(':order_id', $result[0]['Id_Commande'], PDO::PARAM_INT);
