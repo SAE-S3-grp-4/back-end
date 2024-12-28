@@ -3,185 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ADIIL - Panier</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #0b1e3f, #15154e);
-      color: white;
-    }
-
-    .cart-container {
-      max-width: 800px;
-      margin: 50px auto;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-      backdrop-filter: blur(10px);
-    }
-
-    h1 {
-      text-align: center;
-      font-size: 3rem;
-      margin-bottom: 20px;
-      color: #ff79c6;
-      text-shadow: 0 0 10px #ff79c6;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 20px;
-    }
-
-    th, td {
-      padding: 15px;
-      text-align: center;
-    }
-
-    th {
-      background: rgba(255, 255, 255, 0.2);
-      color: #ff79c6;
-      text-transform: uppercase;
-    }
-
-    td {
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    .quantity-buttons {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .quantity-buttons button {
-      background-color: #6c5ce7;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    .quantity-buttons button:hover {
-      background-color: #a29bfe;
-    }
-
-    .delete-btn {
-      background-color: transparent;
-      border: none;
-      color: #ff7675;
-      cursor: pointer;
-      font-size: 1.2rem;
-    }
-
-    .delete-btn:hover {
-      color: #d63031;
-    }
-
-    .cart-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .total {
-      font-size: 1.5rem;
-    }
-
-    .validate-btn {
-      padding: 10px 20px;
-      background-color: #00cec9;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    .validate-btn:hover {
-      background-color: #81ecec;
-    }
-  </style>
+  <title>Panier</title>
+  <link rel="stylesheet" href="CSS/panier.css">
+  <script src="js/ajax.js" defer></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      ajaxRequest('GET', 'php/check_connexion.php', function(response) {
+        if (!response.is_connected) {
+          window.location.href = 'accueil.html';
+        }
+      });
+    });
+  </script>
+  <script src="js/panier.js" defer></script>
 </head>
 <body>
   <div class="cart-container">
     <h1>Panier</h1>
     <table>
+
+      <!-- Header du tableau récapitulatif des commandes -->
       <thead>
         <tr>
           <th>Nom</th>
           <th>Prix Unitaire</th>
           <th>Quantité</th>
-          <th>Coût</th>
+          <th>Prix Total</th>
           <th>Supprimer</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td>Grade Or</td>
-          <td>10€</td>
-          <td>
-            <div class="quantity-buttons">
-              <button>-</button>
-              <span>1</span>
-              <button>+</button>
-            </div>
-          </td>
-          <td>10€</td>
-          <td><button class="delete-btn">&#128465;</button></td>
-        </tr>
-        <tr>
-          <td>Événement Barbecue</td>
-          <td>5€</td>
-          <td>
-            <div class="quantity-buttons">
-              <button>-</button>
-              <span>1</span>
-              <button>+</button>
-            </div>
-          </td>
-          <td>5€</td>
-          <td><button class="delete-btn">&#128465;</button></td>
-        </tr>
-        <tr>
-          <td>Coca-Cola</td>
-          <td>1€</td>
-          <td>
-            <div class="quantity-buttons">
-              <button>-</button>
-              <span>1</span>
-              <button>+</button>
-            </div>
-          </td>
-          <td>1€</td>
-          <td><button class="delete-btn">&#128465;</button></td>
-        </tr>
-        <tr>
-          <td>Kinder Bueno White</td>
-          <td>1€</td>
-          <td>
-            <div class="quantity-buttons">
-              <button>-</button>
-              <span>1</span>
-              <button>+</button>
-            </div>
-          </td>
-          <td>1€</td>
-          <td><button class="delete-btn">&#128465;</button></td>
-        </tr>
+
+      <tbody id="cart-list">
+
+      <!-- Liste des commandes "Dans le panier" -->
+
       </tbody>
     </table>
+
     <div class="cart-footer">
-      <div class="total">Prix total : <strong>17€</strong></div>
-      <button class="validate-btn">Valider le panier</button>
+      <div class="total">Prix total : <strong id="prix-total">17€</strong></div>
+      <button class="validate-btn">Passer au paiement</button>
     </div>
+
   </div>
 </body>
 </html>
