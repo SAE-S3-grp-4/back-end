@@ -85,6 +85,37 @@ if ($requestMethod == "GET") {
     }
 }
 
+if ($requestMethod == "PUT" && $requestRessource === 'student' && isset($id) && is_numeric($id)) {
+    // PHP ne remplit pas $_POST pour les requêtes PUT, on doit donc récupérer les données de php://input manuellement
+    parse_str(file_get_contents('php://input'), $input);
+
+    // Log des données reçues pour débogage
+    error_log("Parsed Input (URL-encoded): " . print_r($input, true));
+
+    // Vérification de l'entrée
+    if (!isset($input['role']) || empty(trim($input['role']))) {
+        header('HTTP/1.1 400 Bad Request');
+        echo json_encode(['success' => false, 'error' => 'Invalid or missing role']);
+        error_log("Invalid or missing role in input: " . print_r($input, true));
+        exit;
+    }
+
+    $role = trim($input['role']);
+
+    // Mettre à jour le rôle dans la base de données
+    $success = updateStudentRole($db, $id, $role);
+    if ($success) {
+        header('HTTP/1.1 200 OK');
+        echo json_encode(['success' => true]);
+        error_log("Role updated successfully for ID: $id, Role: $role");
+    } else {
+        header('HTTP/1.1 500 Internal Server Error');
+        echo json_encode(['success' => false, 'error' => 'Database update failed']);
+        error_log("Failed to update role for ID: $id");
+    }
+    exit;
+}
+
 // Send data to the client.
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-control: no-store, no-cache, must-revalidate');

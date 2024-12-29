@@ -41,6 +41,15 @@ function showStudentPopup(studentId) {
                         <p><b>Pseudo : </b>${student.Pseudo_Membre}</p>
                         <button class="inscriptions-button">Voir la liste des inscriptions</button>
                     </div>
+                    <div class="popup-bottom">
+                        <label for="role-select">Changer le rôle :</label>
+                        <select id="role-select">
+                            <option value="Visiteur">Visiteur</option>
+                            <option value="Membre">Membre</option>
+                            <option value="Administrateur">Administrateur</option>
+                        </select>
+                        <button id="update-role-button">Mettre à jour le rôle</button>
+                    </div>
                 </div>
                 <div class="popup-footer">
                     <button class="delete-button">Supprimer le compte</button>
@@ -48,6 +57,30 @@ function showStudentPopup(studentId) {
             </div>
         `;
         popupContainer.innerHTML = popupContent;
+
+        popupContainer.querySelector('#update-role-button').addEventListener('click', () => {
+            const selectedRole = popupContainer.querySelector('#role-select').value;
+
+            // Vérifiez que le rôle est sélectionné
+            if (!selectedRole) {
+                Swal.fire('Erreur', 'Veuillez sélectionner un rôle.', 'error');
+                return;
+            }
+
+            // Construire les données encodées en x-www-form-urlencoded
+            const data = `role=${encodeURIComponent(selectedRole)}`;
+
+            // Appeler ajaxRequest avec les données encodées
+            ajaxRequest('PUT', `php/controllerPanelAdmin.php/student/${studentId}/role`, (response) => {
+                if (response.success) {
+                    Swal.fire('Succès', 'Le rôle a été mis à jour.', 'success');
+                    // Mettre à jour l'affichage du rôle dans la popup après succès
+                    popupContainer.querySelector('.popup-left p').textContent = selectedRole;
+                } else {
+                    Swal.fire('Erreur', response.error || 'Une erreur est survenue.', 'error');
+                }
+            }, data);
+        });
 
         // Fermer le popup
         popupContainer.querySelector('.close-button').addEventListener('click', () => {

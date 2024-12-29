@@ -111,3 +111,21 @@ function dbRequestStudentRegistrations($db, $id)
         return false;
     }
 }
+
+function updateStudentRole($db, $id, $role)
+{
+    try {
+        $request = '
+            UPDATE MEMBRE
+            SET Id_Role = (SELECT Id_Role FROM ROLE WHERE Nom_Role = :role)
+            WHERE Id_Membre = :id
+        ';
+        $statement = $db->prepare($request);
+        $statement->bindParam(':role', $role, PDO::PARAM_STR);
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
+        return $statement->execute();
+    } catch (PDOException $exception) {
+        error_log('Role update error: ' . $exception->getMessage());
+        return false;
+    }
+}

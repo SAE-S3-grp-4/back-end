@@ -353,3 +353,43 @@ header {
 .accueil-button:hover {
     background: #02597c;
 }
+
+
+
+/* Style du menu déroulant (select) */
+#role-select {
+    padding: 0.5rem; /* Ajoute un espace interne */
+    font-size: 1rem; /* Taille de police lisible */
+    border: 1px solid #00b4d8; /* Bordure adaptée aux autres éléments */
+    border-radius: 5px; /* Coins arrondis pour correspondre au bouton */
+    background: #1e1e3e; /* Couleur de fond correspondante */
+    color: #fff; /* Texte blanc */
+    appearance: none; /* Supprime les styles par défaut du navigateur */
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+/* Modifie la bordure et la couleur de fond au survol */
+#role-select:hover {
+    background: #2b2b59;
+}
+
+/* Style pour le bouton "Mettre à jour le rôle" */
+#update-role-button {
+    padding: 0.7rem; /* Épaisseur du bouton */
+    margin-top: 1rem; /* Espacement par rapport au menu déroulant */
+    font-size: 1rem; /* Taille de la police du texte */
+    font-weight: bold; /* Rendre le texte légèrement plus visible */
+    border: none; /* Supprime la bordure native */
+    border-radius: 5px; /* Coins arrondis, cohérents avec les autres éléments */
+    background: #00b4d8; /* Couleur de fond en cohérence avec le style global */
+    color: #fff; /* Texte en blanc */
+    cursor: pointer;
+    text-transform: uppercase; /* Tout en majuscules */
+    transition: background-color 0.3s ease;
+}
+
+/* Effet au survol du bouton */
+#update-role-button:hover {
+    background: #0077a7; /* Couleur légèrement plus foncée pour un effet interactif */
+}
