@@ -21,6 +21,12 @@
   <header>
     <h1 class="title">Panel <span class="highlight">Administrateur</span></h1>
     <h2>Gestion des <span class="highlight-secondary">rôles</span></h2>
+    <button class="retour-button" id="retour-button">Retour</button>
+    <script>
+      document.getElementById("retour-button").addEventListener('click', (event) => {
+        window.location.href = "adminPanel.html";
+      });
+    </script>
   </header>
 
   <!-- Formulaire de création de rôle -->

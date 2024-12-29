@@ -16,6 +16,9 @@ function displayErrorMessage(message) {
     }, 3000); // Hide after 3 seconds
 }
 
+document.getElementById("retour-button").addEventListener('click', (event) => {
+    window.location.href = "adminPanel.html";
+});
 
 document.getElementById("add-event").addEventListener('submit', (event) => {
     event.preventDefault();

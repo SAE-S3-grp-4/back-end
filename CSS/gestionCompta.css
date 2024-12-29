@@ -227,3 +227,20 @@ button {
     justify-content: center;
     align-items: center;
 }
+
+.retour-button {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: #028eaa;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    transition: background 0.3s ease;
+}
+
+.retour-button:hover {
+    background: #02597c;
+}

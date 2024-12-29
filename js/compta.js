@@ -7,6 +7,10 @@ function displayValidationMessage(message) {
     }, 3000); // Hide after 3 seconds
 }
 
+document.getElementById("retour-button").addEventListener('click', (event) => {
+    window.location.href = "adminPanel.html";
+});
+
 document.getElementById("add-spreadsheet").addEventListener('submit', (event) => {
     event.preventDefault();
     let nom = document.getElementById('spreadsheet-name').value;

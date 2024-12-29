@@ -5,6 +5,9 @@ body, h1, h2, input, button, div {
 }
 
 body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     overflow-y: auto;
     font-family: Arial, sans-serif;
     background: linear-gradient(135deg, #1e1e2f, #3a3a5e);
@@ -30,15 +33,17 @@ header {
 .main-container {
     display: flex;
     align-items: flex-start;
-    width: 100%;
+    justify-content: space-between;
+    width: 90%;
     padding: 1rem;
     position: relative; 
 }
 
 .member-container {
+    display: flex;
     width: 30%;
     margin-top: 5rem;
-    margin-left: 2rem;
+
 }
 
 .content {
@@ -171,10 +176,9 @@ header {
 
 
 .button-container {
-    position: absolute; /* Position absolue pour un placement précis */
-    left: 50%; /* Place le centre de la div au milieu de la page */
-    transform: translateX(-50%); /* Recentre la div en ajustant la moitié de sa largeur */
     display: flex;
+    left: 50%; /* Place le centre de la div au milieu de la page */
+    /*transform: translateX(-50%); /* Recentre la div en ajustant la moitié de sa largeur */
     flex-direction: column; /* Aligne les boutons verticalement */
     align-items: center; /* Centre les boutons dans leur propre div */
     gap: 5rem; /* Espacement entre les boutons */
@@ -320,7 +324,7 @@ header {
     position: absolute;
     top: 1rem;
     left: 1rem;
-    background: #00b4d8;
+    background: #028eaa;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -330,5 +334,22 @@ header {
 }
 
 .close-button:hover {
-    background: #0077a7;
+    background: #02597c;
+}
+
+.accueil-button {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: #028eaa;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    transition: background 0.3s ease;
+}
+
+.accueil-button:hover {
+    background: #02597c;
 }

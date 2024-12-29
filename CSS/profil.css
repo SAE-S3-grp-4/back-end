@@ -128,7 +128,7 @@ body {
     position: absolute;
     top: 1rem;
     left: 1rem;
-    background: #00b4d8;
+    background: #028eaa;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -138,5 +138,5 @@ body {
 }
 
 .close-button:hover {
-    background: #0077a7;
+    background: #02597c;
 }

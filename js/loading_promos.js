@@ -16,6 +16,10 @@ function displayErrorMessage(message) {
     }, 3000); // Hide after 3 seconds
 }
 
+document.getElementById("retour-button").addEventListener('click', (event) => {
+    window.location.href = "gestionBoutique.html";
+});
+
 document.getElementById('promo-form').addEventListener('submit', function(event) {
     event.preventDefault();
 

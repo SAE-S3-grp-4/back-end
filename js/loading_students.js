@@ -14,6 +14,9 @@ const classGroups = {
     'Autre': ['Enseignant']
 };
 
+document.getElementById("accueil-button").addEventListener('click', (event) => {
+    window.location.href = "accueil.html";
+});
 
 function showStudentPopup(studentId) {
     ajaxRequest('GET', `php/controllerPanelAdmin.php/student/${studentId}`, (student) => {
