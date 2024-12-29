@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gestion des Rôles</title>
   <link rel="stylesheet" href="CSS/gestionRole.css">
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      ajaxRequest('GET', 'php/check_admin.php', function(response) {
+        if (!response.is_admin) {
+          window.location.href = 'accueil.html';
+        }
+      });
+    });
+  </script>
 </head>
 <body>
 <div class="main-content">
