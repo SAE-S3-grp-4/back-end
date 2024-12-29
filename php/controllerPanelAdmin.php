@@ -1,7 +1,7 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+ini_set('log_errors', 'On');
+ini_set('error_log', 'C:/xampp/php/logs/php_error.log');
+error_log('Ceci est un test de journalisation.');
 
 require_once('modelePanelAdmin.php');
 
@@ -69,13 +69,32 @@ if ($requestMethod == "DELETE") {
     }
 }
 
+if ($requestMethod == "GET") {
+    if ($requestRessource === 'student-registrations') {
+        if (isset($id) && is_numeric($id)) {
+            $data = dbRequestStudentRegistrations($db, $id);
+            error_log("Requesting student registrations for ID: " . $id); // Log the request
+            error_log("Data: " . print_r($data, true)); // Log the data
+        } else {
+            error_log("Invalid student ID: " . $id); // Log invalid ID
+            header('HTTP/1.1 400 Bad Request');
+            echo json_encode(['success' => false, 'error' => 'Invalid student ID']);
+            exit;
+        }
+
+    }
+}
+
 // Send data to the client.
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-control: no-store, no-cache, must-revalidate');
 header('Pragma: no-cache');
-if ($data !== false) {
-    header('HTTP/1.1 200 OK');
-    echo json_encode($data);
-} else
-    header('HTTP/1.1 400 Bad Request');
+//if ($data !== false) {
+//    header('HTTP/1.1 200 OK');
+//    echo json_encode($data);
+//} else
+//    header('HTTP/1.1 400 Bad Request');
+//exit;
+header('HTTP/1.1 200 OK');
+echo json_encode($data);
 exit;

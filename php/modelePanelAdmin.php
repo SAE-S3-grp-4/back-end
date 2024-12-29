@@ -1,4 +1,7 @@
 <?php
+ini_set('log_errors', 'On');
+ini_set('error_log', 'C:/xampp/php/logs/php_error.log');
+error_log('Ceci est un test de journalisation.');
 require_once('constantes.php');
 
 function dbConnect()
@@ -95,3 +98,16 @@ function deleteStudentById($db, $id)
     return true;
 }
 
+function dbRequestStudentRegistrations($db, $id)
+{
+    try {
+        $request = 'SELECT * FROM INSCRIPTION JOIN EVENEMENT ON INSCRIPTION.Id_Event = EVENEMENT.Id_Event JOIN COMMANDE ON INSCRIPTION.Id_Commande = COMMANDE.Id_Commande WHERE COMMANDE.Id_Membre = :id';
+        $statement = $db->prepare($request);
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $exception) {
+        error_log('Request error: ' . $exception->getMessage());
+        return false;
+    }
+}

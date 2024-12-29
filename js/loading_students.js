@@ -15,14 +15,13 @@ const classGroups = {
 };
 
 
-
 function showStudentPopup(studentId) {
     ajaxRequest('GET', `php/controllerPanelAdmin.php/student/${studentId}`, (student) => {
         let popupContainer = document.createElement('div');
         popupContainer.classList.add('popup-container');
 
         let popupContent = `
-            <div class="popup-content">
+            <div class="popup-content" style="max-width: 90%; max-height: 90%; overflow-y: auto; margin: auto;">
                 <div class="popup-header">
                     <button class="close-button">Retour</button>
                     <span class="student-grade">Grade : ${student.Nom_Grade}</span>
@@ -91,7 +90,45 @@ function showStudentPopup(studentId) {
 
         // Affichage des inscriptions
         popupContainer.querySelector('.inscriptions-button').addEventListener('click', () => {
-            console.log("Inscriptions de :", student.Id_Membre);
+            ajaxRequest('GET', `php/controllerPanelAdmin.php/student-registrations/${student.Id_Membre}`, (registrations) => {
+                console.log(registrations);
+                let registrationPopup = document.createElement('div');
+                registrationPopup.classList.add('popup-container');
+
+                let registrationContent = `
+                    <div class="popup-content" style="max-width: 90%; max-height: 90%; overflow-y: auto; margin: auto;">
+                        <div class="popup-header">
+                            <button class="close-button">Retour</button>
+                            <h3>Inscriptions de ${student.Prenom_Membre} ${student.Nom_Membre}</h3>
+                        </div>
+                        <div class="popup-body">
+                            <ul class="registration-list">
+                                ${registrations.length > 0 ? registrations.map(reg => `<li>
+                                        <strong>Nom de l'événement :</strong> ${reg.Nom_Event || 'Non disponible'} <br>
+                                        <strong>Description :</strong> ${reg.Description_Event || 'Non disponible'} <br>
+                                        <strong>Statut :</strong> ${reg.Statut_Commande || 'Non disponible'} <br>
+                                        <strong>Date de l'événement :</strong> ${reg.Date_Event || 'Non disponible'} <br>
+                                        <strong>Prix :</strong> ${reg.Prix_Event !== undefined ? `${reg.Prix_Event} €` : 'Non disponible'} <br>
+                                    </li>
+                                    ${registrations.indexOf(reg) < registrations.length - 1 ? '<br> <hr> <br>' : ''}`).join('') : '<li>Pas d\'inscriptions disponibles.</li>'}
+                            </ul>
+                        </div>
+                        <div class="popup-footer">
+                            <button class="close-button">Fermer</button>
+                        </div>
+                    </div>
+                `;
+                console.log(registrationContent);
+                registrationPopup.innerHTML = registrationContent;
+
+                registrationPopup.querySelectorAll('.close-button').forEach(button => {
+                    button.addEventListener('click', () => {
+                        document.body.removeChild(registrationPopup);
+                    });
+                });
+
+                document.body.appendChild(registrationPopup);
+            });
         });
 
         document.body.appendChild(popupContainer);
