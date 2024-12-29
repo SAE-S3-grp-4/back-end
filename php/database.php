@@ -101,6 +101,20 @@ function dbRequestUserId($db, $username)
     }
 }
 
+function dbRequestUserRole($db, $id)
+{
+    try {
+        $request = 'SELECT Id_Role FROM MEMBRE WHERE Id_Membre = :id';
+        $statement = $db->prepare($request);
+        $statement->bindParam(':id', $id, PDO::PARAM_STR);
+        $statement->execute();
+        return $statement->fetchColumn();
+    } catch (PDOException $exception) {
+        error_log('Request error: ' . $exception->getMessage());
+        return false;
+    }
+}
+
 
 
 

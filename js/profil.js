@@ -24,13 +24,28 @@ function showStudentPopup(studentId) {
                         <p><b>Pseudo : </b>${student.Pseudo_Membre}</p>
                         <button class="deconnexion-button">Se déconnecter</button>
                     </div>
-                </div>
+                    
+        `;
+        if (student.Nom_Role === 'Administrateur') {
+            popupContent += `
+                <div class="popup-bottom">
+                    <button class="admin-panel-button" id="admin-panel-button">Accéder au panel Administrateur</button>
+                </div>`;
+        }
+        popupContent += `</div>
                 <div class="popup-footer">
                     <button class="delete-button">Supprimer le compte</button>
                 </div>
-            </div>
-        `;
+            </div>`;
+        console.log(popupContent);
         popupContainer.innerHTML = popupContent;
+
+        if (student.Nom_Role === 'Administrateur') {
+            // Accéder au panel administrateur
+            popupContainer.querySelector('.admin-panel-button').addEventListener('click', () => {
+                window.location.href = 'adminPanel.html';
+            });
+        }
 
         // Fermer la page
         popupContainer.querySelector('.close-button').addEventListener('click', () => {

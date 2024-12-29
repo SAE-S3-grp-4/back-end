@@ -140,3 +140,23 @@ body {
 .close-button:hover {
     background: #02597c;
 }
+
+/* Style pour le bouton "Mettre à jour le rôle" */
+#admin-panel-button {
+    padding: 0.7rem; /* Épaisseur du bouton */
+    margin-top: 1rem; /* Espacement par rapport au menu déroulant */
+    font-size: 1rem; /* Taille de la police du texte */
+    font-weight: bold; /* Rendre le texte légèrement plus visible */
+    border: none; /* Supprime la bordure native */
+    border-radius: 5px; /* Coins arrondis, cohérents avec les autres éléments */
+    background: #28a745; /* Couleur de fond en cohérence avec le style global */
+    color: #fff; /* Texte en blanc */
+    cursor: pointer;
+    text-transform: uppercase; /* Tout en majuscules */
+    transition: background-color 0.3s ease;
+}
+
+/* Effet au survol du bouton */
+#admin-panel-button:hover {
+    background: #1d7531; /* Couleur légèrement plus foncée pour un effet interactif */
+}

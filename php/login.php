@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['user'] = $user;
             $_SESSION['Id_User'] = dbRequestUserId($db, $username);
             error_log('User ID from session: ' . $_SESSION['Id_User']);
-            $_SESSION['is_admin'] = ($user['Id_Role'] == 3);
+            $_SESSION['is_admin'] = dbRequestUserRole($db, $_SESSION['Id_User']) == 3;
             echo json_encode(['success' => true]);
         } else {
             echo json_encode(['success' => false, 'error' => 'Nom d\'utilisateur ou mot de passe incorrect']);
