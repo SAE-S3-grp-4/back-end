@@ -52,7 +52,7 @@ function dbLoginUser($db, $username, $password)
     }
 }
 
-function dbRegisterUser($db, $name, $surname, $pseudo, $email, $password, $group)
+function dbRegisterUser($db, $name, $surname, $pseudo, $email, $password, $group): bool
 {
     try {
         $request = 'INSERT INTO MEMBRE (Nom_Membre, Prenom_Membre, Pseudo_Membre, Mail_Membre, Mdp_Membre, Grp_Membre, Id_Role) VALUES (:name, :surname, :pseudo, :email, :password, :group, 1)';

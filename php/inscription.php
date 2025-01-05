@@ -1,4 +1,7 @@
 <?php
+ini_set('log_errors', 'On');
+ini_set('error_log', 'php_error.log');
+error_log('Ceci est un test de journalisation.');
 require_once('database.php');
 
 header('Content-Type: application/json');
