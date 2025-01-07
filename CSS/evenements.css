@@ -109,3 +109,23 @@ footer {
   display: flex; /* Ajouté pour centrer le contenu */
   justify-content: center; /* Ajouté pour centrer le contenu */
 }
+
+.btn-add-to-cart {
+  background-color: #28a745; /* Green background */
+  color: white; /* White text */
+  border: none; /* No border */
+  padding: 10px 20px; /* Padding */
+  text-align: center; /* Centered text */
+  text-decoration: none; /* No underline */
+  display: block; /* Block display */
+  font-size: 16px; /* Font size */
+  margin: 10px auto; /* Centered horizontally */
+  cursor: pointer; /* Pointer cursor on hover */
+  border-radius: 5px; /* Rounded corners */
+  transition: background-color 0.3s ease; /* Smooth transition */
+  width: fit-content; /* Adjust width to content */
+}
+
+.btn-add-to-cart:hover {
+  background-color: #218838; /* Darker green on hover */
+}

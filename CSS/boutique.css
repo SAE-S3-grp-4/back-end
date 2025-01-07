@@ -123,9 +123,9 @@ footer {
   padding: 10px 20px; /* Padding */
   text-align: center; /* Centered text */
   text-decoration: none; /* No underline */
-  display: inline-block; /* Inline-block display */
+  display: block; /* Block display */
   font-size: 16px; /* Font size */
-  margin: 10px 2px; /* Margin */
+  margin: 10px auto; /* Centered margin */
   cursor: pointer; /* Pointer cursor on hover */
   border-radius: 5px; /* Rounded corners */
   transition: background-color 0.3s ease; /* Smooth transition */
