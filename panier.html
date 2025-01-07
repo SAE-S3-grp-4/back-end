@@ -1,65 +1,70 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Panier</title>
-  <link rel="stylesheet" href="CSS/panier.css">
-  <script src="js/ajax.js" defer></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      ajaxRequest('GET', 'php/check_connexion.php', function(response) {
-        if (!response.is_connected) {
-          window.location.href = 'accueil.html';
-        }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panier</title>
+    <link rel="stylesheet" href="CSS/panier.css" />
+    <script src="js/ajax.js" defer></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        ajaxRequest("GET", "php/check_connexion.php", function (response) {
+          if (!response.is_connected) {
+            window.location.href = "accueil.html";
+          }
+        });
       });
-    });
-  </script>
-  <script src="js/panier.js" defer></script>
-</head>
-<body>
-<header class="header">
-  <nav class="navbar">
-    <ul>
-      <li><a href="accueil.html">Accueil</a></li>
-      <li><a href="evenements.html">Événements</a></li>
-      <li><a href="boutique.html">Boutique</a></li>
-      <li><div class="logo"><img src="img/logo.svg" alt="ADIIL" height="50" width="100"></div></li>
-      <li><a href="calendrier.html">Agenda</a></li>
-      <li><a href="#presentation">Présentation</a></li>
-      <li><a href="connexion.html">Connexion / Profil</a></li>
-    </ul>
-  </nav>
-</header>
-  <div class="cart-container">
-    <h1>Panier</h1>
-    <table>
+    </script>
+    <script src="js/panier.js" defer></script>
+  </head>
+  <body>
+    <header class="header">
+      <nav class="navbar">
+        <ul>
+          <li><a href="accueil.html">Accueil</a></li>
+          <li><a href="evenements.html">Événements</a></li>
+          <li><a href="boutique.html">Boutique</a></li>
+          <li>
+            <div class="logo">
+              <img src="img/logo.svg" alt="ADIIL" height="50" width="100" />
+            </div>
+          </li>
+          <li><a href="calendrier.html">Agenda</a></li>
+          <li><a href="presentation.html">Présentation</a></li>
+          <li><a href="connexion.html">Connexion / Profil</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="cart-container">
+      <h1>Panier</h1>
+      <table>
+        <!-- Header du tableau récapitulatif des commandes -->
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Prix Unitaire</th>
+            <th>Quantité</th>
+            <th>Prix Total</th>
+            <th>Supprimer</th>
+          </tr>
+        </thead>
 
-      <!-- Header du tableau récapitulatif des commandes -->
-      <thead>
-        <tr>
-          <th>Nom</th>
-          <th>Prix Unitaire</th>
-          <th>Quantité</th>
-          <th>Prix Total</th>
-          <th>Supprimer</th>
-        </tr>
-      </thead>
+        <tbody id="cart-list">
+          <!-- Liste des commandes "Dans le panier" -->
+        </tbody>
+      </table>
 
-      <tbody id="cart-list">
-
-      <!-- Liste des commandes "Dans le panier" -->
-
-      </tbody>
-    </table>
-
-    <div class="cart-footer">
-      <div class="total">Prix total : <strong id="prix-total">17€</strong></div>
-      <button class="validate-btn">Passer au paiement</button>
+      <div class="cart-footer">
+        <div class="total">
+          Prix total : <strong id="prix-total">17€</strong>
+        </div>
+        <button class="validate-btn">Passer au paiement</button>
+      </div>
     </div>
-
-  </div>
-</body>
+  </body>
 </html>

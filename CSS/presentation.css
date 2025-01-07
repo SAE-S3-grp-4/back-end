@@ -1,0 +1,71 @@
+body {
+  background: linear-gradient(
+    215.36deg,
+    #0f103f 4.4%,
+    #1b1d72 37.78%,
+    #272aa5 71.17%
+  );
+
+  color: #fff;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+.header {
+  width: 100%;
+  background-color: #282850;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.navbar ul {
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+}
+.navbar .logo img {
+  height: 30px; /* Ajuste la hauteur du logo */
+  width: auto; /* Conserve les proportions */
+  margin: 0; /* Réduit l'espacement autour du logo */
+}
+
+footer {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+  color: #c8c8e8;
+  align-content: center;
+  text-align: center; /* Ajouté pour centrer le texte */
+  display: flex; /* Ajouté pour centrer le contenu */
+  justify-content: center; /* Ajouté pour centrer le contenu */
+}
+
+h1 {
+  text-align: center;
+  font-size: 40px;
+  font-weight: 500;
+}
+
+span {
+  color: #c961de;
+}
+
+.membres {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.membre {
+  position: relative;
+}
