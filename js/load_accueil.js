@@ -1,4 +1,4 @@
-function loadAccueil(events) {
+function loadEvent(events) {
   console.log("Loading events:", events);
   let container = document.getElementsByClassName("events-list")[0];
   container.innerHTML = ""; // Clear existing events
@@ -20,4 +20,22 @@ function loadAccueil(events) {
   });
 }
 
-ajaxRequest("GET", "php/controllerAccueil.php/events", loadAccueil);
+function loadProduit(produits) {
+  console.log("Loading produits:", produits);
+  let container = document.getElementsByClassName("shop-img")[0];
+  container.innerHTML = ""; // Clear existing produits
+  produits.forEach((contents) => {
+    let p = document.createElement("p");
+    p.innerHTML = contents["Nom_Produit"];
+
+    let img = new Image();
+    img.src = "img/imgProduits/" + encodeURIComponent(contents["Img_Produit"]);
+
+    container.append(p);
+    container.append(img);
+  });
+}
+
+ajaxRequest("GET", "php/controllerAccueil.php/events", loadEvent);
+
+ajaxRequest("GET", "php/controllerAccueil.php/produit", loadProduit);

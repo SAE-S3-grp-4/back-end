@@ -5,6 +5,7 @@ error_reporting(E_ALL);
 
 require_once('modeleGestionEvent.php');
 
+
 // Database connexion.
 $db = dbConnect();
 
@@ -33,6 +34,9 @@ if ($requestRessource == 'events') {
     $data = dbRequest3FirstEvent($db);
 }
 
+if ($requestRessource == 'produit') {
+    $data = dbRequestLastProduct($db);
+}
 
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-control: no-store, no-cache, must-revalidate');

@@ -127,3 +127,19 @@ function dbRequest3FirstEvent($db)
     }
     return $result;
 }
+
+
+// je le met ici pas grave
+function dbRequestLastProduct($db)
+{
+    try {
+        $request = 'SELECT Nom_Produit, Img_Produit FROM PRODUIT ORDER BY Id_Produit DESC LIMIT 1';
+        $statement = $db->prepare($request);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $exception) {
+        error_log('Request error: ' . $exception->getMessage());
+        return false;
+    }
+    return $result;
+}

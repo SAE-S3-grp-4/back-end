@@ -111,6 +111,51 @@ body {
   text-align: center;
 }
 
+.content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.shop-item {
+  background-color: #2954a3;
+  width: 537px;
+  height: 405px;
+  margin-right: 86px;
+  border-top-left-radius: 60px;
+  border-bottom-right-radius: 60px;
+}
+
+.shop-item h3 {
+  margin-left: 40px;
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.shop-img {
+  background-color: #739aff;
+  border-top-right-radius: 80px;
+  border-bottom-left-radius: 80px;
+  width: 308px;
+  height: 255px;
+  margin: auto;
+  display: block;
+  margin-top: 60px;
+}
+
+.shop p {
+  font-size: 25px;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.shop-img img {
+  width: 225px;
+  height: 159px;
+  margin: auto;
+  display: block;
+}
+
 footer {
   margin-top: 2rem;
   margin-bottom: 2rem;
