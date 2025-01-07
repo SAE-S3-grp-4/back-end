@@ -166,3 +166,17 @@ footer {
   display: flex; /* Ajouté pour centrer le contenu */
   justify-content: center; /* Ajouté pour centrer le contenu */
 }
+@media (max-width: 1700px) {
+  .content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .events {
+    margin-bottom: 2rem;
+  }
+
+  .shop-item {
+    margin-right: 0;
+  }
+}
