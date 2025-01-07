@@ -1,129 +1,131 @@
 /* Reset styles */
-body, h1, h2, p, img, button {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+body,
+h1,
+h2,
+p,
+img,
+button {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .header {
-    width: 100%;
-    background-color: #282850;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+  width: 100%;
+  background-color: #282850;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .navbar ul {
-    display: flex;
-    justify-content: space-around;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .navbar ul li a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: 500;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
 }
 .navbar .logo img {
-    height: 30px; /* Ajuste la hauteur du logo */
-    width: auto;  /* Conserve les proportions */
-    margin: 0;    /* Réduit l'espacement autour du logo */
+  height: 30px; /* Ajuste la hauteur du logo */
+  width: auto; /* Conserve les proportions */
+  margin: 0; /* Réduit l'espacement autour du logo */
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #1e1e2f, #3a3a5e);
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    text-align: center;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #1e1e2f, #3a3a5e);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
 }
-
 
 .store-container {
-    width: 90%;
-    max-width: 1200px;
+  width: 90%;
+  max-width: 1200px;
 }
-
-
 
 /* Section Produits */
 .product-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    gap: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 1.5rem;
 }
 
 .product-card {
-    background: #2b2b59;
-    border-radius: 15px;
-    padding: 1rem;
-    width: 250px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-    text-align: center;
+  background: #2b2b59;
+  border-radius: 15px;
+  padding: 1rem;
+  width: 250px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
 }
 
 .product-card img {
-    width: 100%;
-    border-radius: 10px;
-    margin-bottom: 1rem;
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 1rem;
 }
 
 .product-card h3 {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-    color: #ff99ff;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #ff99ff;
 }
 
 .product-card p {
-    font-size: 1rem;
-    color: #c8c8e8;
-    margin-bottom: 1rem;
+  font-size: 1rem;
+  color: #c8c8e8;
+  margin-bottom: 1rem;
 }
 
 .btn-order {
-    background: #00b4d8;
-    color: white;
-    padding: 0.7rem 1rem;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background 0.3s ease;
+  background: #00b4d8;
+  color: white;
+  padding: 0.7rem 1rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
 
 .btn-order:hover {
-    background: #0077b6;
+  background: #0077b6;
 }
 
 /* Footer */
 footer {
-    margin-top: 2rem;
-    font-size: 0.9rem;
-    color: #c8c8e8;
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: #c8c8e8;
 }
 
 /* CSS for the Add to Cart button */
 .btn-add-to-cart {
-    background-color: #28a745; /* Green background */
-    color: white; /* White text */
-    border: none; /* No border */
-    padding: 10px 20px; /* Padding */
-    text-align: center; /* Centered text */
-    text-decoration: none; /* No underline */
-    display: inline-block; /* Inline-block display */
-    font-size: 16px; /* Font size */
-    margin: 10px 2px; /* Margin */
-    cursor: pointer; /* Pointer cursor on hover */
-    border-radius: 5px; /* Rounded corners */
-    transition: background-color 0.3s ease; /* Smooth transition */
+  background-color: #28a745; /* Green background */
+  color: white; /* White text */
+  border: none; /* No border */
+  padding: 10px 20px; /* Padding */
+  text-align: center; /* Centered text */
+  text-decoration: none; /* No underline */
+  display: inline-block; /* Inline-block display */
+  font-size: 16px; /* Font size */
+  margin: 10px 2px; /* Margin */
+  cursor: pointer; /* Pointer cursor on hover */
+  border-radius: 5px; /* Rounded corners */
+  transition: background-color 0.3s ease; /* Smooth transition */
 }
 
 .btn-add-to-cart:hover {
-    background-color: #218838; /* Darker green on hover */
+  background-color: #218838; /* Darker green on hover */
 }
