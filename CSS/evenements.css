@@ -1,95 +1,111 @@
 body {
-    background: linear-gradient(259.73deg, #0F103F 17.24%, #1B1D72 54.11%, #272AA5 91.73%);
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    color: #fff;
+  background: linear-gradient(
+    259.73deg,
+    #0f103f 17.24%,
+    #1b1d72 54.11%,
+    #272aa5 91.73%
+  );
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  color: #fff;
 }
 
 .header {
-    width: 100%;
-    background-color: #282850;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+  width: 100%;
+  background-color: #282850;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .navbar ul {
-    display: flex;
-    justify-content: space-around;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .navbar ul li a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: 500;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
 }
 .navbar .logo img {
-    height: 30px; /* Ajuste la hauteur du logo */
-    width: auto;  /* Conserve les proportions */
-    margin: 0;    /* Réduit l'espacement autour du logo */
+  height: 30px; /* Ajuste la hauteur du logo */
+  width: auto; /* Conserve les proportions */
+  margin: 0; /* Réduit l'espacement autour du logo */
 }
 
 .agenda {
-    padding: 2rem;
+  padding: 2rem;
 }
 
 .month {
-    margin-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 
 .month h3 {
-    color: #fff;
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+  color: #fff;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .event {
-    border-radius: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    background: #4F75FF;
-    box-shadow: 2px 2px 4px 0px rgba(148, 148, 148, 0.25);
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background: #4f75ff;
+  box-shadow: 2px 2px 4px 0px rgba(148, 148, 148, 0.25);
 }
 
 .event span {
-    font-weight: 500;
-    font-size: 1rem;
-    color: #A5B0FF;
+  font-weight: 500;
+  font-size: 1rem;
+  color: #a5b0ff;
 }
 
 .event p {
-    margin: 0;
-    font-weight: 400;
+  margin: 0;
+  font-weight: 400;
 }
 
 button {
-    background-color: #5468FF;
-    border: 2px solid white;
-    border-radius: 5px;
-    color: #fff;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
+  background-color: #5468ff;
+  border: 2px solid white;
+  border-radius: 5px;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
 }
 
 button:hover {
-    background-color: #4153CC;
+  background-color: #4153cc;
 }
 
 button.unsubscribe {
-    background-color: #FF6A6A;
+  background-color: #ff6a6a;
 }
 
 button.unsubscribe:hover {
-    background-color: #D45555;
+  background-color: #d45555;
 }
 
 .navbar .logo img {
-    height: 30px; /* Ajuste la hauteur du logo */
-    width: auto;  /* Conserve les proportions */
-    margin: 0;    /* Réduit l'espacement autour du logo */
+  height: 30px; /* Ajuste la hauteur du logo */
+  width: auto; /* Conserve les proportions */
+  margin: 0; /* Réduit l'espacement autour du logo */
+}
+
+footer {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+  color: #c8c8e8;
+  align-content: center;
+  text-align: center; /* Ajouté pour centrer le texte */
+  display: flex; /* Ajouté pour centrer le contenu */
+  justify-content: center; /* Ajouté pour centrer le contenu */
 }

@@ -1,0 +1,123 @@
+body {
+  background: linear-gradient(
+    215.36deg,
+    #0f103f 4.4%,
+    #1b1d72 37.78%,
+    #272aa5 71.17%
+  );
+
+  color: #fff;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+.header {
+  width: 100%;
+  background-color: #282850;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.navbar ul {
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+}
+.navbar .logo img {
+  height: 30px; /* Ajuste la hauteur du logo */
+  width: auto; /* Conserve les proportions */
+  margin: 0; /* Réduit l'espacement autour du logo */
+}
+
+.hero-card {
+  background: rgba(78, 83, 190, 0.5);
+  width: 943px;
+  height: 130px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  display: flex;
+  flex-direction: column; /* Organise les éléments verticalement */
+  align-items: center;
+  justify-content: center;
+  margin-left: 0; /* Place la div à gauche */
+  margin-top: 100px;
+}
+
+.hero-card h2 {
+  font-size: 40px;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.hero-card p {
+  font-size: 15px;
+  font-weight: 300;
+  margin-top: 0;
+}
+
+.hero-card span {
+  color: #ff79c6;
+  text-shadow: 0px 0px 10px #ff79c6;
+}
+
+.events h3 {
+  font-size: 40px;
+  font-weight: 500;
+  margin-top: 100px;
+  margin-left: 100px;
+}
+
+.events-list {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 50px;
+  margin-left: 100px;
+  width: 1060px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.event-card {
+  background: #13154d;
+  width: 310px;
+  height: 180px;
+  border-radius: 25px;
+  border: 1px solid #3e5dff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.event-card h4 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.event-card p {
+  font-size: 17px;
+  font-weight: 400;
+  text-align: center;
+}
+
+footer {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+  color: #c8c8e8;
+  align-content: center;
+  text-align: center; /* Ajouté pour centrer le texte */
+  display: flex; /* Ajouté pour centrer le contenu */
+  justify-content: center; /* Ajouté pour centrer le contenu */
+}

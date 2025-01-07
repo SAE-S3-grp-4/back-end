@@ -1,129 +1,138 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calendrier des Groupes</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <link rel="stylesheet" href="CSS/calendrier.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
+    <link rel="stylesheet" href="CSS/calendrier.css" />
     <script src="js/calendar.js" defer></script>
     <script>
-        fetch("php/get_groups.php")
-            .then(response => response.text())
-            .then(options => {
-                document.getElementById("group").innerHTML = options;
-            });
+      fetch("php/get_groups.php")
+        .then((response) => response.text())
+        .then((options) => {
+          document.getElementById("group").innerHTML = options;
+        });
     </script>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <nav class="navbar">
-            <ul>
-                <li><a href="accueil.html">Accueil</a></li>
-                <li><a href="evenements.html">Événements</a></li>
-                <li><a href="boutique.html">Boutique</a></li>
-                <li><div class="logo"><img src="img/logo.svg" alt="ADIIL" height="50" width="100"></div></li>
-                <li><a href="calendrier.html">Agenda</a></li>
-                <li><a href="#presentation">Présentation</a></li>
-                <li><a href="connexion.html">Connexion / Profil</a></li>
-            </ul>
-        </nav>
+      <nav class="navbar">
+        <ul>
+          <li><a href="accueil.html">Accueil</a></li>
+          <li><a href="evenements.html">Événements</a></li>
+          <li><a href="boutique.html">Boutique</a></li>
+          <li>
+            <div class="logo">
+              <img src="img/logo.svg" alt="ADIIL" height="50" width="100" />
+            </div>
+          </li>
+          <li><a href="calendrier.html">Agenda</a></li>
+          <li><a href="#presentation">Présentation</a></li>
+          <li><a href="connexion.html">Connexion / Profil</a></li>
+        </ul>
+      </nav>
     </header>
-    <br>
+    <br />
     <div class="container">
-        <div class="left">
-            <div class="agenda">
-                <div class="header">
-                    <button id="prev-week">⬅️</button>
-                    <h2 id="current-week">Semaine du 22/11/2024</h2>
-                    <button id="next-week">➡️</button>
-                </div>
-                <div class="hours">
-                    <!-- Génération automatique des heures dans CSS ou avec JS -->
-                </div>
-                <div id="week-events" class="events-container">
-                    <div class="day" id="day-1">
-                        <h4>Lundi</h4>
-                        <div class="events"></div>
-                    </div>
-                    <div class="day" id="day-2">
-                        <h4>Mardi</h4>
-                        <div class="events"></div>
-                    </div>
-                    <div class="day" id="day-3">
-                        <h4>Mercredi</h4>
-                        <div class="events"></div>
-                    </div>
-                    <div class="day" id="day-4">
-                        <h4>Jeudi</h4>
-                        <div class="events"></div>
-                    </div>
-                    <div class="day" id="day-5">
-                        <h4>Vendredi</h4>
-                        <div class="events"></div>
-                    </div>
-                    <div class="day" id="day-6">
-                        <h4>Samedi</h4>
-                        <div class="events"></div>
-                    </div>
-                    <div class="day" id="day-7">
-                        <h4>Dimanche</h4>
-                        <div class="events"></div>
-                    </div>
-                </div>                
+      <div class="left">
+        <div class="agenda">
+          <div class="header">
+            <button id="prev-week">⬅️</button>
+            <h2 id="current-week">Semaine du 22/11/2024</h2>
+            <button id="next-week">➡️</button>
+          </div>
+          <div class="hours">
+            <!-- Génération automatique des heures dans CSS ou avec JS -->
+          </div>
+          <div id="week-events" class="events-container">
+            <div class="day" id="day-1">
+              <h4>Lundi</h4>
+              <div class="events"></div>
             </div>
-        </div>
-        <div class="right">
-            <h3>Choisissez une date et un groupe</h3>
-            <div class="group-selector">
-                <label for="group">Groupe :</label>
-                <select id="group">
-                    <!-- Les options seront ajoutées dynamiquement via PHP -->
-                </select>
+            <div class="day" id="day-2">
+              <h4>Mardi</h4>
+              <div class="events"></div>
             </div>
+            <div class="day" id="day-3">
+              <h4>Mercredi</h4>
+              <div class="events"></div>
+            </div>
+            <div class="day" id="day-4">
+              <h4>Jeudi</h4>
+              <div class="events"></div>
+            </div>
+            <div class="day" id="day-5">
+              <h4>Vendredi</h4>
+              <div class="events"></div>
+            </div>
+            <div class="day" id="day-6">
+              <h4>Samedi</h4>
+              <div class="events"></div>
+            </div>
+            <div class="day" id="day-7">
+              <h4>Dimanche</h4>
+              <div class="events"></div>
+            </div>
+          </div>
         </div>
+      </div>
+      <div class="right">
+        <h3>Choisissez une date et un groupe</h3>
+        <div class="group-selector">
+          <label for="group">Groupe :</label>
+          <select id="group">
+            <!-- Les options seront ajoutées dynamiquement via PHP -->
+          </select>
+        </div>
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
-        // Initialise le calendrier Flatpickr
-        flatpickr("#date", {
-            dateFormat: "Y-m-d",
-            onChange: function(selectedDates, dateStr) {
-                updateEvents();
-            }
+      // Initialise le calendrier Flatpickr
+      flatpickr("#date", {
+        dateFormat: "Y-m-d",
+        onChange: function (selectedDates, dateStr) {
+          updateEvents();
+        },
+      });
+
+      const groupSelector = document.getElementById("group");
+      const eventsContainer = document.getElementById("week-events");
+
+      var events = [];
+
+      // Charger dynamiquement les options de groupe depuis get_groups.php
+      fetch("php/get_groups.php")
+        .then((response) => response.text())
+        .then((options) => {
+          groupSelector.innerHTML = options;
         });
 
-        const groupSelector = document.getElementById("group");
-        const eventsContainer = document.getElementById("week-events");
+      // Mettre à jour les événements lorsque le groupe est sélectionné
+      groupSelector.addEventListener("change", () => {
+        const group = groupSelector.value; // Contient directement "11A", "11B", etc.
 
-        var events = [];
-
-        // Charger dynamiquement les options de groupe depuis get_groups.php
-        fetch("php/get_groups.php")
-            .then(response => response.text())
-            .then(options => {
-                groupSelector.innerHTML = options;
+        if (group) {
+          fetch(`php/get_events.php?group=${group}`)
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.length === 0) {
+                eventsContainer.innerHTML = `<p>Aucun événement trouvé pour ce groupe.</p>`;
+              } else {
+                events = data;
+                displayWeekEvents();
+              }
             });
-
-        // Mettre à jour les événements lorsque le groupe est sélectionné
-        groupSelector.addEventListener("change", () => {
-            const group = groupSelector.value; // Contient directement "11A", "11B", etc.
-
-            if (group) {
-                fetch(`php/get_events.php?group=${group}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.length === 0) {
-                            eventsContainer.innerHTML = `<p>Aucun événement trouvé pour ce groupe.</p>`;
-                        } else {
-                            events = data;
-                            displayWeekEvents();
-                        }
-                    });
-            }
-        });
-
+        }
+      });
     </script>
-</body>
+  </body>
+  <footer>
+    <p>© 2023 ADIIL. Tous droits réservés.</p>
+  </footer>
 </html>

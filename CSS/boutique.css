@@ -106,8 +106,13 @@ body {
 /* Footer */
 footer {
   margin-top: 2rem;
+  margin-bottom: 2rem;
   font-size: 0.9rem;
   color: #c8c8e8;
+  align-content: center;
+  text-align: center; /* Ajouté pour centrer le texte */
+  display: flex; /* Ajouté pour centrer le contenu */
+  justify-content: center; /* Ajouté pour centrer le contenu */
 }
 
 /* CSS for the Add to Cart button */

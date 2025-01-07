@@ -113,3 +113,17 @@ function dbRequestEventById($db, $id)
     }
     return $result;
 }
+
+function dbRequest3FirstEvent($db)
+{
+    try {
+        $request ='SELECT Nom_Event, Description_Event FROM EVENEMENT WHERE Date_Event > NOW() ORDER BY Date_Event ASC LIMIT 3';
+        $statement = $db->prepare($request);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $exception) {
+        error_log('Request error: ' . $exception->getMessage());
+        return false;
+    }
+    return $result;
+}

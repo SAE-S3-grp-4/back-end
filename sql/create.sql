@@ -145,16 +145,16 @@ VALUES
 -- Insertion pour la table EVENEMENT
 INSERT INTO EVENEMENT (Nom_Event, Prix_Event, Description_Event, Nb_Place_Event, Date_Fin_Inscription, Date_Event)
 VALUES
-('Soiree d integration', 5.00, 'Une soiree pour accueillir les nouveaux etudiants en informatique', 100, '2024-09-10T00:00:00', '2024-09-15T19:30:00'),
-('Conference sur l IA', 0.00, 'Conference gratuite sur les dernieres tendances de l Intelligence Artificielle', 200, '2024-10-05T00:00:00', '2024-10-10T10:00:00'),
-('Hackathon', 10.00, 'Concours de programmation sur 48 heures', 50, '2024-11-01T00:00:00', '2024-11-05T13:00:00'),
-('Atelier Git et DevOps', 0.00, 'Atelier pratique sur les outils de gestion de version et l integration continue', 30, '2024-12-01T00:00:00', '2024-12-05T13:45:00'),
-('Tournoi de jeux video', 3.00, 'Tournoi de jeux video pour tous les etudiants', 80, '2024-12-15T00:00:00', '2024-12-20T18:15:00'),
-('Karting', 25.00, 'Soiree karting pour les etudiants en Informatique', 40, '2024-06-01T00:00:00', '2024-06-10T19:45:00'),
-('Journee portes ouvertes', 0.00, 'Inscription pour participer a l organisation des JPO', 0, '2024-04-20T00:00:00', '2024-04-25T08:00:00'),
-('Atelier CV et LinkedIn', 0.00, 'Atelier pour ameliorer son CV et son profil LinkedIn', 40, '2024-03-10T00:00:00', '2024-03-15T09:00:00'),
-('Rencontre avec les anciens etudiants', 0.00, 'Echange avec les anciens etudiants du departement informatique', 100, '2024-05-01T00:00:00', '2024-05-05T17:30:00'),
-('Soiree de fin d annee', 10.00, 'Grande soiree pour celebrer la fin de l annee universitaire', 150, '2024-06-15T00:00:00', '2024-06-20T19:30:00');
+('Soiree d integration', 5.00, 'Une soiree pour accueillir les nouveaux etudiants en informatique', 100, '2025-09-10T00:00:00', '2025-09-15T19:30:00'),
+('Conference sur l IA', 0.00, 'Conference gratuite sur les dernieres tendances de l Intelligence Artificielle', 200, '2025-10-05T00:00:00', '2025-10-10T10:00:00'),
+('Hackathon', 10.00, 'Concours de programmation sur 48 heures', 50, '2025-11-01T00:00:00', '2025-11-05T13:00:00'),
+('Atelier Git et DevOps', 0.00, 'Atelier pratique sur les outils de gestion de version et l integration continue', 30, '2025-12-01T00:00:00', '2025-12-05T13:45:00'),
+('Tournoi de jeux video', 3.00, 'Tournoi de jeux video pour tous les etudiants', 80, '2025-12-15T00:00:00', '2025-12-20T18:15:00'),
+('Karting', 25.00, 'Soiree karting pour les etudiants en Informatique', 40, '2025-06-01T00:00:00', '2025-06-10T19:45:00'),
+('Journee portes ouvertes', 0.00, 'Inscription pour participer a l organisation des JPO', 0, '2025-04-20T00:00:00', '2025-04-25T08:00:00'),
+('Atelier CV et LinkedIn', 0.00, 'Atelier pour ameliorer son CV et son profil LinkedIn', 40, '2025-03-10T00:00:00', '2025-03-15T09:00:00'),
+('Rencontre avec les anciens etudiants', 0.00, 'Echange avec les anciens etudiants du departement informatique', 100, '2025-05-01T00:00:00', '2025-05-05T17:30:00'),
+('Soiree de fin d annee', 10.00, 'Grande soiree pour celebrer la fin de l annee universitaire', 150, '2025-06-15T00:00:00', '2025-06-20T19:30:00');
 
 -- Insertion pour la table PROMO
 INSERT INTO PROMO (Nom_Promo, Pourcentage_Promo)
